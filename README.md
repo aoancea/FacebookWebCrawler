@@ -1,4 +1,4 @@
 FacebookWebCrawler
 ==================
 
-a simple application that can harness specific information from certain facebook pages - designed to be used for other machine learning project
+A simple application that can retrieve specific information from given facebook pages. Designed to be used for various machine learning projects in the data mining step.
