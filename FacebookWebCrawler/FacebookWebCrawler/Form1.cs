@@ -8,6 +8,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using System.Linq;
+using FBCrawlLib;
 
 namespace FacebookWebCrawler
 {
@@ -20,30 +21,40 @@ namespace FacebookWebCrawler
 
 		HtmlDocument htmlDocument = null;
 
-		private void button1_Click(object sender, EventArgs e)
+		private async void button1_Click(object sender, EventArgs e)
 		{
-			WebBrowser webBrowser = new WebBrowser();
-			webBrowser.Navigate(txtUrl.Text);
+			Crawler crawler = new Crawler("913819931996488|2e3ef18f88e42c9068d8a6dba3b14021");
 
-			webBrowser.DocumentCompleted += (documentSender, documentEventArgs) =>
+			Crawler.CrawlerQueryResult result = await crawler.ExecuteQuery("klausiohannis/feed");
+
+			foreach (string field in result.GetField("message"))
 			{
-				htmlDocument = webBrowser.Document;
+				textBox1.Text += field + Environment.NewLine + "- - - -" + Environment.NewLine + Environment.NewLine;
+			}
+			
+			//WebBrowser webBrowser = new WebBrowser();
+			//webBrowser.Navigate(txtUrl.Text);
 
-				HtmlElementCollection allDivCollection = htmlDocument.GetElementsByTagName("div");
+			//webBrowser.DocumentCompleted += (documentSender, documentEventArgs) =>
+			//{
+			//	htmlDocument = webBrowser.Document;
 
-				List<HtmlElement> commentContainerCollection = new List<HtmlElement>();
+			//	HtmlElementCollection allDivCollection = htmlDocument.GetElementsByTagName("div");
 
-				foreach (HtmlElement htmlElement in allDivCollection)
-				{
-					if (htmlElement.GetAttribute("className").Contains("_4-u2 mbm _5jmm _5pat _5v3q"))
-					{
-						commentContainerCollection.Add(htmlElement);
-					}
-				}
+			//	List<HtmlElement> commentContainerCollection = new List<HtmlElement>();
 
-				var x = 1;
+			//	foreach (HtmlElement htmlElement in allDivCollection)
+			//	{
+			//		if (htmlElement.GetAttribute("className").Contains("_4-u2 mbm _5jmm _5pat _5v3q"))
+			//		{
+			//			commentContainerCollection.Add(htmlElement);
+			//		}
+			//	}
 
-			};
+			//	var x = 1;
+
+
+			//};
 		}
 	}
 }
