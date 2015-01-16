@@ -27,12 +27,35 @@ namespace FBCrawlLib
 		/// <returns>A CrawlerQueryResult object which can be used to retrieve various results.</returns>
 		public async Task<CrawlerQueryResult> ExecuteQuery(string query)
 		{
-			string queryPath = Crawler.QUERY_BASE_PATH + query + "?access_token=" + this.AccessToken;
+			string queryPath = Crawler.QUERY_BASE_PATH + query;
+			if (queryPath.Contains('?'))
+			{
+				queryPath += "&access_token=" + this.AccessToken;
+			}
+			else
+			{
+				queryPath += "?access_token=" + this.AccessToken;
+			}
 
 			CrawlerQueryResult result = new CrawlerQueryResult();
 			WebClient client = new WebClient();
 			
 			result.RawResult = await client.DownloadStringTaskAsync(queryPath);
+
+			return result;
+		}
+
+		/// <summary>
+		/// Executes a given query by accessing a link, not by building the link.
+		/// </summary>
+		/// <param name="link">The link to access.</param>
+		/// <returns>A CrawlerQueryResult object which can be used to retrieve various results.</returns>
+		public async Task<CrawlerQueryResult> ExecuteLink(string link)
+		{
+			CrawlerQueryResult result = new CrawlerQueryResult();
+			WebClient client = new WebClient();
+
+			result.RawResult = await client.DownloadStringTaskAsync(link);
 
 			return result;
 		}

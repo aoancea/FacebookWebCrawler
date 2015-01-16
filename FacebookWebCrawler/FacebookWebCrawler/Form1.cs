@@ -9,6 +9,8 @@ using System.Threading.Tasks;
 using System.Windows.Forms;
 using System.Linq;
 using FBCrawlLib;
+using System.IO;
+using Newtonsoft.Json.Linq;
 
 namespace FacebookWebCrawler
 {
@@ -23,15 +25,42 @@ namespace FacebookWebCrawler
 
 		private async void button1_Click(object sender, EventArgs e)
 		{
+			progressBar1.MarqueeAnimationSpeed = 60;
 			Crawler crawler = new Crawler("913819931996488|2e3ef18f88e42c9068d8a6dba3b14021");
 
-			Crawler.CrawlerQueryResult result = await crawler.ExecuteQuery("klausiohannis/feed");
+			Crawler.CrawlerQueryResult queryResult = await crawler.ExecuteQuery(txtUrl.Text);
 
-			foreach (string field in result.GetField("message"))
-			{
-				textBox1.Text += field + Environment.NewLine + "- - - -" + Environment.NewLine + Environment.NewLine;
-			}
 			
+			List<JToken> results = queryResult.GetFieldToken("data[*]").ToList();
+
+			DateTime earliestDate = new DateTime(2014, 7, 1);
+			bool dateOk = true;
+			using (StreamWriter writer = new StreamWriter(textBox2.Text))
+			{
+				while (results.Count > 0 && dateOk)
+				{
+					foreach (JToken token in results)
+					{
+						if (token["message"] != null)
+						{
+							DateTime date = DateTime.Parse(token["created_time"].ToString());
+							if (date < earliestDate)
+							{
+								dateOk = false;
+								break;
+							}
+							writer.WriteLine(token["message"].ToString() + Environment.NewLine + "---" + Environment.NewLine);
+						}
+					}
+
+					queryResult = await crawler.ExecuteLink(queryResult.GetSingleField("paging.next"));
+					results = queryResult.GetFieldToken("data[*]").ToList();
+				}
+			}
+
+			progressBar1.MarqueeAnimationSpeed = 0;
+			progressBar1.Value = 0;
+
 			//WebBrowser webBrowser = new WebBrowser();
 			//webBrowser.Navigate(txtUrl.Text);
 
@@ -55,6 +84,14 @@ namespace FacebookWebCrawler
 
 
 			//};
+		}
+
+		private void button2_Click(object sender, EventArgs e)
+		{
+			if (saveFileDialog1.ShowDialog() == System.Windows.Forms.DialogResult.OK)
+			{
+				textBox2.Text = saveFileDialog1.FileName;
+			}
 		}
 	}
 }
