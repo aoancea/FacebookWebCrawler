@@ -26,7 +26,7 @@ namespace FacebookWebCrawler
 			Crawler crawler = new Crawler("913819931996488|2e3ef18f88e42c9068d8a6dba3b14021");
 
 			Crawler.CrawlerQueryResult queryResult = await crawler.ExecuteQueryAsync(txtUrl.Text);
-			
+
 			List<JToken> results = queryResult.GetFieldToken("data[*]").ToList();
 
 			DateTime earliestDate = new DateTime(2014, 7, 1);
@@ -64,6 +64,11 @@ namespace FacebookWebCrawler
 			{
 				textBox2.Text = saveFileDialog1.FileName;
 			}
-		}	
+		}
+
+		private async void btnProcessComments_Click(object sender, EventArgs e)
+		{
+			
+		}
 	}
 }
