@@ -86,8 +86,12 @@ namespace FacebookWebCrawler
 							break;
 						}
 
+						JToken commentsTokenObject = post.SelectToken("comments");
+						if (commentsTokenObject == null)
+							continue;
+
 						Crawler.CrawlerQueryResult commentsPageObject = new Crawler.CrawlerQueryResult();
-						commentsPageObject.RawResult = post.SelectToken("comments").ToString();
+						commentsPageObject.RawResult = commentsTokenObject.ToString();
 
 						List<JToken> comments = commentsPageObject.GetFieldToken("data[*]").ToList();
 
