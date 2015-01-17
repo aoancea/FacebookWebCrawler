@@ -20,8 +20,6 @@ namespace FacebookWebCrawler
 			InitializeComponent();
 		}
 
-		HtmlDocument htmlDocument = null;
-
 		private async void button1_Click(object sender, EventArgs e)
 		{
 			progressBar1.MarqueeAnimationSpeed = 60;
@@ -58,30 +56,6 @@ namespace FacebookWebCrawler
 
 			progressBar1.MarqueeAnimationSpeed = 0;
 			progressBar1.Value = 0;
-
-			//WebBrowser webBrowser = new WebBrowser();
-			//webBrowser.Navigate(txtUrl.Text);
-
-			//webBrowser.DocumentCompleted += (documentSender, documentEventArgs) =>
-			//{
-			//	htmlDocument = webBrowser.Document;
-
-			//	HtmlElementCollection allDivCollection = htmlDocument.GetElementsByTagName("div");
-
-			//	List<HtmlElement> commentContainerCollection = new List<HtmlElement>();
-
-			//	foreach (HtmlElement htmlElement in allDivCollection)
-			//	{
-			//		if (htmlElement.GetAttribute("className").Contains("_4-u2 mbm _5jmm _5pat _5v3q"))
-			//		{
-			//			commentContainerCollection.Add(htmlElement);
-			//		}
-			//	}
-
-			//	var x = 1;
-
-
-			//};
 		}
 
 		private void button2_Click(object sender, EventArgs e)
