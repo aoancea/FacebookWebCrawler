@@ -1,16 +1,15 @@
-﻿using System;
+﻿using FBCrawlLib;
+using Newtonsoft.Json.Linq;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
 using System.Drawing;
+using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
-using System.Linq;
-using FBCrawlLib;
-using System.IO;
-using Newtonsoft.Json.Linq;
 
 namespace FacebookWebCrawler
 {
@@ -28,8 +27,7 @@ namespace FacebookWebCrawler
 			progressBar1.MarqueeAnimationSpeed = 60;
 			Crawler crawler = new Crawler("913819931996488|2e3ef18f88e42c9068d8a6dba3b14021");
 
-			Crawler.CrawlerQueryResult queryResult = await crawler.ExecuteQuery(txtUrl.Text);
-
+			Crawler.CrawlerQueryResult queryResult = await crawler.ExecuteQueryAsync(txtUrl.Text);
 			
 			List<JToken> results = queryResult.GetFieldToken("data[*]").ToList();
 
@@ -53,7 +51,7 @@ namespace FacebookWebCrawler
 						}
 					}
 
-					queryResult = await crawler.ExecuteLink(queryResult.GetSingleField("paging.next"));
+					queryResult = await crawler.ExecuteLinkAsync(queryResult.GetSingleField("paging.next"));
 					results = queryResult.GetFieldToken("data[*]").ToList();
 				}
 			}
@@ -92,6 +90,6 @@ namespace FacebookWebCrawler
 			{
 				textBox2.Text = saveFileDialog1.FileName;
 			}
-		}
+		}	
 	}
 }

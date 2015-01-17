@@ -25,7 +25,7 @@ namespace FBCrawlLib
 		/// </summary>
 		/// <param name="query">The query to execute. This will be appended to https://graph.facebook.com/v2.2/ </param>
 		/// <returns>A CrawlerQueryResult object which can be used to retrieve various results.</returns>
-		public async Task<CrawlerQueryResult> ExecuteQuery(string query)
+		public async Task<CrawlerQueryResult> ExecuteQueryAsync(string query)
 		{
 			string queryPath = Crawler.QUERY_BASE_PATH + query;
 			if (queryPath.Contains('?'))
@@ -50,7 +50,7 @@ namespace FBCrawlLib
 		/// </summary>
 		/// <param name="link">The link to access.</param>
 		/// <returns>A CrawlerQueryResult object which can be used to retrieve various results.</returns>
-		public async Task<CrawlerQueryResult> ExecuteLink(string link)
+		public async Task<CrawlerQueryResult> ExecuteLinkAsync(string link)
 		{
 			CrawlerQueryResult result = new CrawlerQueryResult();
 			WebClient client = new WebClient();
