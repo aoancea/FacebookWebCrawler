@@ -23,13 +23,13 @@ namespace FBCrawlLib
 				{
 					return this._rawResult;
 				}
-				internal set
+				set
 				{
 					this._rawResult = value;
 					_parsedJson = JObject.Parse(this._rawResult);
 				}
 			}
-			
+
 			/// <summary>
 			/// Gets an enumerable with the values for a given field name.
 			/// </summary>
@@ -57,7 +57,8 @@ namespace FBCrawlLib
 			/// <returns></returns>
 			public string GetSingleField(string fieldName)
 			{
-				return _parsedJson.SelectToken(fieldName).ToString();
+				JToken fieldData = _parsedJson.SelectToken(fieldName);
+				return fieldData != null ? fieldData.ToString() : null;
 			}
 		}
 	}

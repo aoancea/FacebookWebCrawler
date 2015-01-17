@@ -2,13 +2,8 @@
 using Newtonsoft.Json.Linq;
 using System;
 using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
-using System.Drawing;
 using System.IO;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Forms;
 
 namespace FacebookWebCrawler
@@ -68,7 +63,61 @@ namespace FacebookWebCrawler
 
 		private async void btnProcessComments_Click(object sender, EventArgs e)
 		{
-			
+			progressBarComments.MarqueeAnimationSpeed = 60;
+
+			Crawler crawler = new Crawler("913819931996488|2e3ef18f88e42c9068d8a6dba3b14021");
+
+			Crawler.CrawlerQueryResult queryResult = await crawler.ExecuteQueryAsync(txtUrl.Text);
+
+			List<JToken> posts = queryResult.GetFieldToken("data[*]").ToList();
+
+			DateTime earliestDate = new DateTime(2014, 7, 1);
+			bool dateOk = true;
+
+			using (StreamWriter writer = new StreamWriter(textBox2.Text))
+			{
+				while (posts.Count > 0 && dateOk)
+				{
+					foreach (JToken post in posts)
+					{
+						if (DateTime.Parse(post["created_time"].ToString()) < earliestDate)
+						{
+							dateOk = false;
+							break;
+						}
+
+						Crawler.CrawlerQueryResult commentsPageObject = new Crawler.CrawlerQueryResult();
+						commentsPageObject.RawResult = post.SelectToken("comments").ToString();
+
+						List<JToken> comments = commentsPageObject.GetFieldToken("data[*]").ToList();
+
+						while (comments.Count > 0)
+						{
+							foreach (JToken comment in comments)
+							{
+								if (comment["message"] != null)
+								{
+									writer.WriteLine(comment["message"].ToString() + Environment.NewLine + "---" + Environment.NewLine);
+								}
+							}
+
+							string nextPageUri = commentsPageObject.GetSingleField("paging.next");
+
+							if (string.IsNullOrEmpty(nextPageUri))
+								break;
+
+							commentsPageObject = await crawler.ExecuteLinkAsync(nextPageUri);
+							comments = commentsPageObject.GetFieldToken("data[*]").ToList();
+						}
+					}
+
+					queryResult = await crawler.ExecuteLinkAsync(queryResult.GetSingleField("paging.next"));
+					posts = queryResult.GetFieldToken("data[*]").ToList();
+				}
+			}
+
+			progressBarComments.MarqueeAnimationSpeed = 0;
+			progressBarComments.Value = 0;
 		}
 	}
 }
