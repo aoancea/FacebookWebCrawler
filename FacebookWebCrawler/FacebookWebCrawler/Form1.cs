@@ -22,15 +22,16 @@ namespace FacebookWebCrawler
 
 			Crawler.CrawlerQueryResult queryResult = await crawler.ExecuteQueryAsync(txtUrl.Text);
 
-			List<JToken> results = queryResult.GetFieldToken("data[*]").ToList();
+			List<JToken> posts = queryResult.GetFieldToken("data[*]").ToList();
 
 			DateTime earliestDate = new DateTime(2014, 7, 1);
 			bool dateOk = true;
+
 			using (StreamWriter writer = new StreamWriter(textBox2.Text))
 			{
-				while (results.Count > 0 && dateOk)
+				while (posts.Count > 0 && dateOk)
 				{
-					foreach (JToken token in results)
+					foreach (JToken token in posts)
 					{
 						if (token["message"] != null)
 						{
@@ -45,7 +46,7 @@ namespace FacebookWebCrawler
 					}
 
 					queryResult = await crawler.ExecuteLinkAsync(queryResult.GetSingleField("paging.next"));
-					results = queryResult.GetFieldToken("data[*]").ToList();
+					posts = queryResult.GetFieldToken("data[*]").ToList();
 				}
 			}
 
