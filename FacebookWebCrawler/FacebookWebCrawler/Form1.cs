@@ -124,5 +124,28 @@ namespace FacebookWebCrawler
 			progressBarComments.MarqueeAnimationSpeed = 0;
 			progressBarComments.Value = 0;
 		}
+
+		private void RadioButton_Click(object sender, EventArgs e)
+		{
+			FacebookWebCrawler.Controls.RadioButton rb = (sender as FacebookWebCrawler.Controls.RadioButton);
+
+			foreach (var c in this.groupBox4.Controls)
+			{
+				if (c is FacebookWebCrawler.Controls.RadioButton && (c as FacebookWebCrawler.Controls.RadioButton).GroupName == rb.GroupName)
+				{
+					(c as FacebookWebCrawler.Controls.RadioButton).Checked = false;
+				}
+			}
+
+			foreach (var c in this.groupBox5.Controls)
+			{
+				if (c is FacebookWebCrawler.Controls.RadioButton && (c as FacebookWebCrawler.Controls.RadioButton).GroupName == rb.GroupName)
+				{
+					(c as FacebookWebCrawler.Controls.RadioButton).Checked = false;
+				}
+			}
+
+			rb.Checked = true;
+		}
 	}
 }
