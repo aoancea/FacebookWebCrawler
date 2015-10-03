@@ -158,6 +158,8 @@ namespace FacebookWebCrawler
 
 		private async void btnProcess_Click(object sender, EventArgs e)
 		{
+			InitializeProgressBar();
+
 			Dictionary<string, int> authorsIndexes = new Dictionary<string, int>();
 
 			string virtualFolderName = DateTime.Now.ToString("yyyy-MM-dd-hh-mm-ss");
@@ -194,6 +196,8 @@ namespace FacebookWebCrawler
 						{
 							writer.WriteLine(post["message"]);
 						}
+
+						progressBar.PerformStep();
 
 						if (!FetchPosts(++postsFetched, commentsFetched))
 						{
@@ -233,6 +237,8 @@ namespace FacebookWebCrawler
 								{
 									writer.WriteLine(commentBody);
 								}
+
+								progressBar.PerformStep();
 
 								if (!FetchComments(++commentsFetched, ++commentsPerPostFetched))
 								{
@@ -322,6 +328,16 @@ namespace FacebookWebCrawler
 			}
 
 			return Path.Combine(commentsFolderPath, commentIndex.ToString() + ".txt");
+		}
+
+		private void InitializeProgressBar()
+		{
+			progressBar.Minimum = 0;
+
+			if (rdoGetPosts.Checked)
+				progressBar.Maximum = (int)numMaxNumberOfPostsToFetch.Value;
+			else if (rdoGetComments.Checked)
+				progressBar.Maximum = (int)numMaxNumberOfCommentsToFetch.Value;
 		}
 	}
 
