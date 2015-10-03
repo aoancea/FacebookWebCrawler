@@ -27,7 +27,7 @@ namespace FBCrawlLib
 		/// <returns>A CrawlerQueryResult object which can be used to retrieve various results.</returns>
 		public async Task<CrawlerQueryResult> ExecuteQueryAsync(string query)
 		{
-			string queryPath = Crawler.QUERY_BASE_PATH + query;
+			string queryPath = Crawler.QUERY_BASE_PATH + query + "/feed";
 			if (queryPath.Contains('?'))
 			{
 				queryPath += "&access_token=" + this.AccessToken;
