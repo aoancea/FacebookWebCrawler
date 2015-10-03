@@ -39,14 +39,12 @@
 			this.groupBox5 = new System.Windows.Forms.GroupBox();
 			this.checkBox2 = new System.Windows.Forms.CheckBox();
 			this.cbxGroupByAuthor = new System.Windows.Forms.CheckBox();
-			this.rdoGetComments = new FacebookWebCrawler.Controls.RadioButton();
 			this.numMaxNumberOfCommentsPerPostToFetch = new System.Windows.Forms.NumericUpDown();
 			this.label8 = new System.Windows.Forms.Label();
 			this.numMaxNumberOfCommentsToFetch = new System.Windows.Forms.NumericUpDown();
 			this.label7 = new System.Windows.Forms.Label();
 			this.groupBox4 = new System.Windows.Forms.GroupBox();
 			this.numMaxNumberOfPostsToFetch = new System.Windows.Forms.NumericUpDown();
-			this.rdoGetPosts = new FacebookWebCrawler.Controls.RadioButton();
 			this.label6 = new System.Windows.Forms.Label();
 			this.btnProcessComments = new System.Windows.Forms.Button();
 			this.label4 = new System.Windows.Forms.Label();
@@ -60,6 +58,10 @@
 			this.label1 = new System.Windows.Forms.Label();
 			this.saveFileDialog1 = new System.Windows.Forms.SaveFileDialog();
 			this.folderBrowserDialog1 = new System.Windows.Forms.FolderBrowserDialog();
+			this.numMinimumCommenLength = new System.Windows.Forms.NumericUpDown();
+			this.label9 = new System.Windows.Forms.Label();
+			this.rdoGetComments = new FacebookWebCrawler.Controls.RadioButton();
+			this.rdoGetPosts = new FacebookWebCrawler.Controls.RadioButton();
 			this.groupBox1.SuspendLayout();
 			this.groupBox3.SuspendLayout();
 			this.groupBox2.SuspendLayout();
@@ -68,6 +70,7 @@
 			((System.ComponentModel.ISupportInitialize)(this.numMaxNumberOfCommentsToFetch)).BeginInit();
 			this.groupBox4.SuspendLayout();
 			((System.ComponentModel.ISupportInitialize)(this.numMaxNumberOfPostsToFetch)).BeginInit();
+			((System.ComponentModel.ISupportInitialize)(this.numMinimumCommenLength)).BeginInit();
 			this.SuspendLayout();
 			// 
 			// txtUrl
@@ -162,6 +165,8 @@
 			// 
 			// groupBox5
 			// 
+			this.groupBox5.Controls.Add(this.label9);
+			this.groupBox5.Controls.Add(this.numMinimumCommenLength);
 			this.groupBox5.Controls.Add(this.checkBox2);
 			this.groupBox5.Controls.Add(this.cbxGroupByAuthor);
 			this.groupBox5.Controls.Add(this.rdoGetComments);
@@ -195,19 +200,6 @@
 			this.cbxGroupByAuthor.TabIndex = 6;
 			this.cbxGroupByAuthor.Text = "Group by Author";
 			this.cbxGroupByAuthor.UseVisualStyleBackColor = true;
-			// 
-			// rdoGetComments
-			// 
-			this.rdoGetComments.AutoSize = true;
-			this.rdoGetComments.GroupName = "group1";
-			this.rdoGetComments.Location = new System.Drawing.Point(6, 0);
-			this.rdoGetComments.Name = "rdoGetComments";
-			this.rdoGetComments.Size = new System.Drawing.Size(93, 17);
-			this.rdoGetComments.TabIndex = 1;
-			this.rdoGetComments.TabStop = true;
-			this.rdoGetComments.Text = "Get comments";
-			this.rdoGetComments.UseVisualStyleBackColor = true;
-			this.rdoGetComments.Click += new System.EventHandler(this.RadioButton_Click);
 			// 
 			// numMaxNumberOfCommentsPerPostToFetch
 			// 
@@ -304,19 +296,6 @@
             0,
             0,
             0});
-			// 
-			// rdoGetPosts
-			// 
-			this.rdoGetPosts.AutoSize = true;
-			this.rdoGetPosts.GroupName = "group1";
-			this.rdoGetPosts.Location = new System.Drawing.Point(9, 0);
-			this.rdoGetPosts.Name = "rdoGetPosts";
-			this.rdoGetPosts.Size = new System.Drawing.Size(70, 17);
-			this.rdoGetPosts.TabIndex = 0;
-			this.rdoGetPosts.TabStop = true;
-			this.rdoGetPosts.Text = "Get posts";
-			this.rdoGetPosts.UseVisualStyleBackColor = true;
-			this.rdoGetPosts.Click += new System.EventHandler(this.RadioButton_Click);
 			// 
 			// label6
 			// 
@@ -422,6 +401,63 @@
 			// 
 			this.saveFileDialog1.Filter = "Text files (*.txt)|*.txt";
 			// 
+			// numMinimumCommenLength
+			// 
+			this.numMinimumCommenLength.Location = new System.Drawing.Point(394, 54);
+			this.numMinimumCommenLength.Maximum = new decimal(new int[] {
+            1000000,
+            0,
+            0,
+            0});
+			this.numMinimumCommenLength.Minimum = new decimal(new int[] {
+            1,
+            0,
+            0,
+            0});
+			this.numMinimumCommenLength.Name = "numMinimumCommenLength";
+			this.numMinimumCommenLength.Size = new System.Drawing.Size(120, 20);
+			this.numMinimumCommenLength.TabIndex = 8;
+			this.numMinimumCommenLength.Value = new decimal(new int[] {
+            1,
+            0,
+            0,
+            0});
+			// 
+			// label9
+			// 
+			this.label9.AutoSize = true;
+			this.label9.Location = new System.Drawing.Point(256, 55);
+			this.label9.Name = "label9";
+			this.label9.Size = new System.Drawing.Size(132, 13);
+			this.label9.TabIndex = 9;
+			this.label9.Text = "Minimum comment length: ";
+			// 
+			// rdoGetComments
+			// 
+			this.rdoGetComments.AutoSize = true;
+			this.rdoGetComments.GroupName = "group1";
+			this.rdoGetComments.Location = new System.Drawing.Point(6, 0);
+			this.rdoGetComments.Name = "rdoGetComments";
+			this.rdoGetComments.Size = new System.Drawing.Size(93, 17);
+			this.rdoGetComments.TabIndex = 1;
+			this.rdoGetComments.TabStop = true;
+			this.rdoGetComments.Text = "Get comments";
+			this.rdoGetComments.UseVisualStyleBackColor = true;
+			this.rdoGetComments.Click += new System.EventHandler(this.RadioButton_Click);
+			// 
+			// rdoGetPosts
+			// 
+			this.rdoGetPosts.AutoSize = true;
+			this.rdoGetPosts.GroupName = "group1";
+			this.rdoGetPosts.Location = new System.Drawing.Point(9, 0);
+			this.rdoGetPosts.Name = "rdoGetPosts";
+			this.rdoGetPosts.Size = new System.Drawing.Size(70, 17);
+			this.rdoGetPosts.TabIndex = 0;
+			this.rdoGetPosts.TabStop = true;
+			this.rdoGetPosts.Text = "Get posts";
+			this.rdoGetPosts.UseVisualStyleBackColor = true;
+			this.rdoGetPosts.Click += new System.EventHandler(this.RadioButton_Click);
+			// 
 			// Form1
 			// 
 			this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -445,6 +481,7 @@
 			this.groupBox4.ResumeLayout(false);
 			this.groupBox4.PerformLayout();
 			((System.ComponentModel.ISupportInitialize)(this.numMaxNumberOfPostsToFetch)).EndInit();
+			((System.ComponentModel.ISupportInitialize)(this.numMinimumCommenLength)).EndInit();
 			this.ResumeLayout(false);
 
 		}
@@ -483,6 +520,8 @@
 		private System.Windows.Forms.CheckBox checkBox2;
 		private System.Windows.Forms.Button btnProcess;
 		private System.Windows.Forms.FolderBrowserDialog folderBrowserDialog1;
+		private System.Windows.Forms.Label label9;
+		private System.Windows.Forms.NumericUpDown numMinimumCommenLength;
 	}
 }
 

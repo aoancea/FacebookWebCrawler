@@ -224,9 +224,14 @@ namespace FacebookWebCrawler
 							{
 								// save comment
 
+								string commentBody = comment["message"].ToString();
+
+								if (commentBody.Length < numMinimumCommenLength.Value)
+									continue;
+
 								using (StreamWriter writer = new StreamWriter(BuildCommentPath(commentsFolderPath, commentsFetched, comment, authorsIndexes)))
 								{
-									writer.WriteLine(comment["message"]);
+									writer.WriteLine(commentBody);
 								}
 
 								if (!FetchComments(++commentsFetched, ++commentsPerPostFetched))
