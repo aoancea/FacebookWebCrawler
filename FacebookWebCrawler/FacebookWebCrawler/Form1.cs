@@ -162,8 +162,8 @@ namespace FacebookWebCrawler
 
 			string virtualFolderName = DateTime.Now.ToString("yyyy-MM-dd-hh-mm-ss");
 
-			string postsFolderPath = Path.Combine(textboxFolderPath.Text, "posts", virtualFolderName);
-			string commentsFolderPath = Path.Combine(textboxFolderPath.Text, "comments", virtualFolderName);
+			string postsFolderPath = Path.Combine(textboxFolderPath.Text, txtUrl.Text, "posts", virtualFolderName);
+			string commentsFolderPath = Path.Combine(textboxFolderPath.Text, txtUrl.Text, "comments", virtualFolderName);
 
 			if (!System.IO.Directory.Exists(postsFolderPath))
 				System.IO.Directory.CreateDirectory(postsFolderPath);
