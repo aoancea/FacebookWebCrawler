@@ -167,7 +167,7 @@ namespace FacebookWebCrawler
 
 			List<JToken> posts = queryResult.GetFieldToken("data[*]").ToList();
 
-			while (posts.Count > 0 && FetchPosts(postsFetched, commentsFetched))
+			while (posts.Count > 0 && FetchPosts(postsFetched))
 			{
 				foreach (JToken post in posts)
 				{
@@ -207,29 +207,33 @@ namespace FacebookWebCrawler
 
 							if (continueFetchingComments)
 							{
-								string nextPageUri = commentsPageObject.GetSingleField("paging.next");
+								string nextCommentPageUri = commentsPageObject.GetSingleField("paging.next");
 
-								if (string.IsNullOrEmpty(nextPageUri))
+								if (string.IsNullOrEmpty(nextCommentPageUri))
 									break;
 
-								commentsPageObject = await crawler.ExecuteLinkAsync(nextPageUri);
+								commentsPageObject = await crawler.ExecuteLinkAsync(nextCommentPageUri);
 								comments = commentsPageObject.GetFieldToken("data[*]").ToList();
 							}
+							else
+								break;
 						}
 					}
 				}
+
+				string nextPostPageUri = queryResult.GetSingleField("paging.next");
+
+				if (string.IsNullOrEmpty(nextPostPageUri))
+					break;
+
+				queryResult = await crawler.ExecuteLinkAsync(nextPostPageUri);
+				posts = queryResult.GetFieldToken("data[*]").ToList();
 			}
 		}
 
-		private bool FetchPosts(int postsFetched, int commentsFetched)
+		private bool FetchPosts(int postsFetched)
 		{
-			if (rdoGetPosts.Checked)
-				return postsFetched < numMaxNumberOfPostsToFetch.Value;
-
-			if (rdoGetComments.Checked)
-				return commentsFetched < numMaxNumberOfCommentsToFetch.Value;
-
-			return false;
+			return postsFetched < numMaxNumberOfPostsToFetch.Value;
 		}
 
 		private bool FetchComments(int commentsFetched, int commentsPerPostFetched)
