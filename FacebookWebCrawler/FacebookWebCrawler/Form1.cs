@@ -181,6 +181,7 @@ namespace FacebookWebCrawler
 						int commentsPerPostFetched = 0;
 
 						JToken commentsTokenObject = post.SelectToken("comments");
+
 						if (commentsTokenObject == null)
 							continue;
 
@@ -191,13 +192,33 @@ namespace FacebookWebCrawler
 
 						while (comments.Count > 0 && FetchComments(commentsFetched, commentsPerPostFetched))
 						{
+							bool continueFetchingComments = true;
 
+							foreach (JToken comment in comments)
+							{
+								// save comment
+
+								if (!FetchComments(++commentsFetched, ++commentsPerPostFetched))
+								{
+									continueFetchingComments = false;
+									break;
+								}
+							}
+
+							if (continueFetchingComments)
+							{
+								string nextPageUri = commentsPageObject.GetSingleField("paging.next");
+
+								if (string.IsNullOrEmpty(nextPageUri))
+									break;
+
+								commentsPageObject = await crawler.ExecuteLinkAsync(nextPageUri);
+								comments = commentsPageObject.GetFieldToken("data[*]").ToList();
+							}
 						}
-
 					}
 				}
 			}
-
 		}
 
 		private bool FetchPosts(int postsFetched, int commentsFetched)
