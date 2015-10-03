@@ -155,5 +155,34 @@ namespace FacebookWebCrawler
 				textboxFolderPath.Text = folderBrowserDialog1.SelectedPath;
 			}
 		}
+
+		private async void btnProcess_Click(object sender, EventArgs e)
+		{
+			int postsFetched = 0;
+			int commentsFetched = 0;
+
+			Crawler crawler = new Crawler("913819931996488|2e3ef18f88e42c9068d8a6dba3b14021");
+
+			Crawler.CrawlerQueryResult queryResult = await crawler.ExecuteQueryAsync(txtUrl.Text);
+
+			List<JToken> posts = queryResult.GetFieldToken("data[*]").ToList();
+
+			while (posts.Count > 0 && FetchPosts(postsFetched, commentsFetched))
+			{
+				
+			}
+
+		}
+
+		private bool FetchPosts(int postsFetched, int commentsFetched)
+		{
+			if (rdoGetPosts.Checked)
+				return postsFetched < numMaxNumberOfPostsToFetch.Value;
+
+			if (rdoGetComments.Checked)
+				return commentsFetched < numMaxNumberOfCommentsToFetch.Value;
+
+			return false;
+		}
 	}
 }

@@ -30,7 +30,7 @@
 		{
 			this.txtUrl = new System.Windows.Forms.TextBox();
 			this.groupBox1 = new System.Windows.Forms.GroupBox();
-			this.button4 = new System.Windows.Forms.Button();
+			this.btnProcess = new System.Windows.Forms.Button();
 			this.groupBox3 = new System.Windows.Forms.GroupBox();
 			this.btnBrowseFolder = new System.Windows.Forms.Button();
 			this.label5 = new System.Windows.Forms.Label();
@@ -39,14 +39,12 @@
 			this.groupBox5 = new System.Windows.Forms.GroupBox();
 			this.checkBox2 = new System.Windows.Forms.CheckBox();
 			this.checkBox1 = new System.Windows.Forms.CheckBox();
-			this.radioButton2 = new FacebookWebCrawler.Controls.RadioButton();
-			this.numericUpDown3 = new System.Windows.Forms.NumericUpDown();
+			this.numMaxNumberOfCommentsPerPostToFetch = new System.Windows.Forms.NumericUpDown();
 			this.label8 = new System.Windows.Forms.Label();
-			this.numericUpDown2 = new System.Windows.Forms.NumericUpDown();
+			this.numMaxNumberOfCommentsToFetch = new System.Windows.Forms.NumericUpDown();
 			this.label7 = new System.Windows.Forms.Label();
 			this.groupBox4 = new System.Windows.Forms.GroupBox();
-			this.numericUpDown1 = new System.Windows.Forms.NumericUpDown();
-			this.radioButton1 = new FacebookWebCrawler.Controls.RadioButton();
+			this.numMaxNumberOfPostsToFetch = new System.Windows.Forms.NumericUpDown();
 			this.label6 = new System.Windows.Forms.Label();
 			this.btnProcessComments = new System.Windows.Forms.Button();
 			this.label4 = new System.Windows.Forms.Label();
@@ -60,14 +58,16 @@
 			this.label1 = new System.Windows.Forms.Label();
 			this.saveFileDialog1 = new System.Windows.Forms.SaveFileDialog();
 			this.folderBrowserDialog1 = new System.Windows.Forms.FolderBrowserDialog();
+			this.rdoGetComments = new FacebookWebCrawler.Controls.RadioButton();
+			this.rdoGetPosts = new FacebookWebCrawler.Controls.RadioButton();
 			this.groupBox1.SuspendLayout();
 			this.groupBox3.SuspendLayout();
 			this.groupBox2.SuspendLayout();
 			this.groupBox5.SuspendLayout();
-			((System.ComponentModel.ISupportInitialize)(this.numericUpDown3)).BeginInit();
-			((System.ComponentModel.ISupportInitialize)(this.numericUpDown2)).BeginInit();
+			((System.ComponentModel.ISupportInitialize)(this.numMaxNumberOfCommentsPerPostToFetch)).BeginInit();
+			((System.ComponentModel.ISupportInitialize)(this.numMaxNumberOfCommentsToFetch)).BeginInit();
 			this.groupBox4.SuspendLayout();
-			((System.ComponentModel.ISupportInitialize)(this.numericUpDown1)).BeginInit();
+			((System.ComponentModel.ISupportInitialize)(this.numMaxNumberOfPostsToFetch)).BeginInit();
 			this.SuspendLayout();
 			// 
 			// txtUrl
@@ -79,7 +79,7 @@
 			// 
 			// groupBox1
 			// 
-			this.groupBox1.Controls.Add(this.button4);
+			this.groupBox1.Controls.Add(this.btnProcess);
 			this.groupBox1.Controls.Add(this.groupBox3);
 			this.groupBox1.Controls.Add(this.groupBox2);
 			this.groupBox1.Controls.Add(this.btnProcessComments);
@@ -101,14 +101,15 @@
 			this.groupBox1.TabStop = false;
 			this.groupBox1.Text = "Action";
 			// 
-			// button4
+			// btnProcess
 			// 
-			this.button4.Location = new System.Drawing.Point(6, 270);
-			this.button4.Name = "button4";
-			this.button4.Size = new System.Drawing.Size(605, 23);
-			this.button4.TabIndex = 14;
-			this.button4.Text = "Process";
-			this.button4.UseVisualStyleBackColor = true;
+			this.btnProcess.Location = new System.Drawing.Point(6, 270);
+			this.btnProcess.Name = "btnProcess";
+			this.btnProcess.Size = new System.Drawing.Size(605, 23);
+			this.btnProcess.TabIndex = 14;
+			this.btnProcess.Text = "Process";
+			this.btnProcess.UseVisualStyleBackColor = true;
+			this.btnProcess.Click += new System.EventHandler(this.btnProcess_Click);
 			// 
 			// groupBox3
 			// 
@@ -163,10 +164,10 @@
 			// 
 			this.groupBox5.Controls.Add(this.checkBox2);
 			this.groupBox5.Controls.Add(this.checkBox1);
-			this.groupBox5.Controls.Add(this.radioButton2);
-			this.groupBox5.Controls.Add(this.numericUpDown3);
+			this.groupBox5.Controls.Add(this.rdoGetComments);
+			this.groupBox5.Controls.Add(this.numMaxNumberOfCommentsPerPostToFetch);
 			this.groupBox5.Controls.Add(this.label8);
-			this.groupBox5.Controls.Add(this.numericUpDown2);
+			this.groupBox5.Controls.Add(this.numMaxNumberOfCommentsToFetch);
 			this.groupBox5.Controls.Add(this.label7);
 			this.groupBox5.Location = new System.Drawing.Point(9, 78);
 			this.groupBox5.Name = "groupBox5";
@@ -195,30 +196,17 @@
 			this.checkBox1.Text = "Group by Author";
 			this.checkBox1.UseVisualStyleBackColor = true;
 			// 
-			// radioButton2
+			// numMaxNumberOfCommentsPerPostToFetch
 			// 
-			this.radioButton2.AutoSize = true;
-			this.radioButton2.GroupName = "group1";
-			this.radioButton2.Location = new System.Drawing.Point(6, 0);
-			this.radioButton2.Name = "radioButton2";
-			this.radioButton2.Size = new System.Drawing.Size(93, 17);
-			this.radioButton2.TabIndex = 1;
-			this.radioButton2.TabStop = true;
-			this.radioButton2.Text = "Get comments";
-			this.radioButton2.UseVisualStyleBackColor = true;
-			this.radioButton2.Click += new System.EventHandler(this.RadioButton_Click);
-			// 
-			// numericUpDown3
-			// 
-			this.numericUpDown3.Location = new System.Drawing.Point(394, 20);
-			this.numericUpDown3.Maximum = new decimal(new int[] {
+			this.numMaxNumberOfCommentsPerPostToFetch.Location = new System.Drawing.Point(394, 20);
+			this.numMaxNumberOfCommentsPerPostToFetch.Maximum = new decimal(new int[] {
             1000000,
             0,
             0,
             0});
-			this.numericUpDown3.Name = "numericUpDown3";
-			this.numericUpDown3.Size = new System.Drawing.Size(120, 20);
-			this.numericUpDown3.TabIndex = 5;
+			this.numMaxNumberOfCommentsPerPostToFetch.Name = "numMaxNumberOfCommentsPerPostToFetch";
+			this.numMaxNumberOfCommentsPerPostToFetch.Size = new System.Drawing.Size(120, 20);
+			this.numMaxNumberOfCommentsPerPostToFetch.TabIndex = 5;
 			// 
 			// label8
 			// 
@@ -229,17 +217,17 @@
 			this.label8.TabIndex = 4;
 			this.label8.Text = "Maximum number of comments per post: ";
 			// 
-			// numericUpDown2
+			// numMaxNumberOfCommentsToFetch
 			// 
-			this.numericUpDown2.Location = new System.Drawing.Point(62, 20);
-			this.numericUpDown2.Maximum = new decimal(new int[] {
+			this.numMaxNumberOfCommentsToFetch.Location = new System.Drawing.Point(62, 20);
+			this.numMaxNumberOfCommentsToFetch.Maximum = new decimal(new int[] {
             1000000,
             0,
             0,
             0});
-			this.numericUpDown2.Name = "numericUpDown2";
-			this.numericUpDown2.Size = new System.Drawing.Size(120, 20);
-			this.numericUpDown2.TabIndex = 3;
+			this.numMaxNumberOfCommentsToFetch.Name = "numMaxNumberOfCommentsToFetch";
+			this.numMaxNumberOfCommentsToFetch.Size = new System.Drawing.Size(120, 20);
+			this.numMaxNumberOfCommentsToFetch.TabIndex = 3;
 			// 
 			// label7
 			// 
@@ -252,8 +240,8 @@
 			// 
 			// groupBox4
 			// 
-			this.groupBox4.Controls.Add(this.numericUpDown1);
-			this.groupBox4.Controls.Add(this.radioButton1);
+			this.groupBox4.Controls.Add(this.numMaxNumberOfPostsToFetch);
+			this.groupBox4.Controls.Add(this.rdoGetPosts);
 			this.groupBox4.Controls.Add(this.label6);
 			this.groupBox4.Location = new System.Drawing.Point(9, 19);
 			this.groupBox4.Name = "groupBox4";
@@ -262,30 +250,17 @@
 			this.groupBox4.TabStop = false;
 			this.groupBox4.Text = "Posts";
 			// 
-			// numericUpDown1
+			// numMaxNumberOfPostsToFetch
 			// 
-			this.numericUpDown1.Location = new System.Drawing.Point(62, 20);
-			this.numericUpDown1.Maximum = new decimal(new int[] {
+			this.numMaxNumberOfPostsToFetch.Location = new System.Drawing.Point(62, 20);
+			this.numMaxNumberOfPostsToFetch.Maximum = new decimal(new int[] {
             1000000,
             0,
             0,
             0});
-			this.numericUpDown1.Name = "numericUpDown1";
-			this.numericUpDown1.Size = new System.Drawing.Size(120, 20);
-			this.numericUpDown1.TabIndex = 15;
-			// 
-			// radioButton1
-			// 
-			this.radioButton1.AutoSize = true;
-			this.radioButton1.GroupName = "group1";
-			this.radioButton1.Location = new System.Drawing.Point(9, 0);
-			this.radioButton1.Name = "radioButton1";
-			this.radioButton1.Size = new System.Drawing.Size(70, 17);
-			this.radioButton1.TabIndex = 0;
-			this.radioButton1.TabStop = true;
-			this.radioButton1.Text = "Get posts";
-			this.radioButton1.UseVisualStyleBackColor = true;
-			this.radioButton1.Click += new System.EventHandler(this.RadioButton_Click);
+			this.numMaxNumberOfPostsToFetch.Name = "numMaxNumberOfPostsToFetch";
+			this.numMaxNumberOfPostsToFetch.Size = new System.Drawing.Size(120, 20);
+			this.numMaxNumberOfPostsToFetch.TabIndex = 15;
 			// 
 			// label6
 			// 
@@ -391,6 +366,32 @@
 			// 
 			this.saveFileDialog1.Filter = "Text files (*.txt)|*.txt";
 			// 
+			// rdoGetComments
+			// 
+			this.rdoGetComments.AutoSize = true;
+			this.rdoGetComments.GroupName = "group1";
+			this.rdoGetComments.Location = new System.Drawing.Point(6, 0);
+			this.rdoGetComments.Name = "rdoGetComments";
+			this.rdoGetComments.Size = new System.Drawing.Size(93, 17);
+			this.rdoGetComments.TabIndex = 1;
+			this.rdoGetComments.TabStop = true;
+			this.rdoGetComments.Text = "Get comments";
+			this.rdoGetComments.UseVisualStyleBackColor = true;
+			this.rdoGetComments.Click += new System.EventHandler(this.RadioButton_Click);
+			// 
+			// rdoGetPosts
+			// 
+			this.rdoGetPosts.AutoSize = true;
+			this.rdoGetPosts.GroupName = "group1";
+			this.rdoGetPosts.Location = new System.Drawing.Point(9, 0);
+			this.rdoGetPosts.Name = "rdoGetPosts";
+			this.rdoGetPosts.Size = new System.Drawing.Size(70, 17);
+			this.rdoGetPosts.TabIndex = 0;
+			this.rdoGetPosts.TabStop = true;
+			this.rdoGetPosts.Text = "Get posts";
+			this.rdoGetPosts.UseVisualStyleBackColor = true;
+			this.rdoGetPosts.Click += new System.EventHandler(this.RadioButton_Click);
+			// 
 			// Form1
 			// 
 			this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -409,11 +410,11 @@
 			this.groupBox2.ResumeLayout(false);
 			this.groupBox5.ResumeLayout(false);
 			this.groupBox5.PerformLayout();
-			((System.ComponentModel.ISupportInitialize)(this.numericUpDown3)).EndInit();
-			((System.ComponentModel.ISupportInitialize)(this.numericUpDown2)).EndInit();
+			((System.ComponentModel.ISupportInitialize)(this.numMaxNumberOfCommentsPerPostToFetch)).EndInit();
+			((System.ComponentModel.ISupportInitialize)(this.numMaxNumberOfCommentsToFetch)).EndInit();
 			this.groupBox4.ResumeLayout(false);
 			this.groupBox4.PerformLayout();
-			((System.ComponentModel.ISupportInitialize)(this.numericUpDown1)).EndInit();
+			((System.ComponentModel.ISupportInitialize)(this.numMaxNumberOfPostsToFetch)).EndInit();
 			this.ResumeLayout(false);
 
 		}
@@ -439,18 +440,18 @@
 		private System.Windows.Forms.GroupBox groupBox4;
 		private System.Windows.Forms.Label label6;
 		private System.Windows.Forms.Label label7;
-		private System.Windows.Forms.NumericUpDown numericUpDown2;
-		private System.Windows.Forms.NumericUpDown numericUpDown1;
-		private System.Windows.Forms.NumericUpDown numericUpDown3;
+		private System.Windows.Forms.NumericUpDown numMaxNumberOfCommentsToFetch;
+		private System.Windows.Forms.NumericUpDown numMaxNumberOfPostsToFetch;
+		private System.Windows.Forms.NumericUpDown numMaxNumberOfCommentsPerPostToFetch;
 		private System.Windows.Forms.Label label8;
-		private FacebookWebCrawler.Controls.RadioButton radioButton2;
-		private FacebookWebCrawler.Controls.RadioButton radioButton1;
+		private FacebookWebCrawler.Controls.RadioButton rdoGetComments;
+		private FacebookWebCrawler.Controls.RadioButton rdoGetPosts;
 		private System.Windows.Forms.CheckBox checkBox1;
 		private System.Windows.Forms.Button btnBrowseFolder;
 		private System.Windows.Forms.Label label5;
 		private System.Windows.Forms.TextBox textboxFolderPath;
 		private System.Windows.Forms.CheckBox checkBox2;
-		private System.Windows.Forms.Button button4;
+		private System.Windows.Forms.Button btnProcess;
 		private System.Windows.Forms.FolderBrowserDialog folderBrowserDialog1;
 	}
 }
