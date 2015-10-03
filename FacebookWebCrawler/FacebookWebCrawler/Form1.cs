@@ -169,7 +169,33 @@ namespace FacebookWebCrawler
 
 			while (posts.Count > 0 && FetchPosts(postsFetched, commentsFetched))
 			{
-				
+				foreach (JToken post in posts)
+				{
+					if (rdoGetPosts.Checked)
+					{
+						// get the posts
+					}
+
+					if (rdoGetComments.Checked)
+					{
+						int commentsPerPostFetched = 0;
+
+						JToken commentsTokenObject = post.SelectToken("comments");
+						if (commentsTokenObject == null)
+							continue;
+
+						Crawler.CrawlerQueryResult commentsPageObject = new Crawler.CrawlerQueryResult();
+						commentsPageObject.RawResult = commentsTokenObject.ToString();
+
+						List<JToken> comments = commentsPageObject.GetFieldToken("data[*]").ToList();
+
+						while (comments.Count > 0 && FetchComments(commentsFetched, commentsPerPostFetched))
+						{
+
+						}
+
+					}
+				}
 			}
 
 		}
@@ -183,6 +209,11 @@ namespace FacebookWebCrawler
 				return commentsFetched < numMaxNumberOfCommentsToFetch.Value;
 
 			return false;
+		}
+
+		private bool FetchComments(int commentsFetched, int commentsPerPostFetched)
+		{
+			return commentsFetched < numMaxNumberOfCommentsToFetch.Value && commentsPerPostFetched < numMaxNumberOfCommentsPerPostToFetch.Value;
 		}
 	}
 }

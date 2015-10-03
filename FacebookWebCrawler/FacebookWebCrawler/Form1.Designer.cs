@@ -204,9 +204,19 @@
             0,
             0,
             0});
+			this.numMaxNumberOfCommentsPerPostToFetch.Minimum = new decimal(new int[] {
+            1,
+            0,
+            0,
+            0});
 			this.numMaxNumberOfCommentsPerPostToFetch.Name = "numMaxNumberOfCommentsPerPostToFetch";
 			this.numMaxNumberOfCommentsPerPostToFetch.Size = new System.Drawing.Size(120, 20);
 			this.numMaxNumberOfCommentsPerPostToFetch.TabIndex = 5;
+			this.numMaxNumberOfCommentsPerPostToFetch.Value = new decimal(new int[] {
+            1,
+            0,
+            0,
+            0});
 			// 
 			// label8
 			// 
@@ -225,9 +235,19 @@
             0,
             0,
             0});
+			this.numMaxNumberOfCommentsToFetch.Minimum = new decimal(new int[] {
+            1,
+            0,
+            0,
+            0});
 			this.numMaxNumberOfCommentsToFetch.Name = "numMaxNumberOfCommentsToFetch";
 			this.numMaxNumberOfCommentsToFetch.Size = new System.Drawing.Size(120, 20);
 			this.numMaxNumberOfCommentsToFetch.TabIndex = 3;
+			this.numMaxNumberOfCommentsToFetch.Value = new decimal(new int[] {
+            1,
+            0,
+            0,
+            0});
 			// 
 			// label7
 			// 
@@ -258,9 +278,19 @@
             0,
             0,
             0});
+			this.numMaxNumberOfPostsToFetch.Minimum = new decimal(new int[] {
+            1,
+            0,
+            0,
+            0});
 			this.numMaxNumberOfPostsToFetch.Name = "numMaxNumberOfPostsToFetch";
 			this.numMaxNumberOfPostsToFetch.Size = new System.Drawing.Size(120, 20);
 			this.numMaxNumberOfPostsToFetch.TabIndex = 15;
+			this.numMaxNumberOfPostsToFetch.Value = new decimal(new int[] {
+            1,
+            0,
+            0,
+            0});
 			// 
 			// label6
 			// 
