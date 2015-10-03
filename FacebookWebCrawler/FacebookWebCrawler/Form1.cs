@@ -158,6 +158,19 @@ namespace FacebookWebCrawler
 
 		private async void btnProcess_Click(object sender, EventArgs e)
 		{
+			Dictionary<string, int> authorsIndexes = new Dictionary<string, int>();
+
+			string virtualFolderName = DateTime.Now.ToString("yyyy-MM-dd-hh-mm-ss");
+
+			string postsFolderPath = Path.Combine(textboxFolderPath.Text, "posts", virtualFolderName);
+			string commentsFolderPath = Path.Combine(textboxFolderPath.Text, "comments", virtualFolderName);
+
+			if (!System.IO.Directory.Exists(postsFolderPath))
+				System.IO.Directory.CreateDirectory(postsFolderPath);
+
+			if (!System.IO.Directory.Exists(commentsFolderPath))
+				System.IO.Directory.CreateDirectory(commentsFolderPath);
+
 			int postsFetched = 0;
 			int commentsFetched = 0;
 
@@ -177,9 +190,14 @@ namespace FacebookWebCrawler
 					{
 						// save post
 
+						using (StreamWriter writer = new StreamWriter(Path.Combine(postsFolderPath, postsFetched.ToString() + ".txt")))
+						{
+							writer.WriteLine(post["message"]);
+						}
+
 						if (!FetchPosts(++postsFetched))
 						{
-							continueFetchingPosts = true;
+							continueFetchingPosts = false;
 							break;
 						}
 					}
@@ -205,6 +223,11 @@ namespace FacebookWebCrawler
 							foreach (JToken comment in comments)
 							{
 								// save comment
+
+								using (StreamWriter writer = new StreamWriter(BuildCommentPath(commentsFolderPath, commentsFetched, authorsIndexes)))
+								{
+									writer.WriteLine(comment["message"]);
+								}
 
 								if (!FetchComments(++commentsFetched, ++commentsPerPostFetched))
 								{
@@ -255,6 +278,11 @@ namespace FacebookWebCrawler
 		private bool FetchComments(int commentsFetched, int commentsPerPostFetched)
 		{
 			return commentsFetched < numMaxNumberOfCommentsToFetch.Value && commentsPerPostFetched < numMaxNumberOfCommentsPerPostToFetch.Value;
+		}
+
+		private string BuildCommentPath(string commentsFolderPath, int commentIndex, Dictionary<string, int> authorsIndexes)
+		{
+			return Path.Combine(commentsFolderPath, commentIndex.ToString() + ".txt");
 		}
 	}
 }
