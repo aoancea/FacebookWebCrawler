@@ -302,7 +302,7 @@ namespace FacebookWebCrawler
 		{
 			if (cbxGroupByAuthor.Checked)
 			{
-				string authorName = comment.SelectToken("from.name").ToString();
+				string authorName = comment.SelectToken("from.name").ToString().Sanitize(); ;
 
 				commentsFolderPath = Path.Combine(commentsFolderPath, authorName);
 
@@ -317,6 +317,23 @@ namespace FacebookWebCrawler
 			}
 
 			return Path.Combine(commentsFolderPath, commentIndex.ToString() + ".txt");
+		}
+	}
+
+	public static class StringExtensions
+	{
+		public static string Sanitize(this string name)
+		{
+			return name
+				.Replace("\\", "")
+				.Replace("/", "")
+				.Replace(":", "")
+				.Replace("*", "")
+				.Replace("?", "")
+				.Replace("\"", "")
+				.Replace("<", "")
+				.Replace(">", "")
+				.Replace("|", "");
 		}
 	}
 }
