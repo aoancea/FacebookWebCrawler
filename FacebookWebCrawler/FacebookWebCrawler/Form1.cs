@@ -147,5 +147,13 @@ namespace FacebookWebCrawler
 
 			rb.Checked = true;
 		}
+
+		private void btnBrowseFolder_Click(object sender, EventArgs e)
+		{
+			if (folderBrowserDialog1.ShowDialog() == System.Windows.Forms.DialogResult.OK)
+			{
+				textboxFolderPath.Text = folderBrowserDialog1.SelectedPath;
+			}
+		}
 	}
 }

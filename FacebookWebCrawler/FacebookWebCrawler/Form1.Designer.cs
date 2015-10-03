@@ -30,16 +30,23 @@
 		{
 			this.txtUrl = new System.Windows.Forms.TextBox();
 			this.groupBox1 = new System.Windows.Forms.GroupBox();
+			this.button4 = new System.Windows.Forms.Button();
 			this.groupBox3 = new System.Windows.Forms.GroupBox();
+			this.btnBrowseFolder = new System.Windows.Forms.Button();
+			this.label5 = new System.Windows.Forms.Label();
+			this.textboxFolderPath = new System.Windows.Forms.TextBox();
 			this.groupBox2 = new System.Windows.Forms.GroupBox();
 			this.groupBox5 = new System.Windows.Forms.GroupBox();
+			this.checkBox2 = new System.Windows.Forms.CheckBox();
 			this.checkBox1 = new System.Windows.Forms.CheckBox();
+			this.radioButton2 = new FacebookWebCrawler.Controls.RadioButton();
 			this.numericUpDown3 = new System.Windows.Forms.NumericUpDown();
 			this.label8 = new System.Windows.Forms.Label();
 			this.numericUpDown2 = new System.Windows.Forms.NumericUpDown();
 			this.label7 = new System.Windows.Forms.Label();
 			this.groupBox4 = new System.Windows.Forms.GroupBox();
 			this.numericUpDown1 = new System.Windows.Forms.NumericUpDown();
+			this.radioButton1 = new FacebookWebCrawler.Controls.RadioButton();
 			this.label6 = new System.Windows.Forms.Label();
 			this.btnProcessComments = new System.Windows.Forms.Button();
 			this.label4 = new System.Windows.Forms.Label();
@@ -52,13 +59,7 @@
 			this.button1 = new System.Windows.Forms.Button();
 			this.label1 = new System.Windows.Forms.Label();
 			this.saveFileDialog1 = new System.Windows.Forms.SaveFileDialog();
-			this.textBox1 = new System.Windows.Forms.TextBox();
-			this.label5 = new System.Windows.Forms.Label();
-			this.button3 = new System.Windows.Forms.Button();
-			this.checkBox2 = new System.Windows.Forms.CheckBox();
-			this.radioButton2 = new FacebookWebCrawler.Controls.RadioButton();
-			this.radioButton1 = new FacebookWebCrawler.Controls.RadioButton();
-			this.button4 = new System.Windows.Forms.Button();
+			this.folderBrowserDialog1 = new System.Windows.Forms.FolderBrowserDialog();
 			this.groupBox1.SuspendLayout();
 			this.groupBox3.SuspendLayout();
 			this.groupBox2.SuspendLayout();
@@ -100,17 +101,52 @@
 			this.groupBox1.TabStop = false;
 			this.groupBox1.Text = "Action";
 			// 
+			// button4
+			// 
+			this.button4.Location = new System.Drawing.Point(6, 270);
+			this.button4.Name = "button4";
+			this.button4.Size = new System.Drawing.Size(605, 23);
+			this.button4.TabIndex = 14;
+			this.button4.Text = "Process";
+			this.button4.UseVisualStyleBackColor = true;
+			// 
 			// groupBox3
 			// 
-			this.groupBox3.Controls.Add(this.button3);
+			this.groupBox3.Controls.Add(this.btnBrowseFolder);
 			this.groupBox3.Controls.Add(this.label5);
-			this.groupBox3.Controls.Add(this.textBox1);
+			this.groupBox3.Controls.Add(this.textboxFolderPath);
 			this.groupBox3.Location = new System.Drawing.Point(6, 207);
 			this.groupBox3.Name = "groupBox3";
 			this.groupBox3.Size = new System.Drawing.Size(605, 57);
 			this.groupBox3.TabIndex = 13;
 			this.groupBox3.TabStop = false;
 			this.groupBox3.Text = "Save settings";
+			// 
+			// btnBrowseFolder
+			// 
+			this.btnBrowseFolder.Location = new System.Drawing.Point(493, 19);
+			this.btnBrowseFolder.Name = "btnBrowseFolder";
+			this.btnBrowseFolder.Size = new System.Drawing.Size(106, 23);
+			this.btnBrowseFolder.TabIndex = 2;
+			this.btnBrowseFolder.Text = "Browse";
+			this.btnBrowseFolder.UseVisualStyleBackColor = true;
+			this.btnBrowseFolder.Click += new System.EventHandler(this.btnBrowseFolder_Click);
+			// 
+			// label5
+			// 
+			this.label5.AutoSize = true;
+			this.label5.Location = new System.Drawing.Point(6, 25);
+			this.label5.Name = "label5";
+			this.label5.Size = new System.Drawing.Size(42, 13);
+			this.label5.TabIndex = 1;
+			this.label5.Text = "Folder: ";
+			// 
+			// textboxFolderPath
+			// 
+			this.textboxFolderPath.Location = new System.Drawing.Point(54, 22);
+			this.textboxFolderPath.Name = "textboxFolderPath";
+			this.textboxFolderPath.Size = new System.Drawing.Size(433, 20);
+			this.textboxFolderPath.TabIndex = 0;
 			// 
 			// groupBox2
 			// 
@@ -139,6 +175,16 @@
 			this.groupBox5.TabStop = false;
 			this.groupBox5.Text = "Comments";
 			// 
+			// checkBox2
+			// 
+			this.checkBox2.AutoSize = true;
+			this.checkBox2.Location = new System.Drawing.Point(116, 54);
+			this.checkBox2.Name = "checkBox2";
+			this.checkBox2.Size = new System.Drawing.Size(90, 17);
+			this.checkBox2.TabIndex = 7;
+			this.checkBox2.Text = "Get metadata";
+			this.checkBox2.UseVisualStyleBackColor = true;
+			// 
 			// checkBox1
 			// 
 			this.checkBox1.AutoSize = true;
@@ -148,6 +194,19 @@
 			this.checkBox1.TabIndex = 6;
 			this.checkBox1.Text = "Group by Author";
 			this.checkBox1.UseVisualStyleBackColor = true;
+			// 
+			// radioButton2
+			// 
+			this.radioButton2.AutoSize = true;
+			this.radioButton2.GroupName = "group1";
+			this.radioButton2.Location = new System.Drawing.Point(6, 0);
+			this.radioButton2.Name = "radioButton2";
+			this.radioButton2.Size = new System.Drawing.Size(93, 17);
+			this.radioButton2.TabIndex = 1;
+			this.radioButton2.TabStop = true;
+			this.radioButton2.Text = "Get comments";
+			this.radioButton2.UseVisualStyleBackColor = true;
+			this.radioButton2.Click += new System.EventHandler(this.RadioButton_Click);
 			// 
 			// numericUpDown3
 			// 
@@ -214,6 +273,19 @@
 			this.numericUpDown1.Name = "numericUpDown1";
 			this.numericUpDown1.Size = new System.Drawing.Size(120, 20);
 			this.numericUpDown1.TabIndex = 15;
+			// 
+			// radioButton1
+			// 
+			this.radioButton1.AutoSize = true;
+			this.radioButton1.GroupName = "group1";
+			this.radioButton1.Location = new System.Drawing.Point(9, 0);
+			this.radioButton1.Name = "radioButton1";
+			this.radioButton1.Size = new System.Drawing.Size(70, 17);
+			this.radioButton1.TabIndex = 0;
+			this.radioButton1.TabStop = true;
+			this.radioButton1.Text = "Get posts";
+			this.radioButton1.UseVisualStyleBackColor = true;
+			this.radioButton1.Click += new System.EventHandler(this.RadioButton_Click);
 			// 
 			// label6
 			// 
@@ -319,76 +391,6 @@
 			// 
 			this.saveFileDialog1.Filter = "Text files (*.txt)|*.txt";
 			// 
-			// textBox1
-			// 
-			this.textBox1.Location = new System.Drawing.Point(54, 22);
-			this.textBox1.Name = "textBox1";
-			this.textBox1.Size = new System.Drawing.Size(433, 20);
-			this.textBox1.TabIndex = 0;
-			// 
-			// label5
-			// 
-			this.label5.AutoSize = true;
-			this.label5.Location = new System.Drawing.Point(6, 25);
-			this.label5.Name = "label5";
-			this.label5.Size = new System.Drawing.Size(42, 13);
-			this.label5.TabIndex = 1;
-			this.label5.Text = "Folder: ";
-			// 
-			// button3
-			// 
-			this.button3.Location = new System.Drawing.Point(493, 19);
-			this.button3.Name = "button3";
-			this.button3.Size = new System.Drawing.Size(106, 23);
-			this.button3.TabIndex = 2;
-			this.button3.Text = "Browse";
-			this.button3.UseVisualStyleBackColor = true;
-			// 
-			// checkBox2
-			// 
-			this.checkBox2.AutoSize = true;
-			this.checkBox2.Location = new System.Drawing.Point(116, 54);
-			this.checkBox2.Name = "checkBox2";
-			this.checkBox2.Size = new System.Drawing.Size(90, 17);
-			this.checkBox2.TabIndex = 7;
-			this.checkBox2.Text = "Get metadata";
-			this.checkBox2.UseVisualStyleBackColor = true;
-			// 
-			// radioButton2
-			// 
-			this.radioButton2.AutoSize = true;
-			this.radioButton2.GroupName = "group1";
-			this.radioButton2.Location = new System.Drawing.Point(6, 0);
-			this.radioButton2.Name = "radioButton2";
-			this.radioButton2.Size = new System.Drawing.Size(93, 17);
-			this.radioButton2.TabIndex = 1;
-			this.radioButton2.TabStop = true;
-			this.radioButton2.Text = "Get comments";
-			this.radioButton2.UseVisualStyleBackColor = true;
-			this.radioButton2.Click += new System.EventHandler(this.RadioButton_Click);
-			// 
-			// radioButton1
-			// 
-			this.radioButton1.AutoSize = true;
-			this.radioButton1.GroupName = "group1";
-			this.radioButton1.Location = new System.Drawing.Point(9, 0);
-			this.radioButton1.Name = "radioButton1";
-			this.radioButton1.Size = new System.Drawing.Size(70, 17);
-			this.radioButton1.TabIndex = 0;
-			this.radioButton1.TabStop = true;
-			this.radioButton1.Text = "Get posts";
-			this.radioButton1.UseVisualStyleBackColor = true;
-			this.radioButton1.Click += new System.EventHandler(this.RadioButton_Click);
-			// 
-			// button4
-			// 
-			this.button4.Location = new System.Drawing.Point(6, 270);
-			this.button4.Name = "button4";
-			this.button4.Size = new System.Drawing.Size(605, 23);
-			this.button4.TabIndex = 14;
-			this.button4.Text = "Process";
-			this.button4.UseVisualStyleBackColor = true;
-			// 
 			// Form1
 			// 
 			this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -444,11 +446,12 @@
 		private FacebookWebCrawler.Controls.RadioButton radioButton2;
 		private FacebookWebCrawler.Controls.RadioButton radioButton1;
 		private System.Windows.Forms.CheckBox checkBox1;
-		private System.Windows.Forms.Button button3;
+		private System.Windows.Forms.Button btnBrowseFolder;
 		private System.Windows.Forms.Label label5;
-		private System.Windows.Forms.TextBox textBox1;
+		private System.Windows.Forms.TextBox textboxFolderPath;
 		private System.Windows.Forms.CheckBox checkBox2;
 		private System.Windows.Forms.Button button4;
+		private System.Windows.Forms.FolderBrowserDialog folderBrowserDialog1;
 	}
 }
 
