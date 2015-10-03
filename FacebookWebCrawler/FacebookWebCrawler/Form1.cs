@@ -180,7 +180,7 @@ namespace FacebookWebCrawler
 
 			List<JToken> posts = queryResult.GetFieldToken("data[*]").ToList();
 
-			while (posts.Count > 0 && FetchPosts(postsFetched))
+			while (posts.Count > 0 && FetchPosts(postsFetched, commentsFetched))
 			{
 				bool continueFetchingPosts = true;
 
@@ -195,7 +195,7 @@ namespace FacebookWebCrawler
 							writer.WriteLine(post["message"]);
 						}
 
-						if (!FetchPosts(++postsFetched))
+						if (!FetchPosts(++postsFetched, commentsFetched))
 						{
 							continueFetchingPosts = false;
 							break;
@@ -224,7 +224,7 @@ namespace FacebookWebCrawler
 							{
 								// save comment
 
-								using (StreamWriter writer = new StreamWriter(BuildCommentPath(commentsFolderPath, commentsFetched, authorsIndexes)))
+								using (StreamWriter writer = new StreamWriter(BuildCommentPath(commentsFolderPath, commentsFetched, comment, authorsIndexes)))
 								{
 									writer.WriteLine(comment["message"]);
 								}
@@ -265,12 +265,30 @@ namespace FacebookWebCrawler
 				else
 					break;
 			}
+
+
+			if (cbxGroupByAuthor.Checked)
+			{
+				foreach (var author in authorsIndexes)
+				{
+					string oldPath = Path.Combine(commentsFolderPath, author.Key);
+
+					string[] filesInPath = System.IO.Directory.GetFiles(oldPath);
+
+					string newPath = Path.Combine(commentsFolderPath, filesInPath.Length + " - " + author.Key);
+
+					System.IO.Directory.Move(oldPath, newPath);
+				}
+			}
 		}
 
-		private bool FetchPosts(int postsFetched)
+		private bool FetchPosts(int postsFetched, int commentsFetched)
 		{
 			if (rdoGetPosts.Checked)
 				return postsFetched < numMaxNumberOfPostsToFetch.Value;
+
+			if (rdoGetComments.Checked)
+				return commentsFetched < numMaxNumberOfCommentsToFetch.Value;
 
 			return true;
 		}
@@ -280,8 +298,24 @@ namespace FacebookWebCrawler
 			return commentsFetched < numMaxNumberOfCommentsToFetch.Value && commentsPerPostFetched < numMaxNumberOfCommentsPerPostToFetch.Value;
 		}
 
-		private string BuildCommentPath(string commentsFolderPath, int commentIndex, Dictionary<string, int> authorsIndexes)
+		private string BuildCommentPath(string commentsFolderPath, int commentIndex, JToken comment, Dictionary<string, int> authorsIndexes)
 		{
+			if (cbxGroupByAuthor.Checked)
+			{
+				string authorName = comment.SelectToken("from.name").ToString();
+
+				commentsFolderPath = Path.Combine(commentsFolderPath, authorName);
+
+				System.IO.Directory.CreateDirectory(commentsFolderPath);
+
+				if (!authorsIndexes.ContainsKey(authorName))
+					authorsIndexes.Add(authorName, 0);
+				else
+					authorsIndexes[authorName] = authorsIndexes[authorName] + 1;
+
+				return Path.Combine(commentsFolderPath, authorsIndexes[authorName].ToString() + ".txt");
+			}
+
 			return Path.Combine(commentsFolderPath, commentIndex.ToString() + ".txt");
 		}
 	}
