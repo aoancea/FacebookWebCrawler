@@ -313,18 +313,21 @@ namespace FacebookWebCrawler
 		{
 			if (cbxGroupByAuthor.Checked)
 			{
-				string authorName = comment.SelectToken("from.name").ToString().Sanitize(); ;
+				string authorName = comment.SelectToken("from.name").ToString().Sanitize();
+				string authorId = comment.SelectToken("from.id").ToString();
 
-				commentsFolderPath = Path.Combine(commentsFolderPath, authorName);
+				string authorFolderName = authorId + "-" + authorName;
 
-				System.IO.Directory.CreateDirectory(commentsFolderPath);
+				string commentsFolderPathByAuthorName = Path.Combine(commentsFolderPath, authorFolderName);
 
-				if (!authorsIndexes.ContainsKey(authorName))
-					authorsIndexes.Add(authorName, 0);
+				System.IO.Directory.CreateDirectory(commentsFolderPathByAuthorName);
+
+				if (!authorsIndexes.ContainsKey(authorFolderName))
+					authorsIndexes.Add(authorFolderName, 0);
 				else
-					authorsIndexes[authorName] = authorsIndexes[authorName] + 1;
+					authorsIndexes[authorFolderName] = authorsIndexes[authorFolderName] + 1;
 
-				return Path.Combine(commentsFolderPath, authorsIndexes[authorName].ToString() + ".txt");
+				return Path.Combine(commentsFolderPathByAuthorName, authorsIndexes[authorFolderName].ToString() + ".txt");
 			}
 
 			return Path.Combine(commentsFolderPath, commentIndex.ToString() + ".txt");
