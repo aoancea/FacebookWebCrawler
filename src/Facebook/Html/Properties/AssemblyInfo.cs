@@ -5,11 +5,11 @@ using System.Runtime.InteropServices;
 // General Information about an assembly is controlled through the following 
 // set of attributes. Change these attribute values to modify the information
 // associated with an assembly.
-[assembly: AssemblyTitle("Crawler.Facebook")]
+[assembly: AssemblyTitle("Crawler.Facebook.Html")]
 [assembly: AssemblyDescription("")]
 [assembly: AssemblyConfiguration("")]
 [assembly: AssemblyCompany("")]
-[assembly: AssemblyProduct("Crawler.Facebook")]
+[assembly: AssemblyProduct("Crawler.Facebook.Html")]
 [assembly: AssemblyCopyright("Copyright ©  2015")]
 [assembly: AssemblyTrademark("")]
 [assembly: AssemblyCulture("")]
@@ -20,7 +20,7 @@ using System.Runtime.InteropServices;
 [assembly: ComVisible(false)]
 
 // The following GUID is for the ID of the typelib if this project is exposed to COM
-[assembly: Guid("f0357129-8f9c-4183-b028-380302daa716")]
+[assembly: Guid("ed26da6c-4550-4341-82b5-d2953e47f7e4")]
 
 // Version information for an assembly consists of the following four values:
 //

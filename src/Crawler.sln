@@ -14,7 +14,9 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Crawler.Core.Common", "Core
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Facebook", "Facebook", "{8B77D7B9-E30A-4FC7-89B5-DABF2CCB44CA}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Crawler.Facebook", "Facebook\Crawler.Facebook\Crawler.Facebook.csproj", "{43B5A8FF-22ED-46BC-8FC4-ACF79CAD2C0A}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Crawler.Facebook.Api", "Facebook\Api\Crawler.Facebook.Api.csproj", "{5F990830-1081-4133-A4CA-3BC5F2B55213}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Crawler.Facebook.Html", "Facebook\Html\Crawler.Facebook.Html.csproj", "{AFFBA0F2-BBEA-49AA-B4AD-7D21B0B0C665}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -26,16 +28,21 @@ Global
 		{33C41179-3B7B-41CE-856B-E7CB088EFABE}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{33C41179-3B7B-41CE-856B-E7CB088EFABE}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{33C41179-3B7B-41CE-856B-E7CB088EFABE}.Release|Any CPU.Build.0 = Release|Any CPU
-		{43B5A8FF-22ED-46BC-8FC4-ACF79CAD2C0A}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{43B5A8FF-22ED-46BC-8FC4-ACF79CAD2C0A}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{43B5A8FF-22ED-46BC-8FC4-ACF79CAD2C0A}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{43B5A8FF-22ED-46BC-8FC4-ACF79CAD2C0A}.Release|Any CPU.Build.0 = Release|Any CPU
+		{5F990830-1081-4133-A4CA-3BC5F2B55213}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{5F990830-1081-4133-A4CA-3BC5F2B55213}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{5F990830-1081-4133-A4CA-3BC5F2B55213}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{5F990830-1081-4133-A4CA-3BC5F2B55213}.Release|Any CPU.Build.0 = Release|Any CPU
+		{AFFBA0F2-BBEA-49AA-B4AD-7D21B0B0C665}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{AFFBA0F2-BBEA-49AA-B4AD-7D21B0B0C665}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{AFFBA0F2-BBEA-49AA-B4AD-7D21B0B0C665}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{AFFBA0F2-BBEA-49AA-B4AD-7D21B0B0C665}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
 	EndGlobalSection
 	GlobalSection(NestedProjects) = preSolution
 		{33C41179-3B7B-41CE-856B-E7CB088EFABE} = {4C6DDA5E-E705-416D-9D6D-E00BEE8181FB}
-		{43B5A8FF-22ED-46BC-8FC4-ACF79CAD2C0A} = {8B77D7B9-E30A-4FC7-89B5-DABF2CCB44CA}
+		{5F990830-1081-4133-A4CA-3BC5F2B55213} = {8B77D7B9-E30A-4FC7-89B5-DABF2CCB44CA}
+		{AFFBA0F2-BBEA-49AA-B4AD-7D21B0B0C665} = {8B77D7B9-E30A-4FC7-89B5-DABF2CCB44CA}
 	EndGlobalSection
 EndGlobal
