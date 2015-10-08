@@ -1,0 +1,7 @@
+Project will be split in several parts as per below:
+
+Core:
+	- will contain sharable binaries that can be used by everyone
+
+Facebook
+	- will containt binaries used to fetch data from Facebook Api

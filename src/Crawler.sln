@@ -1,0 +1,41 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio 2013
+VisualStudioVersion = 12.0.31101.0
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{900AB5D5-69DB-471B-B175-011C2947AB9E}"
+	ProjectSection(SolutionItems) = preProject
+		project decomposition.txt = project decomposition.txt
+	EndProjectSection
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Core", "Core", "{4C6DDA5E-E705-416D-9D6D-E00BEE8181FB}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Crawler.Core.Common", "Core\Common\Crawler.Core.Common.csproj", "{33C41179-3B7B-41CE-856B-E7CB088EFABE}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Facebook", "Facebook", "{8B77D7B9-E30A-4FC7-89B5-DABF2CCB44CA}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Crawler.Facebook", "Facebook\Crawler.Facebook\Crawler.Facebook.csproj", "{43B5A8FF-22ED-46BC-8FC4-ACF79CAD2C0A}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{33C41179-3B7B-41CE-856B-E7CB088EFABE}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{33C41179-3B7B-41CE-856B-E7CB088EFABE}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{33C41179-3B7B-41CE-856B-E7CB088EFABE}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{33C41179-3B7B-41CE-856B-E7CB088EFABE}.Release|Any CPU.Build.0 = Release|Any CPU
+		{43B5A8FF-22ED-46BC-8FC4-ACF79CAD2C0A}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{43B5A8FF-22ED-46BC-8FC4-ACF79CAD2C0A}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{43B5A8FF-22ED-46BC-8FC4-ACF79CAD2C0A}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{43B5A8FF-22ED-46BC-8FC4-ACF79CAD2C0A}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{33C41179-3B7B-41CE-856B-E7CB088EFABE} = {4C6DDA5E-E705-416D-9D6D-E00BEE8181FB}
+		{43B5A8FF-22ED-46BC-8FC4-ACF79CAD2C0A} = {8B77D7B9-E30A-4FC7-89B5-DABF2CCB44CA}
+	EndGlobalSection
+EndGlobal
