@@ -158,138 +158,146 @@ namespace FacebookWebCrawler
 
 		private async void btnProcess_Click(object sender, EventArgs e)
 		{
-			InitializeProgressBar();
-
-			Dictionary<string, int> authorsIndexes = new Dictionary<string, int>();
-
-			string virtualFolderName = DateTime.Now.ToString("yyyy-MM-dd-hh-mm-ss");
-
-			string postsFolderPath = Path.Combine(textboxFolderPath.Text, txtUrl.Text, "posts", virtualFolderName);
-			string commentsFolderPath = Path.Combine(textboxFolderPath.Text, txtUrl.Text, "comments", virtualFolderName);
-
-			if (!System.IO.Directory.Exists(postsFolderPath))
-				System.IO.Directory.CreateDirectory(postsFolderPath);
-
-			if (!System.IO.Directory.Exists(commentsFolderPath))
-				System.IO.Directory.CreateDirectory(commentsFolderPath);
-
-			int postsFetched = 0;
-			int commentsFetched = 0;
-
-			Crawler crawler = new Crawler("913819931996488|2e3ef18f88e42c9068d8a6dba3b14021");
-
-			Crawler.CrawlerQueryResult queryResult = await crawler.ExecuteQueryAsync(txtUrl.Text);
-
-			List<JToken> posts = queryResult.GetFieldToken("data[*]").ToList();
-
-			while (posts.Count > 0 && FetchPosts(postsFetched, commentsFetched))
+			try
 			{
-				bool continueFetchingPosts = true;
 
-				foreach (JToken post in posts)
+				InitializeProgressBar();
+
+				Dictionary<string, int> authorsIndexes = new Dictionary<string, int>();
+
+				string virtualFolderName = DateTime.Now.ToString("yyyy-MM-dd-hh-mm-ss");
+
+				string postsFolderPath = Path.Combine(textboxFolderPath.Text, txtUrl.Text, "posts", virtualFolderName);
+				string commentsFolderPath = Path.Combine(textboxFolderPath.Text, txtUrl.Text, "comments", virtualFolderName);
+
+				if (!System.IO.Directory.Exists(postsFolderPath))
+					System.IO.Directory.CreateDirectory(postsFolderPath);
+
+				if (!System.IO.Directory.Exists(commentsFolderPath))
+					System.IO.Directory.CreateDirectory(commentsFolderPath);
+
+				int postsFetched = 0;
+				int commentsFetched = 0;
+
+				Crawler crawler = new Crawler("913819931996488|2e3ef18f88e42c9068d8a6dba3b14021");
+
+				Crawler.CrawlerQueryResult queryResult = await crawler.ExecuteQueryAsync(txtUrl.Text);
+
+				List<JToken> posts = queryResult.GetFieldToken("data[*]").ToList();
+
+				while (posts.Count > 0 && FetchPosts(postsFetched, commentsFetched))
 				{
-					if (rdoGetPosts.Checked)
+					bool continueFetchingPosts = true;
+
+					foreach (JToken post in posts)
 					{
-						// save post
-
-						using (StreamWriter writer = new StreamWriter(Path.Combine(postsFolderPath, postsFetched.ToString() + ".txt")))
+						if (rdoGetPosts.Checked)
 						{
-							writer.WriteLine(post["message"]);
-						}
+							// save post
 
-						progressBar.PerformStep();
-
-						if (!FetchPosts(++postsFetched, commentsFetched))
-						{
-							continueFetchingPosts = false;
-							break;
-						}
-					}
-
-					if (rdoGetComments.Checked)
-					{
-						int commentsPerPostFetched = 0;
-
-						JToken commentsTokenObject = post.SelectToken("comments");
-
-						if (commentsTokenObject == null)
-							continue;
-
-						Crawler.CrawlerQueryResult commentsPageObject = new Crawler.CrawlerQueryResult();
-						commentsPageObject.RawResult = commentsTokenObject.ToString();
-
-						List<JToken> comments = commentsPageObject.GetFieldToken("data[*]").ToList();
-
-						while (comments.Count > 0 && FetchComments(commentsFetched, commentsPerPostFetched))
-						{
-							bool continueFetchingComments = true;
-
-							foreach (JToken comment in comments)
+							using (StreamWriter writer = new StreamWriter(Path.Combine(postsFolderPath, postsFetched.ToString() + ".txt")))
 							{
-								// save comment
-
-								string commentBody = comment["message"].ToString();
-
-								if (commentBody.Length < numMinimumCommenLength.Value)
-									continue;
-
-								using (StreamWriter writer = new StreamWriter(BuildCommentPath(commentsFolderPath, commentsFetched, comment, authorsIndexes)))
-								{
-									writer.WriteLine(commentBody);
-								}
-
-								progressBar.PerformStep();
-
-								if (!FetchComments(++commentsFetched, ++commentsPerPostFetched))
-								{
-									continueFetchingComments = false;
-									break;
-								}
+								writer.WriteLine(post["message"]);
 							}
 
-							if (continueFetchingComments)
+							progressBar.PerformStep();
+
+							if (!FetchPosts(++postsFetched, commentsFetched))
 							{
-								string nextCommentPageUri = commentsPageObject.GetSingleField("paging.next");
-
-								if (string.IsNullOrEmpty(nextCommentPageUri))
-									break;
-
-								commentsPageObject = await crawler.ExecuteLinkAsync(nextCommentPageUri);
-								comments = commentsPageObject.GetFieldToken("data[*]").ToList();
-							}
-							else
+								continueFetchingPosts = false;
 								break;
+							}
+						}
+
+						if (rdoGetComments.Checked)
+						{
+							int commentsPerPostFetched = 0;
+
+							JToken commentsTokenObject = post.SelectToken("comments");
+
+							if (commentsTokenObject == null)
+								continue;
+
+							Crawler.CrawlerQueryResult commentsPageObject = new Crawler.CrawlerQueryResult();
+							commentsPageObject.RawResult = commentsTokenObject.ToString();
+
+							List<JToken> comments = commentsPageObject.GetFieldToken("data[*]").ToList();
+
+							while (comments.Count > 0 && FetchComments(commentsFetched, commentsPerPostFetched))
+							{
+								bool continueFetchingComments = true;
+
+								foreach (JToken comment in comments)
+								{
+									// save comment
+
+									string commentBody = comment["message"].ToString();
+
+									if (commentBody.Length < numMinimumCommenLength.Value)
+										continue;
+
+									using (StreamWriter writer = new StreamWriter(BuildCommentPath(commentsFolderPath, commentsFetched, comment, authorsIndexes)))
+									{
+										writer.WriteLine(commentBody);
+									}
+
+									progressBar.PerformStep();
+
+									if (!FetchComments(++commentsFetched, ++commentsPerPostFetched))
+									{
+										continueFetchingComments = false;
+										break;
+									}
+								}
+
+								if (continueFetchingComments)
+								{
+									string nextCommentPageUri = commentsPageObject.GetSingleField("paging.next");
+
+									if (string.IsNullOrEmpty(nextCommentPageUri))
+										break;
+
+									commentsPageObject = await crawler.ExecuteLinkAsync(nextCommentPageUri);
+									comments = commentsPageObject.GetFieldToken("data[*]").ToList();
+								}
+								else
+									break;
+							}
 						}
 					}
-				}
 
-				if (continueFetchingPosts)
-				{
-					string nextPostPageUri = queryResult.GetSingleField("paging.next");
+					if (continueFetchingPosts)
+					{
+						string nextPostPageUri = queryResult.GetSingleField("paging.next");
 
-					if (string.IsNullOrEmpty(nextPostPageUri))
+						if (string.IsNullOrEmpty(nextPostPageUri))
+							break;
+
+						queryResult = await crawler.ExecuteLinkAsync(nextPostPageUri);
+						posts = queryResult.GetFieldToken("data[*]").ToList();
+					}
+					else
 						break;
-
-					queryResult = await crawler.ExecuteLinkAsync(nextPostPageUri);
-					posts = queryResult.GetFieldToken("data[*]").ToList();
 				}
-				else
-					break;
-			}
 
 
-			if (cbxGroupByAuthor.Checked)
-			{
-				foreach (var author in authorsIndexes)
+				if (cbxGroupByAuthor.Checked)
 				{
-					string oldPath = Path.Combine(commentsFolderPath, author.Key);
+					foreach (var author in authorsIndexes)
+					{
+						string oldPath = Path.Combine(commentsFolderPath, author.Key);
 
-					string[] filesInPath = System.IO.Directory.GetFiles(oldPath);
+						string[] filesInPath = System.IO.Directory.GetFiles(oldPath);
 
-					string newPath = Path.Combine(commentsFolderPath, filesInPath.Length + " - " + author.Key);
+						string newPath = Path.Combine(commentsFolderPath, filesInPath.Length + " - " + author.Key);
 
-					System.IO.Directory.Move(oldPath, newPath);
+						System.IO.Directory.Move(oldPath, newPath);
+					}
 				}
+			}
+			catch (Exception ex)
+			{
+				System.Diagnostics.Trace.TraceError(ex.Message);
 			}
 		}
 
@@ -313,7 +321,7 @@ namespace FacebookWebCrawler
 		{
 			if (cbxGroupByAuthor.Checked)
 			{
-				string authorName = comment.SelectToken("from.name").ToString().Sanitize();
+				string authorName = (comment.SelectToken("from.name") ?? string.Empty).ToString().Sanitize();
 				string authorId = comment.SelectToken("from.id").ToString();
 
 				string authorFolderName = authorId + "-" + authorName;
