@@ -164,6 +164,7 @@ namespace FacebookWebCrawler
 				InitializeProgressBar();
 
 				Dictionary<string, int> authorsIndexes = new Dictionary<string, int>();
+				Dictionary<string, List<string>> authorsCommentsInMemory = new Dictionary<string, List<string>>();
 
 				string virtualFolderName = DateTime.Now.ToString("yyyy-MM-dd-hh-mm-ss");
 
@@ -231,14 +232,32 @@ namespace FacebookWebCrawler
 								{
 									// save comment
 
+									string authorFolderName = GetAuthorFolderName(comment);
 									string commentBody = comment["message"].ToString();
 
 									if (commentBody.Length < numMinimumCommenLength.Value)
 										continue;
 
-									using (StreamWriter writer = new StreamWriter(BuildCommentPath(commentsFolderPath, commentsFetched, comment, authorsIndexes)))
+									UpdateDictionaries(authorsCommentsInMemory, authorsIndexes, authorFolderName, commentBody);
+
+									int authorIndex = authorsIndexes[authorFolderName];
+									if (authorIndex >= 20) 
 									{
-										writer.WriteLine(commentBody);
+										using (StreamWriter writer = new StreamWriter(BuildCommentPath(commentsFolderPath, commentsFetched, authorFolderName, authorIndex)))
+										{
+											writer.WriteLine(commentBody);
+										}
+									}
+									else if (authorIndex == 20 - 1)
+									{
+										List<string> authorComments = authorsCommentsInMemory[authorFolderName];
+										for (int i = 0; i < authorComments.Count; ++i)
+										{
+											using (StreamWriter writer = new StreamWriter(BuildCommentPath(commentsFolderPath, commentsFetched, authorFolderName, i)))
+											{
+												writer.WriteLine(authorComments[i]);
+											}
+										}
 									}
 
 									progressBar.PerformStep();
@@ -280,11 +299,17 @@ namespace FacebookWebCrawler
 						break;
 				}
 
-
+				progressBar.Maximum = authorsIndexes.Count(t => t.Value >= 20 - 1);
+				progressBar.Value = 0;
 				if (cbxGroupByAuthor.Checked)
 				{
 					foreach (var author in authorsIndexes)
 					{
+						if (author.Value < 20 - 1)
+						{
+							continue;
+						}
+
 						string oldPath = Path.Combine(commentsFolderPath, author.Key);
 
 						string[] filesInPath = System.IO.Directory.GetFiles(oldPath);
@@ -292,6 +317,8 @@ namespace FacebookWebCrawler
 						string newPath = Path.Combine(commentsFolderPath, filesInPath.Length + " - " + author.Key);
 
 						System.IO.Directory.Move(oldPath, newPath);
+
+						progressBar.PerformStep();
 					}
 				}
 			}
@@ -317,25 +344,51 @@ namespace FacebookWebCrawler
 			return commentsFetched < numMaxNumberOfCommentsToFetch.Value && commentsPerPostFetched < numMaxNumberOfCommentsPerPostToFetch.Value;
 		}
 
-		private string BuildCommentPath(string commentsFolderPath, int commentIndex, JToken comment, Dictionary<string, int> authorsIndexes)
+		private string GetAuthorFolderName(JToken comment)
+		{
+			string authorName = (comment.SelectToken("from.name") ?? string.Empty).ToString().Sanitize();
+			string authorId = comment.SelectToken("from.id").ToString();
+
+			return authorId + "-" + authorName;
+		}
+
+		private void UpdateDictionaries(Dictionary<string, List<string>> authorsCommentsInMemory, Dictionary<string, int> authorsIndexes, string authorFolderName, string commentBody)
+		{
+			if (!authorsIndexes.ContainsKey(authorFolderName))
+			{
+				authorsIndexes[authorFolderName] = 0;
+			}
+			else
+			{
+				++authorsIndexes[authorFolderName];
+			}
+
+			if (authorsIndexes[authorFolderName] >= 20 - 1)
+			{
+				return;
+			}
+
+			if (!authorsCommentsInMemory.ContainsKey(authorFolderName))
+			{
+				authorsCommentsInMemory[authorFolderName] = new List<string>();
+			}
+			else
+			{
+				authorsCommentsInMemory[authorFolderName].Add(commentBody);
+			}
+
+
+		}
+
+		private string BuildCommentPath(string commentsFolderPath, int commentIndex, string authorFolderName, int authorIndex)
 		{
 			if (cbxGroupByAuthor.Checked)
 			{
-				string authorName = (comment.SelectToken("from.name") ?? string.Empty).ToString().Sanitize();
-				string authorId = comment.SelectToken("from.id").ToString();
-
-				string authorFolderName = authorId + "-" + authorName;
-
 				string commentsFolderPathByAuthorName = Path.Combine(commentsFolderPath, authorFolderName);
 
 				System.IO.Directory.CreateDirectory(commentsFolderPathByAuthorName);
-
-				if (!authorsIndexes.ContainsKey(authorFolderName))
-					authorsIndexes.Add(authorFolderName, 0);
-				else
-					authorsIndexes[authorFolderName] = authorsIndexes[authorFolderName] + 1;
-
-				return Path.Combine(commentsFolderPathByAuthorName, authorsIndexes[authorFolderName].ToString() + ".txt");
+	
+				return Path.Combine(commentsFolderPathByAuthorName, authorIndex.ToString() + ".txt");
 			}
 
 			return Path.Combine(commentsFolderPath, commentIndex.ToString() + ".txt");
