@@ -30,6 +30,7 @@
 		{
 			this.txtUrl = new System.Windows.Forms.TextBox();
 			this.groupBox1 = new System.Windows.Forms.GroupBox();
+			this.progressBar = new System.Windows.Forms.ProgressBar();
 			this.btnProcess = new System.Windows.Forms.Button();
 			this.groupBox3 = new System.Windows.Forms.GroupBox();
 			this.btnBrowseFolder = new System.Windows.Forms.Button();
@@ -62,7 +63,6 @@
 			this.label1 = new System.Windows.Forms.Label();
 			this.saveFileDialog1 = new System.Windows.Forms.SaveFileDialog();
 			this.folderBrowserDialog1 = new System.Windows.Forms.FolderBrowserDialog();
-			this.progressBar = new System.Windows.Forms.ProgressBar();
 			this.groupBox1.SuspendLayout();
 			this.groupBox3.SuspendLayout();
 			this.groupBox2.SuspendLayout();
@@ -105,6 +105,14 @@
 			this.groupBox1.TabIndex = 1;
 			this.groupBox1.TabStop = false;
 			this.groupBox1.Text = "Action";
+			// 
+			// progressBar
+			// 
+			this.progressBar.Location = new System.Drawing.Point(6, 299);
+			this.progressBar.Name = "progressBar";
+			this.progressBar.Size = new System.Drawing.Size(605, 23);
+			this.progressBar.Step = 1;
+			this.progressBar.TabIndex = 15;
 			// 
 			// btnProcess
 			// 
@@ -237,6 +245,7 @@
 			// rdoGetComments
 			// 
 			this.rdoGetComments.AutoSize = true;
+			this.rdoGetComments.Checked = true;
 			this.rdoGetComments.GroupName = "group1";
 			this.rdoGetComments.Location = new System.Drawing.Point(6, 0);
 			this.rdoGetComments.Name = "rdoGetComments";
@@ -459,14 +468,6 @@
 			// saveFileDialog1
 			// 
 			this.saveFileDialog1.Filter = "Text files (*.txt)|*.txt";
-			// 
-			// progressBar
-			// 
-			this.progressBar.Location = new System.Drawing.Point(6, 299);
-			this.progressBar.Name = "progressBar";
-			this.progressBar.Size = new System.Drawing.Size(605, 23);
-			this.progressBar.Step = 1;
-			this.progressBar.TabIndex = 15;
 			// 
 			// Form1
 			// 

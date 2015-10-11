@@ -166,7 +166,7 @@ namespace FacebookWebCrawler
 				Dictionary<string, int> authorsIndexes = new Dictionary<string, int>();
 				Dictionary<string, List<string>> authorsCommentsInMemory = new Dictionary<string, List<string>>();
 
-				string virtualFolderName = DateTime.Now.ToString("yyyy-MM-dd-hh-mm-ss");
+				string virtualFolderName = DateTime.Now.ToString("yyyy-MM-dd-HH-mm-ss");
 
 				string postsFolderPath = Path.Combine(textboxFolderPath.Text, txtUrl.Text, "posts", virtualFolderName);
 				string commentsFolderPath = Path.Combine(textboxFolderPath.Text, txtUrl.Text, "comments", virtualFolderName);
@@ -241,14 +241,8 @@ namespace FacebookWebCrawler
 									UpdateDictionaries(authorsCommentsInMemory, authorsIndexes, authorFolderName, commentBody);
 
 									int authorIndex = authorsIndexes[authorFolderName];
-									if (authorIndex >= 20) 
-									{
-										using (StreamWriter writer = new StreamWriter(BuildCommentPath(commentsFolderPath, commentsFetched, authorFolderName, authorIndex)))
-										{
-											writer.WriteLine(commentBody);
-										}
-									}
-									else if (authorIndex == 20 - 1)
+
+									if (authorIndex == 20 - 1)
 									{
 										List<string> authorComments = authorsCommentsInMemory[authorFolderName];
 										for (int i = 0; i < authorComments.Count; ++i)
@@ -257,6 +251,14 @@ namespace FacebookWebCrawler
 											{
 												writer.WriteLine(authorComments[i]);
 											}
+										}
+									}
+
+									if (authorIndex >= 20 - 1) 
+									{
+										using (StreamWriter writer = new StreamWriter(BuildCommentPath(commentsFolderPath, commentsFetched, authorFolderName, authorIndex)))
+										{
+											writer.WriteLine(commentBody);
 										}
 									}
 
@@ -372,12 +374,8 @@ namespace FacebookWebCrawler
 			{
 				authorsCommentsInMemory[authorFolderName] = new List<string>();
 			}
-			else
-			{
-				authorsCommentsInMemory[authorFolderName].Add(commentBody);
-			}
 
-
+			authorsCommentsInMemory[authorFolderName].Add(commentBody);
 		}
 
 		private string BuildCommentPath(string commentsFolderPath, int commentIndex, string authorFolderName, int authorIndex)
