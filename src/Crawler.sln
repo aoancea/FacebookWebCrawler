@@ -18,6 +18,10 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Crawler.Facebook.Api", "Fac
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Crawler.Facebook.Html", "Facebook\Html\Crawler.Facebook.Html.csproj", "{AFFBA0F2-BBEA-49AA-B4AD-7D21B0B0C665}"
 EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Github", "Github", "{0A62BD84-2273-44DA-92A5-08E8B88D6163}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Crawler.Github.Api", "Github\Api\Crawler.Github.Api.csproj", "{BBA2C094-2685-42BF-99E8-D895C11E0E5B}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -36,6 +40,10 @@ Global
 		{AFFBA0F2-BBEA-49AA-B4AD-7D21B0B0C665}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{AFFBA0F2-BBEA-49AA-B4AD-7D21B0B0C665}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{AFFBA0F2-BBEA-49AA-B4AD-7D21B0B0C665}.Release|Any CPU.Build.0 = Release|Any CPU
+		{BBA2C094-2685-42BF-99E8-D895C11E0E5B}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{BBA2C094-2685-42BF-99E8-D895C11E0E5B}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{BBA2C094-2685-42BF-99E8-D895C11E0E5B}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{BBA2C094-2685-42BF-99E8-D895C11E0E5B}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -44,5 +52,6 @@ Global
 		{33C41179-3B7B-41CE-856B-E7CB088EFABE} = {4C6DDA5E-E705-416D-9D6D-E00BEE8181FB}
 		{5F990830-1081-4133-A4CA-3BC5F2B55213} = {8B77D7B9-E30A-4FC7-89B5-DABF2CCB44CA}
 		{AFFBA0F2-BBEA-49AA-B4AD-7D21B0B0C665} = {8B77D7B9-E30A-4FC7-89B5-DABF2CCB44CA}
+		{BBA2C094-2685-42BF-99E8-D895C11E0E5B} = {0A62BD84-2273-44DA-92A5-08E8B88D6163}
 	EndGlobalSection
 EndGlobal
