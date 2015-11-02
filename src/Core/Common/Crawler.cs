@@ -11,7 +11,7 @@ namespace Crawler.Core.Common
 	{
 		public Crawler()
 		{
-
+			Authenticate();
 		}
 
 		public async Task<CrawlerQueryResult> ExecuteQueryAsync(string query)
@@ -34,6 +34,21 @@ namespace Crawler.Core.Common
 			result.RawResult = await client.DownloadStringTaskAsync(queryPath);
 
 			return result;
+		}
+
+
+
+
+
+
+		public virtual void Authenticate()
+		{
+
+		}
+
+		public virtual string GetUri()
+		{
+			return string.Empty;
 		}
 	}
 }
