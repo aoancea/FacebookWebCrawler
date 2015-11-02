@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace Crawler.Core.Common
 {
-    public class Class1
+    public class Crawler
     {
     }
 }
