@@ -6,9 +6,9 @@ using System.Threading.Tasks;
 
 namespace Crawler.Github.Api
 {
-	public class Crawler : Core.Common.Crawler
+	public class CrawlerContext : Core.Common.Crawler
 	{
-		public Crawler()
+		public CrawlerContext()
 		{
 
 		}

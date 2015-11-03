@@ -4,12 +4,12 @@ using Microsoft.VisualStudio.TestTools.UnitTesting;
 namespace Crawler.UnitTesting.Github
 {
 	[TestClass]
-	public class CrawlerTest
+	public class CrawlerContextTest
 	{
 		[TestMethod]
-		public void Crawler_Authentication_Success()
+		public void CrawlerContext_Authentication_Success()
 		{
-			Crawler.Github.Api.Crawler crawler = new Crawler.Github.Api.Crawler();
+			Crawler.Github.Api.CrawlerContext crawler = new Crawler.Github.Api.CrawlerContext();
 
 			Assert.AreEqual(true, crawler.Authenticated);
 		}
