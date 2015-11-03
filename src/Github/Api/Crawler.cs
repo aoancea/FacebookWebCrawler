@@ -13,13 +13,9 @@ namespace Crawler.Github.Api
 
 		}
 
-
-		public override void Authenticate()
+		protected override bool Authenticate()
 		{
-			base.Authenticate();
-
-
-
+			return base.Authenticate();
 		}
 	}
 }

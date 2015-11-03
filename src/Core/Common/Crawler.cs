@@ -11,7 +11,7 @@ namespace Crawler.Core.Common
 	{
 		public Crawler()
 		{
-			Authenticate();
+
 		}
 
 		public async Task<CrawlerQueryResult> ExecuteQueryAsync(string query)
@@ -37,16 +37,30 @@ namespace Crawler.Core.Common
 		}
 
 
+		private bool authenticated;
 
-
-
-
-		public virtual void Authenticate()
+		public bool Authenticated
 		{
+			get
+			{
+				if (!authenticated)
+					authenticated = Authenticate();
 
+				return this.authenticated;
+			}
+			private set
+			{
+				this.authenticated = true;
+			}
 		}
 
-		public virtual string GetUri()
+
+		protected virtual bool Authenticate()
+		{
+			return true;
+		}
+
+		protected virtual string GetUri()
 		{
 			return string.Empty;
 		}

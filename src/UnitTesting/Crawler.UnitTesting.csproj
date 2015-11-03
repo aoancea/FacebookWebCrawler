@@ -50,8 +50,18 @@
     </Otherwise>
   </Choose>
   <ItemGroup>
-    <Compile Include="UnitTest1.cs" />
+    <Compile Include="Github\CrawlerTest.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\Core\Common\Crawler.Core.Common.csproj">
+      <Project>{33c41179-3b7b-41ce-856b-e7cb088efabe}</Project>
+      <Name>Crawler.Core.Common</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Github\Api\Crawler.Github.Api.csproj">
+      <Project>{bba2c094-2685-42bf-99e8-d895c11e0e5b}</Project>
+      <Name>Crawler.Github.Api</Name>
+    </ProjectReference>
   </ItemGroup>
   <Choose>
     <When Condition="'$(VisualStudioVersion)' == '10.0' And '$(IsCodedUITest)' == 'True'">
