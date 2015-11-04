@@ -17,6 +17,5 @@ namespace Crawler.Github.Api.Entities
 
 		[DataMember(Name = "number")]
 		public int Number { get; set; }
-
 	}
 }
