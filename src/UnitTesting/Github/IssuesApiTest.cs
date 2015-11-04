@@ -3,6 +3,7 @@ using Microsoft.VisualStudio.TestTools.UnitTesting;
 using Crawler.Github.Api;
 using Crawler.Github.Api.Entities;
 using System.Collections.Generic;
+using System.Linq;
 
 namespace Crawler.UnitTesting.Github
 {
@@ -10,13 +11,13 @@ namespace Crawler.UnitTesting.Github
 	public class IssuesApiTest
 	{
 		[TestMethod]
-		public async void TestMethod1()
+		public void TestMethod1()
 		{
 			CrawlerContext context = new CrawlerContext();
 
 			IssuesApi issuesApi = new IssuesApi(context);
 
-			Issue[] issues = (Issue[])await issuesApi.Get();
+			Issue[] issues = issuesApi.Get("aoancea", "FacebookWebCrawler").Result.ToArray();
 		}
 	}
 }

@@ -34,10 +34,15 @@ namespace Crawler.Github.Api
 		private WebRequest CreateRequest(string path)
 		{
 			var uriString = "https://" + "api.github.com" + path;
-
+			
 			var uri = new Uri(uriString);
 			var request = WebRequest.CreateHttp(uri);
 			request.KeepAlive = false;
+
+
+			var version = "0.1";
+			
+			request.UserAgent = "Crawler.Github.Api" + version;
 
 			return request;
 		}
