@@ -16,7 +16,6 @@ namespace Crawler.Github.Api
 			this.context = context;
 		}
 
-
 		public async Task<IEnumerable<Issue>> Get()
 		{
 			return await context.RequestAsync<IEnumerable<Issue>>("/issues");

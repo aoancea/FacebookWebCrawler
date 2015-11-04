@@ -1,4 +1,5 @@
-﻿using System;
+﻿using ServiceStack.Text;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Net;
@@ -23,17 +24,14 @@ namespace Crawler.Github.Api
 		{
 			WebRequest request = CreateRequest(path);
 
+			HttpWebResponse response = (HttpWebResponse)await request.GetResponseAsync().ConfigureAwait(false);
 
+			T result = JsonSerializer.DeserializeResponse<T>(response);
 
-			return await Task.FromResult<T>(default(T));
+			return await Task.FromResult<T>(result);
 		}
 
-
-
-
-
-
-		public WebRequest CreateRequest(string path)
+		private WebRequest CreateRequest(string path)
 		{
 			var uriString = "https://" + "api.github.com" + path;
 

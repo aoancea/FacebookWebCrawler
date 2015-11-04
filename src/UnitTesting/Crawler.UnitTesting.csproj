@@ -51,6 +51,7 @@
   </Choose>
   <ItemGroup>
     <Compile Include="Github\CrawlerContextTest.cs" />
+    <Compile Include="Github\IssuesApiTest.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
