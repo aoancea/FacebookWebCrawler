@@ -17,7 +17,7 @@ namespace Crawler.UnitTesting.Github
 
 			IssuesApi issuesApi = new IssuesApi(context);
 
-			Issue[] issues = issuesApi.Get("aoancea", "FacebookWebCrawler").Result.ToArray();
+			Issue[] issues = issuesApi.GetAsync("aoancea", "FacebookWebCrawler").Result.ToArray();
 		}
 	}
 }

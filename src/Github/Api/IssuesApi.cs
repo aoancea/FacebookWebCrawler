@@ -16,7 +16,7 @@ namespace Crawler.Github.Api
 			this.context = context;
 		}
 
-		public async Task<IEnumerable<Issue>> Get(string owner, string repo)
+		public async Task<IEnumerable<Issue>> GetAsync(string owner, string repo)
 		{
 			return await context.RequestAsync<IEnumerable<Issue>>(string.Format("/repos/{0}/{1}/issues", owner, repo));
 		}
