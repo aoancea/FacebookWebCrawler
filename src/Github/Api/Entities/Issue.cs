@@ -12,6 +12,12 @@ namespace Crawler.Github.Api.Entities
 		[DataMember(Name = "url")]
 		public string Url { get; set; }
 
+		[DataMember(Name = "labels_url")]
+		public string Labels_Url { get; set; }
+
+		[DataMember(Name = "comments_url")]
+		public string Comments_Url { get; set; }
+
 		[DataMember(Name = "id")]
 		public int Id { get; set; }
 
