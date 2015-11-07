@@ -27,29 +27,29 @@ namespace Crawler.UnitTesting.Github
 			{
 				new Issue()
 				{
-					Url = "https://api.github.com/repos/aoancea/github-api/issues/2",
-					Labels_Url = "https://api.github.com/repos/aoancea/github-api/issues/2/labels{/name}",
-					Comments_Url = "https://api.github.com/repos/aoancea/github-api/issues/2/comments",
-					Events_Url = "https://api.github.com/repos/aoancea/github-api/issues/2/events",
-					Html_Url = "https://github.com/aoancea/github-api/issues/2",
+					Url = "https://api.github.com/repos/aoancea/github-api-tests/issues/2",
+					Labels_Url = "https://api.github.com/repos/aoancea/github-api-tests/issues/2/labels{/name}",
+					Comments_Url = "https://api.github.com/repos/aoancea/github-api-tests/issues/2/comments",
+					Events_Url = "https://api.github.com/repos/aoancea/github-api-tests/issues/2/events",
+					Html_Url = "https://github.com/aoancea/github-api-tests/issues/2",
 					Id = 115684392,
 					Number = 2,
 					Title = "Issue 2"
 				},
 				new Issue()
 				{
-					Url = "https://api.github.com/repos/aoancea/github-api/issues/1",
-					Labels_Url = "https://api.github.com/repos/aoancea/github-api/issues/1/labels{/name}",
-					Comments_Url = "https://api.github.com/repos/aoancea/github-api/issues/1/comments",
-					Events_Url = "https://api.github.com/repos/aoancea/github-api/issues/1/events",
-					Html_Url = "https://github.com/aoancea/github-api/issues/1",
+					Url = "https://api.github.com/repos/aoancea/github-api-tests/issues/1",
+					Labels_Url = "https://api.github.com/repos/aoancea/github-api-tests/issues/1/labels{/name}",
+					Comments_Url = "https://api.github.com/repos/aoancea/github-api-tests/issues/1/comments",
+					Events_Url = "https://api.github.com/repos/aoancea/github-api-tests/issues/1/events",
+					Html_Url = "https://github.com/aoancea/github-api-tests/issues/1",
 					Id = 115684374,
 					Number = 1,
 					Title = "Issue 1"
 				},
 			};
 
-			List<Issue> issues = issuesApi.GetAsync("aoancea", "github-api").Result.ToList();
+			List<Issue> issues = issuesApi.GetAsync("aoancea", "github-api-tests").Result.ToList();
 
 			Assert.AreEqual(2, issues.Count);
 			AssertHaveEqualState(expectedIssues[0], issues[0]);
