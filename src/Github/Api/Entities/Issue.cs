@@ -33,5 +33,37 @@ namespace Crawler.Github.Api.Entities
 		[DataMember(Name = "title")]
 		public string Title { get; set; }
 
+		[DataMember(Name = "user")]
+		public User User { get; set; }
+
+		[DataMember(Name = "labels")]
+		public IEnumerable<Label> Labels { get; set; }
+
+		[DataMember(Name = "state")]
+		public string State { get; set; }
+
+		[DataMember(Name = "locked")]
+		public bool Locked { get; set; }
+
+		[DataMember(Name = "assignee")]
+		public User Assignee { get; set; }
+
+		[DataMember(Name = "milestone")]
+		public Milestone Milestone { get; set; }
+
+		[DataMember(Name = "comments")]
+		public int Comments { get; set; }
+
+		[DataMember(Name = "created_at")]
+		public DateTime Created_at { get; set; }
+
+		[DataMember(Name = "updated_at")]
+		public DateTime? Updated_at { get; set; }
+
+		[DataMember(Name = "closed_at")]
+		public DateTime? Closed_at { get; set; }
+
+		[DataMember(Name = "body")]
+		public string Body { get; set; }
 	}
 }

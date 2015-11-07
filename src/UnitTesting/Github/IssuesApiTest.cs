@@ -34,7 +34,18 @@ namespace Crawler.UnitTesting.Github
 					Html_Url = "https://github.com/aoancea/github-api-tests/issues/2",
 					Id = 115684392,
 					Number = 2,
-					Title = "Issue 2"
+					Title = "Issue 2",
+					User = new User() { }, // TODO: test
+					Labels = new List<Label>() { }, // TODO: test
+					State = "open",
+					Locked = false,
+					Assignee = null,
+					Milestone = null,
+					Comments = 0,
+					Created_at = new DateTime(2015, 11, 07, 20, 43, 25), // there might be a GMT conversion problem as the time fetched comes in local time
+					Updated_at = new DateTime(2015, 11, 07, 20, 44, 17), // there might be a GMT conversion problem as the time fetched comes in local time
+					Closed_at = null,
+					Body = "This is issue 2."
 				},
 				new Issue()
 				{
@@ -45,7 +56,18 @@ namespace Crawler.UnitTesting.Github
 					Html_Url = "https://github.com/aoancea/github-api-tests/issues/1",
 					Id = 115684374,
 					Number = 1,
-					Title = "Issue 1"
+					Title = "Issue 1",
+					User = new User() { }, // TODO: test
+					Labels = new List<Label>() { }, // TODO: test
+					State = "open",
+					Locked = false,
+					Assignee = new User() { }, // TODO: test
+					Milestone = new Milestone() { }, // TODO: test
+					Comments = 2,
+					Created_at = new DateTime(2015, 11, 07, 20, 42, 49), // there might be a GMT conversion problem as the time fetched comes in local time
+					Updated_at = new DateTime(2015, 11, 07, 20, 49, 18), // there might be a GMT conversion problem as the time fetched comes in local time
+					Closed_at = null,
+					Body = "This is issue 1."
 				},
 			};
 
@@ -66,6 +88,62 @@ namespace Crawler.UnitTesting.Github
 			Assert.AreEqual(expected.Id, actual.Id);
 			Assert.AreEqual(expected.Number, actual.Number);
 			Assert.AreEqual(expected.Title, actual.Title);
+			AssertHaveEqualState(expected.User, actual.User);
+			AssertHaveEqualState(expected.Labels, actual.Labels);
+			Assert.AreEqual(expected.State, actual.State);
+			Assert.AreEqual(expected.Locked, actual.Locked);
+			AssertHaveEqualState(expected.Assignee, actual.Assignee);
+			AssertHaveEqualState(expected.Milestone, actual.Milestone);
+			Assert.AreEqual(expected.Comments, actual.Comments);
+			Assert.AreEqual(expected.Created_at, actual.Created_at);
+			Assert.AreEqual(expected.Updated_at, actual.Updated_at);
+			Assert.AreEqual(expected.Closed_at, actual.Closed_at);
+			Assert.AreEqual(expected.Body, actual.Body);
+		}
+
+
+		public void AssertHaveEqualState(User expected, User actual)
+		{
+			if (expected != null || actual != null)
+			{
+				// TODO: test
+			}
+			else
+			{
+				Assert.IsNull(expected);
+				Assert.IsNull(actual);
+			}
+		}
+
+		public void AssertHaveEqualState(Milestone expected, Milestone actual)
+		{
+			if (expected != null || actual != null)
+			{
+				// TODO: test
+			}
+			else
+			{
+				Assert.IsNull(expected);
+				Assert.IsNull(actual);
+			}
+		}
+
+		public void AssertHaveEqualState(IEnumerable<Label> expected, IEnumerable<Label> actual)
+		{
+			// TODO: test
+		}
+
+		public void AssertHaveEqualState(Label expected, Label actual)
+		{
+			if (expected != null || actual != null)
+			{
+				// TODO: test
+			}
+			else
+			{
+				Assert.IsNull(expected);
+				Assert.IsNull(actual);
+			}
 		}
 	}
 }
