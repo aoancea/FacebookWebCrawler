@@ -27,10 +27,11 @@ namespace Crawler.Github.Api.Entities
 		[DataMember(Name = "id")]
 		public int Id { get; set; }
 
+		[DataMember(Name = "number")]
+		public int Number { get; set; }
+
 		[DataMember(Name = "title")]
 		public string Title { get; set; }
 
-		[DataMember(Name = "number")]
-		public int Number { get; set; }
 	}
 }
