@@ -35,7 +35,18 @@ namespace Crawler.UnitTesting.Github
 					Id = 115684392,
 					Number = 2,
 					Title = "Issue 2",
-					User = new User() { }, // TODO: test
+					User = new User()
+					{
+						Login = "aoancea",
+						Id = 4282532,
+						Avatar_Url = "https://avatars.githubusercontent.com/u/4282532?v=3",
+						Gravatar_Id = "",
+						Url = "https://api.github.com/users/aoancea",
+						Html_Url = "https://github.com/aoancea",
+						Followers_Url = "https://api.github.com/users/aoancea/followers",
+						Following_Url = "https://api.github.com/users/aoancea/following{/other_user}",
+						Gists_Url = "https://api.github.com/users/aoancea/gists{/gist_id}"
+					}, // TODO: test
 					Labels = new List<Label>() { }, // TODO: test
 					State = "open",
 					Locked = false,
@@ -57,11 +68,33 @@ namespace Crawler.UnitTesting.Github
 					Id = 115684374,
 					Number = 1,
 					Title = "Issue 1",
-					User = new User() { }, // TODO: test
+					User = new User()
+					{
+						Login = "aoancea",
+						Id = 4282532,
+						Avatar_Url = "https://avatars.githubusercontent.com/u/4282532?v=3",
+						Gravatar_Id = "",
+						Url = "https://api.github.com/users/aoancea",
+						Html_Url = "https://github.com/aoancea",
+						Followers_Url = "https://api.github.com/users/aoancea/followers",
+						Following_Url = "https://api.github.com/users/aoancea/following{/other_user}",
+						Gists_Url = "https://api.github.com/users/aoancea/gists{/gist_id}"
+					}, // TODO: test
 					Labels = new List<Label>() { }, // TODO: test
 					State = "open",
 					Locked = false,
-					Assignee = new User() { }, // TODO: test
+					Assignee = new User()
+					{
+						Login = "aoancea",
+						Id = 4282532,
+						Avatar_Url = "https://avatars.githubusercontent.com/u/4282532?v=3",
+						Gravatar_Id = "",
+						Url = "https://api.github.com/users/aoancea",
+						Html_Url = "https://github.com/aoancea",
+						Followers_Url = "https://api.github.com/users/aoancea/followers",
+						Following_Url = "https://api.github.com/users/aoancea/following{/other_user}",
+						Gists_Url = "https://api.github.com/users/aoancea/gists{/gist_id}"
+					}, // TODO: test
 					Milestone = new Milestone() { }, // TODO: test
 					Comments = 2,
 					Created_at = new DateTime(2015, 11, 07, 20, 42, 49), // there might be a GMT conversion problem as the time fetched comes in local time
@@ -101,11 +134,20 @@ namespace Crawler.UnitTesting.Github
 			Assert.AreEqual(expected.Body, actual.Body);
 		}
 
-
 		public void AssertHaveEqualState(User expected, User actual)
 		{
 			if (expected != null || actual != null)
 			{
+				Assert.AreEqual(expected.Login, actual.Login);
+				Assert.AreEqual(expected.Id, actual.Id);
+				Assert.AreEqual(expected.Avatar_Url, actual.Avatar_Url);
+				Assert.AreEqual(expected.Gravatar_Id, actual.Gravatar_Id);
+				Assert.AreEqual(expected.Url, actual.Url);
+				Assert.AreEqual(expected.Html_Url, actual.Html_Url);
+				Assert.AreEqual(expected.Followers_Url, actual.Followers_Url);
+				Assert.AreEqual(expected.Following_Url, actual.Following_Url);
+				Assert.AreEqual(expected.Gists_Url, actual.Gists_Url);
+
 				// TODO: test
 			}
 			else
