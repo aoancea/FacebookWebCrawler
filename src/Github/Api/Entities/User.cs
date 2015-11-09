@@ -35,5 +35,8 @@ namespace Crawler.Github.Api.Entities
 
 		[DataMember(Name = "gists_url")]
 		public string Gists_Url { get; set; }
+
+		[DataMember(Name = "starred_url")]
+		public string Starred_Url { get; set; }
 	}
 }
