@@ -7,11 +7,11 @@ namespace Crawler.UnitTesting.Github
 	public class CrawlerContextTest
 	{
 		[TestMethod]
-		public void CrawlerContext_Authentication_Success()
+		public void GithubContext_NewInstance_Success()
 		{
-			Crawler.Github.Api.CrawlerContext crawler = new Crawler.Github.Api.CrawlerContext();
+			Crawler.Github.Api.GithubContext crawler = new Crawler.Github.Api.GithubContext();
 
-			Assert.AreEqual(true, crawler.Authenticated);
+			Assert.IsNotNull(crawler);
 		}
 	}
 }

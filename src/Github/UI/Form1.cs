@@ -21,16 +21,15 @@ namespace Crawler.Github.UI
 
 		private async void btnStart_Click(object sender, EventArgs e)
 		{
-			CrawlerContext crawlerContext = new CrawlerContext();
+			GithubContext crawlerContext = new GithubContext();
 
-			IssuesApi issuesApi = new IssuesApi(crawlerContext);
-			CommentsApi commentsApi = new CommentsApi(crawlerContext);
+			GithubApi githubApi = new GithubApi(crawlerContext);
 
-			List<Issue> issues = await issuesApi.GetAsync(tbxRepoOwner.Text, tbxRepoName.Text);
+			List<Issue> issues = await githubApi.IssuesApi.GetAsync(tbxRepoOwner.Text, tbxRepoName.Text);
 
 			foreach (Issue issue in issues)
 			{
-				List<Comment> comments = await commentsApi.GetAsync(issue);
+				List<Comment> comments = await githubApi.CommentsApi.GetAsync(issue);
 			}
 		}
 	}

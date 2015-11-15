@@ -9,9 +9,9 @@ namespace Crawler.Github.Api
 {
 	public class CommentsApi
 	{
-		private readonly CrawlerContext crawlerContext;
+		private readonly GithubContext crawlerContext;
 
-		public CommentsApi(CrawlerContext crawlerContext)
+		public CommentsApi(GithubContext crawlerContext)
 		{
 			this.crawlerContext = crawlerContext;
 		}

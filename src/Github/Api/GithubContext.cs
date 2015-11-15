@@ -8,18 +8,8 @@ using System.Threading.Tasks;
 
 namespace Crawler.Github.Api
 {
-	public class CrawlerContext : Core.Common.Crawler
+	public class GithubContext
 	{
-		public CrawlerContext()
-		{
-
-		}
-
-		protected override bool Authenticate()
-		{
-			return base.Authenticate();
-		}
-
 		public async Task<T> RequestAsync<T>(string path)
 		{
 			return await RequestAsync<T>(new Uri(path));
@@ -40,11 +30,7 @@ namespace Crawler.Github.Api
 		{
 			var request = WebRequest.CreateHttp(uri);
 			request.KeepAlive = false;
-
-
-			var version = "0.1";
-
-			request.UserAgent = "Crawler.Github.Api" + version;
+			request.UserAgent = "Crawler.Github.Api 0.1";
 
 			return request;
 		}

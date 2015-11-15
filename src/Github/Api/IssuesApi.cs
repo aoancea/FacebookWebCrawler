@@ -9,9 +9,9 @@ namespace Crawler.Github.Api
 {
 	public class IssuesApi
 	{
-		private readonly CrawlerContext context;
+		private readonly GithubContext context;
 
-		public IssuesApi(CrawlerContext context)
+		public IssuesApi(GithubContext context)
 		{
 			this.context = context;
 		}

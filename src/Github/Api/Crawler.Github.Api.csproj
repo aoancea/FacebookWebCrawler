@@ -46,12 +46,13 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="CommentsApi.cs" />
-    <Compile Include="CrawlerContext.cs" />
+    <Compile Include="GithubContext.cs" />
     <Compile Include="Entities\Comment.cs" />
     <Compile Include="Entities\Issue.cs" />
     <Compile Include="Entities\Label.cs" />
     <Compile Include="Entities\Milestone.cs" />
     <Compile Include="Entities\User.cs" />
+    <Compile Include="GithubApi.cs" />
     <Compile Include="IssuesApi.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
