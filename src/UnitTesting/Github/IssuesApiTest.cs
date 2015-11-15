@@ -56,7 +56,7 @@ namespace Crawler.UnitTesting.Github
 							Color = "84b6eb"
 						}
 					},
-					State = "open",
+					State =  IssueState.Open,
 					Locked = false,
 					Assignee = null,
 					Milestone = null,
@@ -97,7 +97,7 @@ namespace Crawler.UnitTesting.Github
 							Color = "fc2929"
 						}
 					},
-					State = "open",
+					State = IssueState.Open,
 					Locked = false,
 					Assignee = new User()
 					{

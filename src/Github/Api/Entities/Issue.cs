@@ -40,7 +40,7 @@ namespace Crawler.Github.Api.Entities
 		public List<Label> Labels { get; set; }
 
 		[DataMember(Name = "state")]
-		public string State { get; set; }
+		public IssueState State { get; set; }
 
 		[DataMember(Name = "locked")]
 		public bool Locked { get; set; }
@@ -65,5 +65,14 @@ namespace Crawler.Github.Api.Entities
 
 		[DataMember(Name = "body")]
 		public string Body { get; set; }
+	}
+
+	public enum IssueState
+	{
+		[EnumMember(Value = "open")]
+		Open = 1,
+
+		[EnumMember(Value = "closed")]
+		Closed = 2
 	}
 }
