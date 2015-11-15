@@ -22,7 +22,12 @@ namespace Crawler.Github.Api
 
 		public async Task<T> RequestAsync<T>(string path)
 		{
-			WebRequest request = CreateRequest(path);
+			return await RequestAsync<T>(new Uri(path));
+		}
+
+		public async Task<T> RequestAsync<T>(Uri uri)
+		{
+			WebRequest request = CreateRequest(uri);
 
 			HttpWebResponse response = (HttpWebResponse)await request.GetResponseAsync().ConfigureAwait(false);
 
@@ -31,17 +36,14 @@ namespace Crawler.Github.Api
 			return await Task.FromResult<T>(result);
 		}
 
-		private WebRequest CreateRequest(string path)
+		private WebRequest CreateRequest(Uri uri)
 		{
-			var uriString = "https://" + "api.github.com" + path;
-			
-			var uri = new Uri(uriString);
 			var request = WebRequest.CreateHttp(uri);
 			request.KeepAlive = false;
 
 
 			var version = "0.1";
-			
+
 			request.UserAgent = "Crawler.Github.Api" + version;
 
 			return request;

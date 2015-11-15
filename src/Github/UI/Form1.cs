@@ -26,12 +26,12 @@ namespace Crawler.Github.UI
 			IssuesApi issuesApi = new IssuesApi(crawlerContext);
 
 
-			IEnumerable<Issue> issues = await issuesApi.GetAsync(tbxRepoOwner.Text, tbxRepoName.Text);
+			List<Issue> issues = (List<Issue>)await issuesApi.GetAsync(tbxRepoOwner.Text, tbxRepoName.Text);
 
-
-
-
-
+			foreach (Issue issue in issues)
+			{
+				List<Comment> comments = await crawlerContext.RequestAsync<List<Comment>>(issue.Comments_Url);
+			}
 
 
 		}
