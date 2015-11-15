@@ -47,7 +47,15 @@ namespace Crawler.UnitTesting.Github
 						Following_Url = "https://api.github.com/users/aoancea/following{/other_user}",
 						Gists_Url = "https://api.github.com/users/aoancea/gists{/gist_id}"
 					}, // TODO: test
-					Labels = new List<Label>() { }, // TODO: test
+					Labels = new List<Label>()
+					{
+						new Label()
+						{
+							Url = "https://api.github.com/repos/aoancea/github-api-tests/labels/enhancement",
+							Name = "enhancement",
+							Color = "84b6eb"
+						}
+					},
 					State = "open",
 					Locked = false,
 					Assignee = null,
@@ -80,7 +88,15 @@ namespace Crawler.UnitTesting.Github
 						Following_Url = "https://api.github.com/users/aoancea/following{/other_user}",
 						Gists_Url = "https://api.github.com/users/aoancea/gists{/gist_id}"
 					}, // TODO: test
-					Labels = new List<Label>() { }, // TODO: test
+					Labels = new List<Label>()
+					{
+						new Label()
+						{
+							Url = "https://api.github.com/repos/aoancea/github-api-tests/labels/bug",
+							Name = "bug",
+							Color = "fc2929"
+						}
+					},
 					State = "open",
 					Locked = false,
 					Assignee = new User()
@@ -107,11 +123,11 @@ namespace Crawler.UnitTesting.Github
 			List<Issue> issues = issuesApi.GetAsync("aoancea", "github-api-tests").Result.ToList();
 
 			Assert.AreEqual(2, issues.Count);
-			AssertHaveEqualState(expectedIssues[0], issues[0]);
-			AssertHaveEqualState(expectedIssues[1], issues[1]);
+			AssertAreEqual(expectedIssues[0], issues[0]);
+			AssertAreEqual(expectedIssues[1], issues[1]);
 		}
 
-		public void AssertHaveEqualState(Issue expected, Issue actual)
+		public void AssertAreEqual(Issue expected, Issue actual)
 		{
 			Assert.AreEqual(expected.Url, actual.Url);
 			Assert.AreEqual(expected.Labels_Url, actual.Labels_Url);
@@ -121,12 +137,12 @@ namespace Crawler.UnitTesting.Github
 			Assert.AreEqual(expected.Id, actual.Id);
 			Assert.AreEqual(expected.Number, actual.Number);
 			Assert.AreEqual(expected.Title, actual.Title);
-			AssertHaveEqualState(expected.User, actual.User);
-			AssertHaveEqualState(expected.Labels, actual.Labels);
+			AssertAreEqual(expected.User, actual.User);
+			AssertAreEqual(expected.Labels, actual.Labels);
 			Assert.AreEqual(expected.State, actual.State);
 			Assert.AreEqual(expected.Locked, actual.Locked);
-			AssertHaveEqualState(expected.Assignee, actual.Assignee);
-			AssertHaveEqualState(expected.Milestone, actual.Milestone);
+			AssertAreEqual(expected.Assignee, actual.Assignee);
+			AssertAreEqual(expected.Milestone, actual.Milestone);
 			Assert.AreEqual(expected.Comments, actual.Comments);
 			Assert.AreEqual(expected.Created_at, actual.Created_at);
 			Assert.AreEqual(expected.Updated_at, actual.Updated_at);
@@ -134,7 +150,7 @@ namespace Crawler.UnitTesting.Github
 			Assert.AreEqual(expected.Body, actual.Body);
 		}
 
-		public void AssertHaveEqualState(User expected, User actual)
+		public void AssertAreEqual(User expected, User actual)
 		{
 			if (expected != null || actual != null)
 			{
@@ -157,7 +173,7 @@ namespace Crawler.UnitTesting.Github
 			}
 		}
 
-		public void AssertHaveEqualState(Milestone expected, Milestone actual)
+		public void AssertAreEqual(Milestone expected, Milestone actual)
 		{
 			if (expected != null || actual != null)
 			{
@@ -170,16 +186,22 @@ namespace Crawler.UnitTesting.Github
 			}
 		}
 
-		public void AssertHaveEqualState(IEnumerable<Label> expected, IEnumerable<Label> actual)
+		public void AssertAreEqual(List<Label> expected, List<Label> actual)
 		{
-			// TODO: test
+			Assert.AreEqual(expected.Count, actual.Count);
+			for (int i = 0; i < expected.Count; ++i)
+			{
+				AssertAreEqual(expected[i], actual[i]);
+			}
 		}
 
-		public void AssertHaveEqualState(Label expected, Label actual)
+		public void AssertAreEqual(Label expected, Label actual)
 		{
 			if (expected != null || actual != null)
 			{
-				// TODO: test
+				Assert.AreEqual(expected.Url, actual.Url);
+				Assert.AreEqual(expected.Name, actual.Name);
+				Assert.AreEqual(expected.Color, actual.Color);
 			}
 			else
 			{

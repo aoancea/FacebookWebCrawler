@@ -37,7 +37,7 @@ namespace Crawler.Github.Api.Entities
 		public User User { get; set; }
 
 		[DataMember(Name = "labels")]
-		public IEnumerable<Label> Labels { get; set; }
+		public List<Label> Labels { get; set; }
 
 		[DataMember(Name = "state")]
 		public string State { get; set; }
