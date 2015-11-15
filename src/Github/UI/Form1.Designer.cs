@@ -36,13 +36,13 @@
             "2",
             ".*problem.*",
             "bug"}, -1);
-			this.tbxProjectOwner = new System.Windows.Forms.TextBox();
+			this.tbxRepoOwner = new System.Windows.Forms.TextBox();
 			this.label1 = new System.Windows.Forms.Label();
 			this.label2 = new System.Windows.Forms.Label();
 			this.tbxFolderPath = new System.Windows.Forms.TextBox();
 			this.btnBrowseFolder = new System.Windows.Forms.Button();
 			this.groupBox1 = new System.Windows.Forms.GroupBox();
-			this.tbxProjectName = new System.Windows.Forms.TextBox();
+			this.tbxRepoName = new System.Windows.Forms.TextBox();
 			this.label4 = new System.Windows.Forms.Label();
 			this.cbxFetchPullRequests = new System.Windows.Forms.CheckBox();
 			this.cbxFetchClosedIssues = new System.Windows.Forms.CheckBox();
@@ -67,21 +67,21 @@
 			this.groupBox2.SuspendLayout();
 			this.SuspendLayout();
 			// 
-			// tbxProjectOwner
+			// tbxRepoOwner
 			// 
-			this.tbxProjectOwner.Location = new System.Drawing.Point(82, 21);
-			this.tbxProjectOwner.Name = "tbxProjectOwner";
-			this.tbxProjectOwner.Size = new System.Drawing.Size(189, 20);
-			this.tbxProjectOwner.TabIndex = 0;
+			this.tbxRepoOwner.Location = new System.Drawing.Point(82, 21);
+			this.tbxRepoOwner.Name = "tbxRepoOwner";
+			this.tbxRepoOwner.Size = new System.Drawing.Size(189, 20);
+			this.tbxRepoOwner.TabIndex = 0;
 			// 
 			// label1
 			// 
 			this.label1.AutoSize = true;
 			this.label1.Location = new System.Drawing.Point(8, 24);
 			this.label1.Name = "label1";
-			this.label1.Size = new System.Drawing.Size(75, 13);
+			this.label1.Size = new System.Drawing.Size(68, 13);
 			this.label1.TabIndex = 1;
-			this.label1.Text = "Project owner:";
+			this.label1.Text = "Repo owner:";
 			// 
 			// label2
 			// 
@@ -110,7 +110,7 @@
 			// 
 			// groupBox1
 			// 
-			this.groupBox1.Controls.Add(this.tbxProjectName);
+			this.groupBox1.Controls.Add(this.tbxRepoName);
 			this.groupBox1.Controls.Add(this.label4);
 			this.groupBox1.Controls.Add(this.cbxFetchPullRequests);
 			this.groupBox1.Controls.Add(this.cbxFetchClosedIssues);
@@ -119,7 +119,7 @@
 			this.groupBox1.Controls.Add(this.cbxGroupCommentsByIssues);
 			this.groupBox1.Controls.Add(this.cbxFetchComments);
 			this.groupBox1.Controls.Add(this.btnBrowseFolder);
-			this.groupBox1.Controls.Add(this.tbxProjectOwner);
+			this.groupBox1.Controls.Add(this.tbxRepoOwner);
 			this.groupBox1.Controls.Add(this.tbxFolderPath);
 			this.groupBox1.Controls.Add(this.label1);
 			this.groupBox1.Controls.Add(this.label2);
@@ -130,21 +130,21 @@
 			this.groupBox1.TabStop = false;
 			this.groupBox1.Text = "Main options";
 			// 
-			// tbxProjectName
+			// tbxRepoName
 			// 
-			this.tbxProjectName.Location = new System.Drawing.Point(388, 21);
-			this.tbxProjectName.Name = "tbxProjectName";
-			this.tbxProjectName.Size = new System.Drawing.Size(189, 20);
-			this.tbxProjectName.TabIndex = 15;
+			this.tbxRepoName.Location = new System.Drawing.Point(388, 21);
+			this.tbxRepoName.Name = "tbxRepoName";
+			this.tbxRepoName.Size = new System.Drawing.Size(189, 20);
+			this.tbxRepoName.TabIndex = 15;
 			// 
 			// label4
 			// 
 			this.label4.AutoSize = true;
 			this.label4.Location = new System.Drawing.Point(310, 24);
 			this.label4.Name = "label4";
-			this.label4.Size = new System.Drawing.Size(72, 13);
+			this.label4.Size = new System.Drawing.Size(65, 13);
 			this.label4.TabIndex = 14;
-			this.label4.Text = "Project name:";
+			this.label4.Text = "Repo name:";
 			// 
 			// cbxFetchPullRequests
 			// 
@@ -328,6 +328,7 @@
 			this.btnStart.TabIndex = 14;
 			this.btnStart.Text = "Start";
 			this.btnStart.UseVisualStyleBackColor = true;
+			this.btnStart.Click += new System.EventHandler(this.btnStart_Click);
 			// 
 			// btnCancel
 			// 
@@ -364,7 +365,7 @@
 
 		#endregion
 
-		private System.Windows.Forms.TextBox tbxProjectOwner;
+		private System.Windows.Forms.TextBox tbxRepoOwner;
 		private System.Windows.Forms.Label label1;
 		private System.Windows.Forms.Label label2;
 		private System.Windows.Forms.TextBox tbxFolderPath;
@@ -389,7 +390,7 @@
 		private System.Windows.Forms.CheckBox cbxFetchClosedIssues;
 		private System.Windows.Forms.CheckBox cbxFetchOpenIssues;
 		private System.Windows.Forms.CheckBox cbxGroupByLabel;
-		private System.Windows.Forms.TextBox tbxProjectName;
+		private System.Windows.Forms.TextBox tbxRepoName;
 		private System.Windows.Forms.Label label4;
 	}
 }
