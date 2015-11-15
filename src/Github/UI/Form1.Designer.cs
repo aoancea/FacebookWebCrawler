@@ -42,25 +42,27 @@
 			this.textBox2 = new System.Windows.Forms.TextBox();
 			this.button1 = new System.Windows.Forms.Button();
 			this.groupBox1 = new System.Windows.Forms.GroupBox();
-			this.checkBox1 = new System.Windows.Forms.CheckBox();
+			this.checkBox6 = new System.Windows.Forms.CheckBox();
+			this.checkBox5 = new System.Windows.Forms.CheckBox();
+			this.checkBox4 = new System.Windows.Forms.CheckBox();
+			this.checkBox3 = new System.Windows.Forms.CheckBox();
 			this.checkBox2 = new System.Windows.Forms.CheckBox();
+			this.checkBox1 = new System.Windows.Forms.CheckBox();
 			this.groupBox2 = new System.Windows.Forms.GroupBox();
+			this.label3 = new System.Windows.Forms.Label();
+			this.radioButton2 = new System.Windows.Forms.RadioButton();
+			this.radioButton1 = new System.Windows.Forms.RadioButton();
+			this.button3 = new System.Windows.Forms.Button();
+			this.button2 = new System.Windows.Forms.Button();
 			this.listView1 = new System.Windows.Forms.ListView();
 			this.columnHeader1 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
 			this.columnHeader2 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
 			this.columnHeader3 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
-			this.button2 = new System.Windows.Forms.Button();
-			this.button3 = new System.Windows.Forms.Button();
-			this.radioButton1 = new System.Windows.Forms.RadioButton();
-			this.radioButton2 = new System.Windows.Forms.RadioButton();
-			this.label3 = new System.Windows.Forms.Label();
 			this.progressBar1 = new System.Windows.Forms.ProgressBar();
 			this.button4 = new System.Windows.Forms.Button();
 			this.button5 = new System.Windows.Forms.Button();
-			this.checkBox3 = new System.Windows.Forms.CheckBox();
-			this.checkBox4 = new System.Windows.Forms.CheckBox();
-			this.checkBox5 = new System.Windows.Forms.CheckBox();
-			this.checkBox6 = new System.Windows.Forms.CheckBox();
+			this.label4 = new System.Windows.Forms.Label();
+			this.textBox3 = new System.Windows.Forms.TextBox();
 			this.groupBox1.SuspendLayout();
 			this.groupBox2.SuspendLayout();
 			this.SuspendLayout();
@@ -69,7 +71,7 @@
 			// 
 			this.textBox1.Location = new System.Drawing.Point(82, 21);
 			this.textBox1.Name = "textBox1";
-			this.textBox1.Size = new System.Drawing.Size(495, 20);
+			this.textBox1.Size = new System.Drawing.Size(189, 20);
 			this.textBox1.TabIndex = 0;
 			// 
 			// label1
@@ -77,9 +79,9 @@
 			this.label1.AutoSize = true;
 			this.label1.Location = new System.Drawing.Point(8, 24);
 			this.label1.Name = "label1";
-			this.label1.Size = new System.Drawing.Size(68, 13);
+			this.label1.Size = new System.Drawing.Size(75, 13);
 			this.label1.TabIndex = 1;
-			this.label1.Text = "Project URL:";
+			this.label1.Text = "Project owner:";
 			// 
 			// label2
 			// 
@@ -108,6 +110,8 @@
 			// 
 			// groupBox1
 			// 
+			this.groupBox1.Controls.Add(this.textBox3);
+			this.groupBox1.Controls.Add(this.label4);
 			this.groupBox1.Controls.Add(this.checkBox6);
 			this.groupBox1.Controls.Add(this.checkBox5);
 			this.groupBox1.Controls.Add(this.checkBox4);
@@ -126,17 +130,49 @@
 			this.groupBox1.TabStop = false;
 			this.groupBox1.Text = "Main options";
 			// 
-			// checkBox1
+			// checkBox6
 			// 
-			this.checkBox1.AutoSize = true;
-			this.checkBox1.Checked = true;
-			this.checkBox1.CheckState = System.Windows.Forms.CheckState.Checked;
-			this.checkBox1.Location = new System.Drawing.Point(11, 78);
-			this.checkBox1.Name = "checkBox1";
-			this.checkBox1.Size = new System.Drawing.Size(104, 17);
-			this.checkBox1.TabIndex = 6;
-			this.checkBox1.Text = "Fetch comments";
-			this.checkBox1.UseVisualStyleBackColor = true;
+			this.checkBox6.AutoSize = true;
+			this.checkBox6.Location = new System.Drawing.Point(254, 137);
+			this.checkBox6.Name = "checkBox6";
+			this.checkBox6.Size = new System.Drawing.Size(115, 17);
+			this.checkBox6.TabIndex = 12;
+			this.checkBox6.Text = "Fetch pull requests";
+			this.checkBox6.UseVisualStyleBackColor = true;
+			// 
+			// checkBox5
+			// 
+			this.checkBox5.AutoSize = true;
+			this.checkBox5.Checked = true;
+			this.checkBox5.CheckState = System.Windows.Forms.CheckState.Checked;
+			this.checkBox5.Location = new System.Drawing.Point(129, 137);
+			this.checkBox5.Name = "checkBox5";
+			this.checkBox5.Size = new System.Drawing.Size(119, 17);
+			this.checkBox5.TabIndex = 11;
+			this.checkBox5.Text = "Fetch closed issues";
+			this.checkBox5.UseVisualStyleBackColor = true;
+			// 
+			// checkBox4
+			// 
+			this.checkBox4.AutoSize = true;
+			this.checkBox4.Checked = true;
+			this.checkBox4.CheckState = System.Windows.Forms.CheckState.Checked;
+			this.checkBox4.Location = new System.Drawing.Point(11, 137);
+			this.checkBox4.Name = "checkBox4";
+			this.checkBox4.Size = new System.Drawing.Size(112, 17);
+			this.checkBox4.TabIndex = 10;
+			this.checkBox4.Text = "Fetch open issues";
+			this.checkBox4.UseVisualStyleBackColor = true;
+			// 
+			// checkBox3
+			// 
+			this.checkBox3.AutoSize = true;
+			this.checkBox3.Location = new System.Drawing.Point(129, 78);
+			this.checkBox3.Name = "checkBox3";
+			this.checkBox3.Size = new System.Drawing.Size(94, 17);
+			this.checkBox3.TabIndex = 9;
+			this.checkBox3.Text = "Group by label";
+			this.checkBox3.UseVisualStyleBackColor = true;
 			// 
 			// checkBox2
 			// 
@@ -148,6 +184,18 @@
 			this.checkBox2.Text = "Group comments by issue (otherwise, they will appear in the same file as the issu" +
     "e text)";
 			this.checkBox2.UseVisualStyleBackColor = true;
+			// 
+			// checkBox1
+			// 
+			this.checkBox1.AutoSize = true;
+			this.checkBox1.Checked = true;
+			this.checkBox1.CheckState = System.Windows.Forms.CheckState.Checked;
+			this.checkBox1.Location = new System.Drawing.Point(11, 78);
+			this.checkBox1.Name = "checkBox1";
+			this.checkBox1.Size = new System.Drawing.Size(104, 17);
+			this.checkBox1.TabIndex = 6;
+			this.checkBox1.Text = "Fetch comments";
+			this.checkBox1.UseVisualStyleBackColor = true;
 			// 
 			// groupBox2
 			// 
@@ -163,6 +211,55 @@
 			this.groupBox2.TabIndex = 8;
 			this.groupBox2.TabStop = false;
 			this.groupBox2.Text = "Label grouping options";
+			// 
+			// label3
+			// 
+			this.label3.AutoSize = true;
+			this.label3.Location = new System.Drawing.Point(3, 31);
+			this.label3.Name = "label3";
+			this.label3.Size = new System.Drawing.Size(167, 13);
+			this.label3.TabIndex = 8;
+			this.label3.Text = "Label renaming (regex supported):";
+			// 
+			// radioButton2
+			// 
+			this.radioButton2.AutoSize = true;
+			this.radioButton2.Location = new System.Drawing.Point(313, 191);
+			this.radioButton2.Name = "radioButton2";
+			this.radioButton2.Size = new System.Drawing.Size(266, 17);
+			this.radioButton2.TabIndex = 13;
+			this.radioButton2.Text = "If an issue has multiple labels, only consider the first";
+			this.radioButton2.UseVisualStyleBackColor = true;
+			// 
+			// radioButton1
+			// 
+			this.radioButton1.AutoSize = true;
+			this.radioButton1.Checked = true;
+			this.radioButton1.Location = new System.Drawing.Point(6, 191);
+			this.radioButton1.Name = "radioButton1";
+			this.radioButton1.Size = new System.Drawing.Size(285, 17);
+			this.radioButton1.TabIndex = 12;
+			this.radioButton1.TabStop = true;
+			this.radioButton1.Text = "If an issue has multiple labels, duplicate it for each label";
+			this.radioButton1.UseVisualStyleBackColor = true;
+			// 
+			// button3
+			// 
+			this.button3.Location = new System.Drawing.Point(516, 26);
+			this.button3.Name = "button3";
+			this.button3.Size = new System.Drawing.Size(61, 23);
+			this.button3.TabIndex = 10;
+			this.button3.Text = "Remove";
+			this.button3.UseVisualStyleBackColor = true;
+			// 
+			// button2
+			// 
+			this.button2.Location = new System.Drawing.Point(449, 26);
+			this.button2.Name = "button2";
+			this.button2.Size = new System.Drawing.Size(61, 23);
+			this.button2.TabIndex = 8;
+			this.button2.Text = "Add";
+			this.button2.UseVisualStyleBackColor = true;
 			// 
 			// listView1
 			// 
@@ -199,55 +296,6 @@
 			this.columnHeader3.Text = "Rename to text";
 			this.columnHeader3.Width = 120;
 			// 
-			// button2
-			// 
-			this.button2.Location = new System.Drawing.Point(449, 26);
-			this.button2.Name = "button2";
-			this.button2.Size = new System.Drawing.Size(61, 23);
-			this.button2.TabIndex = 8;
-			this.button2.Text = "Add";
-			this.button2.UseVisualStyleBackColor = true;
-			// 
-			// button3
-			// 
-			this.button3.Location = new System.Drawing.Point(516, 26);
-			this.button3.Name = "button3";
-			this.button3.Size = new System.Drawing.Size(61, 23);
-			this.button3.TabIndex = 10;
-			this.button3.Text = "Remove";
-			this.button3.UseVisualStyleBackColor = true;
-			// 
-			// radioButton1
-			// 
-			this.radioButton1.AutoSize = true;
-			this.radioButton1.Checked = true;
-			this.radioButton1.Location = new System.Drawing.Point(6, 191);
-			this.radioButton1.Name = "radioButton1";
-			this.radioButton1.Size = new System.Drawing.Size(285, 17);
-			this.radioButton1.TabIndex = 12;
-			this.radioButton1.TabStop = true;
-			this.radioButton1.Text = "If an issue has multiple labels, duplicate it for each label";
-			this.radioButton1.UseVisualStyleBackColor = true;
-			// 
-			// radioButton2
-			// 
-			this.radioButton2.AutoSize = true;
-			this.radioButton2.Location = new System.Drawing.Point(313, 191);
-			this.radioButton2.Name = "radioButton2";
-			this.radioButton2.Size = new System.Drawing.Size(266, 17);
-			this.radioButton2.TabIndex = 13;
-			this.radioButton2.Text = "If an issue has multiple labels, only consider the first";
-			this.radioButton2.UseVisualStyleBackColor = true;
-			// 
-			// label3
-			// 
-			this.label3.AutoSize = true;
-			this.label3.Location = new System.Drawing.Point(3, 31);
-			this.label3.Name = "label3";
-			this.label3.Size = new System.Drawing.Size(167, 13);
-			this.label3.TabIndex = 8;
-			this.label3.Text = "Label renaming (regex supported):";
-			// 
 			// progressBar1
 			// 
 			this.progressBar1.Location = new System.Drawing.Point(12, 413);
@@ -275,51 +323,21 @@
 			this.button5.Text = "Cancel";
 			this.button5.UseVisualStyleBackColor = true;
 			// 
-			// checkBox3
+			// label4
 			// 
-			this.checkBox3.AutoSize = true;
-			this.checkBox3.Location = new System.Drawing.Point(129, 78);
-			this.checkBox3.Name = "checkBox3";
-			this.checkBox3.Size = new System.Drawing.Size(94, 17);
-			this.checkBox3.TabIndex = 9;
-			this.checkBox3.Text = "Group by label";
-			this.checkBox3.UseVisualStyleBackColor = true;
+			this.label4.AutoSize = true;
+			this.label4.Location = new System.Drawing.Point(310, 24);
+			this.label4.Name = "label4";
+			this.label4.Size = new System.Drawing.Size(72, 13);
+			this.label4.TabIndex = 14;
+			this.label4.Text = "Project name:";
 			// 
-			// checkBox4
+			// textBox3
 			// 
-			this.checkBox4.AutoSize = true;
-			this.checkBox4.Checked = true;
-			this.checkBox4.CheckState = System.Windows.Forms.CheckState.Checked;
-			this.checkBox4.Location = new System.Drawing.Point(11, 137);
-			this.checkBox4.Name = "checkBox4";
-			this.checkBox4.Size = new System.Drawing.Size(112, 17);
-			this.checkBox4.TabIndex = 10;
-			this.checkBox4.Text = "Fetch open issues";
-			this.checkBox4.UseVisualStyleBackColor = true;
-			// 
-			// checkBox5
-			// 
-			this.checkBox5.AutoSize = true;
-			this.checkBox5.Checked = true;
-			this.checkBox5.CheckState = System.Windows.Forms.CheckState.Checked;
-			this.checkBox5.Location = new System.Drawing.Point(129, 137);
-			this.checkBox5.Name = "checkBox5";
-			this.checkBox5.Size = new System.Drawing.Size(119, 17);
-			this.checkBox5.TabIndex = 11;
-			this.checkBox5.Text = "Fetch closed issues";
-			this.checkBox5.UseVisualStyleBackColor = true;
-			// 
-			// checkBox6
-			// 
-			this.checkBox6.AutoSize = true;
-			this.checkBox6.Checked = true;
-			this.checkBox6.CheckState = System.Windows.Forms.CheckState.Checked;
-			this.checkBox6.Location = new System.Drawing.Point(254, 137);
-			this.checkBox6.Name = "checkBox6";
-			this.checkBox6.Size = new System.Drawing.Size(140, 17);
-			this.checkBox6.TabIndex = 12;
-			this.checkBox6.Text = "Don\'t fetch pull requests";
-			this.checkBox6.UseVisualStyleBackColor = true;
+			this.textBox3.Location = new System.Drawing.Point(388, 21);
+			this.textBox3.Name = "textBox3";
+			this.textBox3.Size = new System.Drawing.Size(189, 20);
+			this.textBox3.TabIndex = 15;
 			// 
 			// Form1
 			// 
@@ -371,6 +389,8 @@
 		private System.Windows.Forms.CheckBox checkBox5;
 		private System.Windows.Forms.CheckBox checkBox4;
 		private System.Windows.Forms.CheckBox checkBox3;
+		private System.Windows.Forms.TextBox textBox3;
+		private System.Windows.Forms.Label label4;
 	}
 }
 
