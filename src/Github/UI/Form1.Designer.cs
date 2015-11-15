@@ -36,43 +36,43 @@
             "2",
             ".*problem.*",
             "bug"}, -1);
-			this.textBox1 = new System.Windows.Forms.TextBox();
+			this.tbxProjectOwner = new System.Windows.Forms.TextBox();
 			this.label1 = new System.Windows.Forms.Label();
 			this.label2 = new System.Windows.Forms.Label();
-			this.textBox2 = new System.Windows.Forms.TextBox();
-			this.button1 = new System.Windows.Forms.Button();
+			this.tbxFolderPath = new System.Windows.Forms.TextBox();
+			this.btnBrowseFolder = new System.Windows.Forms.Button();
 			this.groupBox1 = new System.Windows.Forms.GroupBox();
-			this.checkBox6 = new System.Windows.Forms.CheckBox();
-			this.checkBox5 = new System.Windows.Forms.CheckBox();
-			this.checkBox4 = new System.Windows.Forms.CheckBox();
-			this.checkBox3 = new System.Windows.Forms.CheckBox();
-			this.checkBox2 = new System.Windows.Forms.CheckBox();
-			this.checkBox1 = new System.Windows.Forms.CheckBox();
+			this.tbxProjectName = new System.Windows.Forms.TextBox();
+			this.label4 = new System.Windows.Forms.Label();
+			this.cbxFetchPullRequests = new System.Windows.Forms.CheckBox();
+			this.cbxFetchClosedIssues = new System.Windows.Forms.CheckBox();
+			this.cbxFetchOpenIssues = new System.Windows.Forms.CheckBox();
+			this.cbxGroupByLabel = new System.Windows.Forms.CheckBox();
+			this.cbxGroupCommentsByIssues = new System.Windows.Forms.CheckBox();
+			this.cbxFetchComments = new System.Windows.Forms.CheckBox();
 			this.groupBox2 = new System.Windows.Forms.GroupBox();
 			this.label3 = new System.Windows.Forms.Label();
-			this.radioButton2 = new System.Windows.Forms.RadioButton();
-			this.radioButton1 = new System.Windows.Forms.RadioButton();
-			this.button3 = new System.Windows.Forms.Button();
-			this.button2 = new System.Windows.Forms.Button();
-			this.listView1 = new System.Windows.Forms.ListView();
+			this.rdoOnlyConsiderFirst = new System.Windows.Forms.RadioButton();
+			this.rdoDuplicateForEachLabel = new System.Windows.Forms.RadioButton();
+			this.btnRemoveLabelOverride = new System.Windows.Forms.Button();
+			this.btnAddLabelOverride = new System.Windows.Forms.Button();
+			this.lstViewLabelOverride = new System.Windows.Forms.ListView();
 			this.columnHeader1 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
 			this.columnHeader2 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
 			this.columnHeader3 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
-			this.progressBar1 = new System.Windows.Forms.ProgressBar();
-			this.button4 = new System.Windows.Forms.Button();
-			this.button5 = new System.Windows.Forms.Button();
-			this.label4 = new System.Windows.Forms.Label();
-			this.textBox3 = new System.Windows.Forms.TextBox();
+			this.progressBar = new System.Windows.Forms.ProgressBar();
+			this.btnStart = new System.Windows.Forms.Button();
+			this.btnCancel = new System.Windows.Forms.Button();
 			this.groupBox1.SuspendLayout();
 			this.groupBox2.SuspendLayout();
 			this.SuspendLayout();
 			// 
-			// textBox1
+			// tbxProjectOwner
 			// 
-			this.textBox1.Location = new System.Drawing.Point(82, 21);
-			this.textBox1.Name = "textBox1";
-			this.textBox1.Size = new System.Drawing.Size(189, 20);
-			this.textBox1.TabIndex = 0;
+			this.tbxProjectOwner.Location = new System.Drawing.Point(82, 21);
+			this.tbxProjectOwner.Name = "tbxProjectOwner";
+			this.tbxProjectOwner.Size = new System.Drawing.Size(189, 20);
+			this.tbxProjectOwner.TabIndex = 0;
 			// 
 			// label1
 			// 
@@ -92,35 +92,35 @@
 			this.label2.TabIndex = 2;
 			this.label2.Text = "Save location:";
 			// 
-			// textBox2
+			// tbxFolderPath
 			// 
-			this.textBox2.Location = new System.Drawing.Point(82, 52);
-			this.textBox2.Name = "textBox2";
-			this.textBox2.Size = new System.Drawing.Size(428, 20);
-			this.textBox2.TabIndex = 3;
+			this.tbxFolderPath.Location = new System.Drawing.Point(82, 52);
+			this.tbxFolderPath.Name = "tbxFolderPath";
+			this.tbxFolderPath.Size = new System.Drawing.Size(428, 20);
+			this.tbxFolderPath.TabIndex = 3;
 			// 
-			// button1
+			// btnBrowseFolder
 			// 
-			this.button1.Location = new System.Drawing.Point(516, 50);
-			this.button1.Name = "button1";
-			this.button1.Size = new System.Drawing.Size(61, 23);
-			this.button1.TabIndex = 4;
-			this.button1.Text = "Browse";
-			this.button1.UseVisualStyleBackColor = true;
+			this.btnBrowseFolder.Location = new System.Drawing.Point(516, 50);
+			this.btnBrowseFolder.Name = "btnBrowseFolder";
+			this.btnBrowseFolder.Size = new System.Drawing.Size(61, 23);
+			this.btnBrowseFolder.TabIndex = 4;
+			this.btnBrowseFolder.Text = "Browse";
+			this.btnBrowseFolder.UseVisualStyleBackColor = true;
 			// 
 			// groupBox1
 			// 
-			this.groupBox1.Controls.Add(this.textBox3);
+			this.groupBox1.Controls.Add(this.tbxProjectName);
 			this.groupBox1.Controls.Add(this.label4);
-			this.groupBox1.Controls.Add(this.checkBox6);
-			this.groupBox1.Controls.Add(this.checkBox5);
-			this.groupBox1.Controls.Add(this.checkBox4);
-			this.groupBox1.Controls.Add(this.checkBox3);
-			this.groupBox1.Controls.Add(this.checkBox2);
-			this.groupBox1.Controls.Add(this.checkBox1);
-			this.groupBox1.Controls.Add(this.button1);
-			this.groupBox1.Controls.Add(this.textBox1);
-			this.groupBox1.Controls.Add(this.textBox2);
+			this.groupBox1.Controls.Add(this.cbxFetchPullRequests);
+			this.groupBox1.Controls.Add(this.cbxFetchClosedIssues);
+			this.groupBox1.Controls.Add(this.cbxFetchOpenIssues);
+			this.groupBox1.Controls.Add(this.cbxGroupByLabel);
+			this.groupBox1.Controls.Add(this.cbxGroupCommentsByIssues);
+			this.groupBox1.Controls.Add(this.cbxFetchComments);
+			this.groupBox1.Controls.Add(this.btnBrowseFolder);
+			this.groupBox1.Controls.Add(this.tbxProjectOwner);
+			this.groupBox1.Controls.Add(this.tbxFolderPath);
 			this.groupBox1.Controls.Add(this.label1);
 			this.groupBox1.Controls.Add(this.label2);
 			this.groupBox1.Location = new System.Drawing.Point(12, 12);
@@ -130,81 +130,97 @@
 			this.groupBox1.TabStop = false;
 			this.groupBox1.Text = "Main options";
 			// 
-			// checkBox6
+			// tbxProjectName
 			// 
-			this.checkBox6.AutoSize = true;
-			this.checkBox6.Location = new System.Drawing.Point(254, 137);
-			this.checkBox6.Name = "checkBox6";
-			this.checkBox6.Size = new System.Drawing.Size(115, 17);
-			this.checkBox6.TabIndex = 12;
-			this.checkBox6.Text = "Fetch pull requests";
-			this.checkBox6.UseVisualStyleBackColor = true;
+			this.tbxProjectName.Location = new System.Drawing.Point(388, 21);
+			this.tbxProjectName.Name = "tbxProjectName";
+			this.tbxProjectName.Size = new System.Drawing.Size(189, 20);
+			this.tbxProjectName.TabIndex = 15;
 			// 
-			// checkBox5
+			// label4
 			// 
-			this.checkBox5.AutoSize = true;
-			this.checkBox5.Checked = true;
-			this.checkBox5.CheckState = System.Windows.Forms.CheckState.Checked;
-			this.checkBox5.Location = new System.Drawing.Point(129, 137);
-			this.checkBox5.Name = "checkBox5";
-			this.checkBox5.Size = new System.Drawing.Size(119, 17);
-			this.checkBox5.TabIndex = 11;
-			this.checkBox5.Text = "Fetch closed issues";
-			this.checkBox5.UseVisualStyleBackColor = true;
+			this.label4.AutoSize = true;
+			this.label4.Location = new System.Drawing.Point(310, 24);
+			this.label4.Name = "label4";
+			this.label4.Size = new System.Drawing.Size(72, 13);
+			this.label4.TabIndex = 14;
+			this.label4.Text = "Project name:";
 			// 
-			// checkBox4
+			// cbxFetchPullRequests
 			// 
-			this.checkBox4.AutoSize = true;
-			this.checkBox4.Checked = true;
-			this.checkBox4.CheckState = System.Windows.Forms.CheckState.Checked;
-			this.checkBox4.Location = new System.Drawing.Point(11, 137);
-			this.checkBox4.Name = "checkBox4";
-			this.checkBox4.Size = new System.Drawing.Size(112, 17);
-			this.checkBox4.TabIndex = 10;
-			this.checkBox4.Text = "Fetch open issues";
-			this.checkBox4.UseVisualStyleBackColor = true;
+			this.cbxFetchPullRequests.AutoSize = true;
+			this.cbxFetchPullRequests.Location = new System.Drawing.Point(254, 137);
+			this.cbxFetchPullRequests.Name = "cbxFetchPullRequests";
+			this.cbxFetchPullRequests.Size = new System.Drawing.Size(115, 17);
+			this.cbxFetchPullRequests.TabIndex = 12;
+			this.cbxFetchPullRequests.Text = "Fetch pull requests";
+			this.cbxFetchPullRequests.UseVisualStyleBackColor = true;
 			// 
-			// checkBox3
+			// cbxFetchClosedIssues
 			// 
-			this.checkBox3.AutoSize = true;
-			this.checkBox3.Location = new System.Drawing.Point(129, 78);
-			this.checkBox3.Name = "checkBox3";
-			this.checkBox3.Size = new System.Drawing.Size(94, 17);
-			this.checkBox3.TabIndex = 9;
-			this.checkBox3.Text = "Group by label";
-			this.checkBox3.UseVisualStyleBackColor = true;
+			this.cbxFetchClosedIssues.AutoSize = true;
+			this.cbxFetchClosedIssues.Checked = true;
+			this.cbxFetchClosedIssues.CheckState = System.Windows.Forms.CheckState.Checked;
+			this.cbxFetchClosedIssues.Location = new System.Drawing.Point(129, 137);
+			this.cbxFetchClosedIssues.Name = "cbxFetchClosedIssues";
+			this.cbxFetchClosedIssues.Size = new System.Drawing.Size(119, 17);
+			this.cbxFetchClosedIssues.TabIndex = 11;
+			this.cbxFetchClosedIssues.Text = "Fetch closed issues";
+			this.cbxFetchClosedIssues.UseVisualStyleBackColor = true;
 			// 
-			// checkBox2
+			// cbxFetchOpenIssues
 			// 
-			this.checkBox2.AutoSize = true;
-			this.checkBox2.Location = new System.Drawing.Point(11, 101);
-			this.checkBox2.Name = "checkBox2";
-			this.checkBox2.Size = new System.Drawing.Size(432, 17);
-			this.checkBox2.TabIndex = 7;
-			this.checkBox2.Text = "Group comments by issue (otherwise, they will appear in the same file as the issu" +
+			this.cbxFetchOpenIssues.AutoSize = true;
+			this.cbxFetchOpenIssues.Checked = true;
+			this.cbxFetchOpenIssues.CheckState = System.Windows.Forms.CheckState.Checked;
+			this.cbxFetchOpenIssues.Location = new System.Drawing.Point(11, 137);
+			this.cbxFetchOpenIssues.Name = "cbxFetchOpenIssues";
+			this.cbxFetchOpenIssues.Size = new System.Drawing.Size(112, 17);
+			this.cbxFetchOpenIssues.TabIndex = 10;
+			this.cbxFetchOpenIssues.Text = "Fetch open issues";
+			this.cbxFetchOpenIssues.UseVisualStyleBackColor = true;
+			// 
+			// cbxGroupByLabel
+			// 
+			this.cbxGroupByLabel.AutoSize = true;
+			this.cbxGroupByLabel.Location = new System.Drawing.Point(129, 78);
+			this.cbxGroupByLabel.Name = "cbxGroupByLabel";
+			this.cbxGroupByLabel.Size = new System.Drawing.Size(94, 17);
+			this.cbxGroupByLabel.TabIndex = 9;
+			this.cbxGroupByLabel.Text = "Group by label";
+			this.cbxGroupByLabel.UseVisualStyleBackColor = true;
+			// 
+			// cbxGroupCommentsByIssues
+			// 
+			this.cbxGroupCommentsByIssues.AutoSize = true;
+			this.cbxGroupCommentsByIssues.Location = new System.Drawing.Point(11, 101);
+			this.cbxGroupCommentsByIssues.Name = "cbxGroupCommentsByIssues";
+			this.cbxGroupCommentsByIssues.Size = new System.Drawing.Size(432, 17);
+			this.cbxGroupCommentsByIssues.TabIndex = 7;
+			this.cbxGroupCommentsByIssues.Text = "Group comments by issue (otherwise, they will appear in the same file as the issu" +
     "e text)";
-			this.checkBox2.UseVisualStyleBackColor = true;
+			this.cbxGroupCommentsByIssues.UseVisualStyleBackColor = true;
 			// 
-			// checkBox1
+			// cbxFetchComments
 			// 
-			this.checkBox1.AutoSize = true;
-			this.checkBox1.Checked = true;
-			this.checkBox1.CheckState = System.Windows.Forms.CheckState.Checked;
-			this.checkBox1.Location = new System.Drawing.Point(11, 78);
-			this.checkBox1.Name = "checkBox1";
-			this.checkBox1.Size = new System.Drawing.Size(104, 17);
-			this.checkBox1.TabIndex = 6;
-			this.checkBox1.Text = "Fetch comments";
-			this.checkBox1.UseVisualStyleBackColor = true;
+			this.cbxFetchComments.AutoSize = true;
+			this.cbxFetchComments.Checked = true;
+			this.cbxFetchComments.CheckState = System.Windows.Forms.CheckState.Checked;
+			this.cbxFetchComments.Location = new System.Drawing.Point(11, 78);
+			this.cbxFetchComments.Name = "cbxFetchComments";
+			this.cbxFetchComments.Size = new System.Drawing.Size(104, 17);
+			this.cbxFetchComments.TabIndex = 6;
+			this.cbxFetchComments.Text = "Fetch comments";
+			this.cbxFetchComments.UseVisualStyleBackColor = true;
 			// 
 			// groupBox2
 			// 
 			this.groupBox2.Controls.Add(this.label3);
-			this.groupBox2.Controls.Add(this.radioButton2);
-			this.groupBox2.Controls.Add(this.radioButton1);
-			this.groupBox2.Controls.Add(this.button3);
-			this.groupBox2.Controls.Add(this.button2);
-			this.groupBox2.Controls.Add(this.listView1);
+			this.groupBox2.Controls.Add(this.rdoOnlyConsiderFirst);
+			this.groupBox2.Controls.Add(this.rdoDuplicateForEachLabel);
+			this.groupBox2.Controls.Add(this.btnRemoveLabelOverride);
+			this.groupBox2.Controls.Add(this.btnAddLabelOverride);
+			this.groupBox2.Controls.Add(this.lstViewLabelOverride);
 			this.groupBox2.Location = new System.Drawing.Point(12, 193);
 			this.groupBox2.Name = "groupBox2";
 			this.groupBox2.Size = new System.Drawing.Size(583, 214);
@@ -221,65 +237,65 @@
 			this.label3.TabIndex = 8;
 			this.label3.Text = "Label renaming (regex supported):";
 			// 
-			// radioButton2
+			// rdoOnlyConsiderFirst
 			// 
-			this.radioButton2.AutoSize = true;
-			this.radioButton2.Location = new System.Drawing.Point(313, 191);
-			this.radioButton2.Name = "radioButton2";
-			this.radioButton2.Size = new System.Drawing.Size(266, 17);
-			this.radioButton2.TabIndex = 13;
-			this.radioButton2.Text = "If an issue has multiple labels, only consider the first";
-			this.radioButton2.UseVisualStyleBackColor = true;
+			this.rdoOnlyConsiderFirst.AutoSize = true;
+			this.rdoOnlyConsiderFirst.Location = new System.Drawing.Point(313, 191);
+			this.rdoOnlyConsiderFirst.Name = "rdoOnlyConsiderFirst";
+			this.rdoOnlyConsiderFirst.Size = new System.Drawing.Size(266, 17);
+			this.rdoOnlyConsiderFirst.TabIndex = 13;
+			this.rdoOnlyConsiderFirst.Text = "If an issue has multiple labels, only consider the first";
+			this.rdoOnlyConsiderFirst.UseVisualStyleBackColor = true;
 			// 
-			// radioButton1
+			// rdoDuplicateForEachLabel
 			// 
-			this.radioButton1.AutoSize = true;
-			this.radioButton1.Checked = true;
-			this.radioButton1.Location = new System.Drawing.Point(6, 191);
-			this.radioButton1.Name = "radioButton1";
-			this.radioButton1.Size = new System.Drawing.Size(285, 17);
-			this.radioButton1.TabIndex = 12;
-			this.radioButton1.TabStop = true;
-			this.radioButton1.Text = "If an issue has multiple labels, duplicate it for each label";
-			this.radioButton1.UseVisualStyleBackColor = true;
+			this.rdoDuplicateForEachLabel.AutoSize = true;
+			this.rdoDuplicateForEachLabel.Checked = true;
+			this.rdoDuplicateForEachLabel.Location = new System.Drawing.Point(6, 191);
+			this.rdoDuplicateForEachLabel.Name = "rdoDuplicateForEachLabel";
+			this.rdoDuplicateForEachLabel.Size = new System.Drawing.Size(285, 17);
+			this.rdoDuplicateForEachLabel.TabIndex = 12;
+			this.rdoDuplicateForEachLabel.TabStop = true;
+			this.rdoDuplicateForEachLabel.Text = "If an issue has multiple labels, duplicate it for each label";
+			this.rdoDuplicateForEachLabel.UseVisualStyleBackColor = true;
 			// 
-			// button3
+			// btnRemoveLabelOverride
 			// 
-			this.button3.Location = new System.Drawing.Point(516, 26);
-			this.button3.Name = "button3";
-			this.button3.Size = new System.Drawing.Size(61, 23);
-			this.button3.TabIndex = 10;
-			this.button3.Text = "Remove";
-			this.button3.UseVisualStyleBackColor = true;
+			this.btnRemoveLabelOverride.Location = new System.Drawing.Point(516, 26);
+			this.btnRemoveLabelOverride.Name = "btnRemoveLabelOverride";
+			this.btnRemoveLabelOverride.Size = new System.Drawing.Size(61, 23);
+			this.btnRemoveLabelOverride.TabIndex = 10;
+			this.btnRemoveLabelOverride.Text = "Remove";
+			this.btnRemoveLabelOverride.UseVisualStyleBackColor = true;
 			// 
-			// button2
+			// btnAddLabelOverride
 			// 
-			this.button2.Location = new System.Drawing.Point(449, 26);
-			this.button2.Name = "button2";
-			this.button2.Size = new System.Drawing.Size(61, 23);
-			this.button2.TabIndex = 8;
-			this.button2.Text = "Add";
-			this.button2.UseVisualStyleBackColor = true;
+			this.btnAddLabelOverride.Location = new System.Drawing.Point(449, 26);
+			this.btnAddLabelOverride.Name = "btnAddLabelOverride";
+			this.btnAddLabelOverride.Size = new System.Drawing.Size(61, 23);
+			this.btnAddLabelOverride.TabIndex = 8;
+			this.btnAddLabelOverride.Text = "Add";
+			this.btnAddLabelOverride.UseVisualStyleBackColor = true;
 			// 
-			// listView1
+			// lstViewLabelOverride
 			// 
-			this.listView1.Columns.AddRange(new System.Windows.Forms.ColumnHeader[] {
+			this.lstViewLabelOverride.Columns.AddRange(new System.Windows.Forms.ColumnHeader[] {
             this.columnHeader1,
             this.columnHeader2,
             this.columnHeader3});
-			this.listView1.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-			this.listView1.FullRowSelect = true;
-			this.listView1.GridLines = true;
+			this.lstViewLabelOverride.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+			this.lstViewLabelOverride.FullRowSelect = true;
+			this.lstViewLabelOverride.GridLines = true;
 			listViewItem2.Tag = "";
-			this.listView1.Items.AddRange(new System.Windows.Forms.ListViewItem[] {
+			this.lstViewLabelOverride.Items.AddRange(new System.Windows.Forms.ListViewItem[] {
             listViewItem1,
             listViewItem2});
-			this.listView1.Location = new System.Drawing.Point(6, 53);
-			this.listView1.Name = "listView1";
-			this.listView1.Size = new System.Drawing.Size(571, 123);
-			this.listView1.TabIndex = 9;
-			this.listView1.UseCompatibleStateImageBehavior = false;
-			this.listView1.View = System.Windows.Forms.View.Details;
+			this.lstViewLabelOverride.Location = new System.Drawing.Point(6, 53);
+			this.lstViewLabelOverride.Name = "lstViewLabelOverride";
+			this.lstViewLabelOverride.Size = new System.Drawing.Size(571, 123);
+			this.lstViewLabelOverride.TabIndex = 9;
+			this.lstViewLabelOverride.UseCompatibleStateImageBehavior = false;
+			this.lstViewLabelOverride.View = System.Windows.Forms.View.Details;
 			// 
 			// columnHeader1
 			// 
@@ -296,57 +312,41 @@
 			this.columnHeader3.Text = "Rename to text";
 			this.columnHeader3.Width = 120;
 			// 
-			// progressBar1
+			// progressBar
 			// 
-			this.progressBar1.Location = new System.Drawing.Point(12, 413);
-			this.progressBar1.Name = "progressBar1";
-			this.progressBar1.Size = new System.Drawing.Size(583, 23);
-			this.progressBar1.TabIndex = 9;
+			this.progressBar.Location = new System.Drawing.Point(12, 413);
+			this.progressBar.Name = "progressBar";
+			this.progressBar.Size = new System.Drawing.Size(583, 23);
+			this.progressBar.TabIndex = 9;
 			// 
-			// button4
+			// btnStart
 			// 
-			this.button4.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-			this.button4.Location = new System.Drawing.Point(12, 442);
-			this.button4.Name = "button4";
-			this.button4.Size = new System.Drawing.Size(83, 30);
-			this.button4.TabIndex = 14;
-			this.button4.Text = "Start";
-			this.button4.UseVisualStyleBackColor = true;
+			this.btnStart.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+			this.btnStart.Location = new System.Drawing.Point(12, 442);
+			this.btnStart.Name = "btnStart";
+			this.btnStart.Size = new System.Drawing.Size(83, 30);
+			this.btnStart.TabIndex = 14;
+			this.btnStart.Text = "Start";
+			this.btnStart.UseVisualStyleBackColor = true;
 			// 
-			// button5
+			// btnCancel
 			// 
-			this.button5.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-			this.button5.Location = new System.Drawing.Point(101, 442);
-			this.button5.Name = "button5";
-			this.button5.Size = new System.Drawing.Size(83, 30);
-			this.button5.TabIndex = 15;
-			this.button5.Text = "Cancel";
-			this.button5.UseVisualStyleBackColor = true;
-			// 
-			// label4
-			// 
-			this.label4.AutoSize = true;
-			this.label4.Location = new System.Drawing.Point(310, 24);
-			this.label4.Name = "label4";
-			this.label4.Size = new System.Drawing.Size(72, 13);
-			this.label4.TabIndex = 14;
-			this.label4.Text = "Project name:";
-			// 
-			// textBox3
-			// 
-			this.textBox3.Location = new System.Drawing.Point(388, 21);
-			this.textBox3.Name = "textBox3";
-			this.textBox3.Size = new System.Drawing.Size(189, 20);
-			this.textBox3.TabIndex = 15;
+			this.btnCancel.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+			this.btnCancel.Location = new System.Drawing.Point(101, 442);
+			this.btnCancel.Name = "btnCancel";
+			this.btnCancel.Size = new System.Drawing.Size(83, 30);
+			this.btnCancel.TabIndex = 15;
+			this.btnCancel.Text = "Cancel";
+			this.btnCancel.UseVisualStyleBackColor = true;
 			// 
 			// Form1
 			// 
 			this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
 			this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
 			this.ClientSize = new System.Drawing.Size(610, 480);
-			this.Controls.Add(this.button5);
-			this.Controls.Add(this.button4);
-			this.Controls.Add(this.progressBar1);
+			this.Controls.Add(this.btnCancel);
+			this.Controls.Add(this.btnStart);
+			this.Controls.Add(this.progressBar);
 			this.Controls.Add(this.groupBox2);
 			this.Controls.Add(this.groupBox1);
 			this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedDialog;
@@ -364,32 +364,32 @@
 
 		#endregion
 
-		private System.Windows.Forms.TextBox textBox1;
+		private System.Windows.Forms.TextBox tbxProjectOwner;
 		private System.Windows.Forms.Label label1;
 		private System.Windows.Forms.Label label2;
-		private System.Windows.Forms.TextBox textBox2;
-		private System.Windows.Forms.Button button1;
+		private System.Windows.Forms.TextBox tbxFolderPath;
+		private System.Windows.Forms.Button btnBrowseFolder;
 		private System.Windows.Forms.GroupBox groupBox1;
-		private System.Windows.Forms.CheckBox checkBox2;
-		private System.Windows.Forms.CheckBox checkBox1;
+		private System.Windows.Forms.CheckBox cbxGroupCommentsByIssues;
+		private System.Windows.Forms.CheckBox cbxFetchComments;
 		private System.Windows.Forms.GroupBox groupBox2;
 		private System.Windows.Forms.Label label3;
-		private System.Windows.Forms.RadioButton radioButton2;
-		private System.Windows.Forms.RadioButton radioButton1;
-		private System.Windows.Forms.Button button3;
-		private System.Windows.Forms.Button button2;
-		private System.Windows.Forms.ListView listView1;
+		private System.Windows.Forms.RadioButton rdoOnlyConsiderFirst;
+		private System.Windows.Forms.RadioButton rdoDuplicateForEachLabel;
+		private System.Windows.Forms.Button btnRemoveLabelOverride;
+		private System.Windows.Forms.Button btnAddLabelOverride;
+		private System.Windows.Forms.ListView lstViewLabelOverride;
 		private System.Windows.Forms.ColumnHeader columnHeader1;
 		private System.Windows.Forms.ColumnHeader columnHeader2;
 		private System.Windows.Forms.ColumnHeader columnHeader3;
-		private System.Windows.Forms.ProgressBar progressBar1;
-		private System.Windows.Forms.Button button4;
-		private System.Windows.Forms.Button button5;
-		private System.Windows.Forms.CheckBox checkBox6;
-		private System.Windows.Forms.CheckBox checkBox5;
-		private System.Windows.Forms.CheckBox checkBox4;
-		private System.Windows.Forms.CheckBox checkBox3;
-		private System.Windows.Forms.TextBox textBox3;
+		private System.Windows.Forms.ProgressBar progressBar;
+		private System.Windows.Forms.Button btnStart;
+		private System.Windows.Forms.Button btnCancel;
+		private System.Windows.Forms.CheckBox cbxFetchPullRequests;
+		private System.Windows.Forms.CheckBox cbxFetchClosedIssues;
+		private System.Windows.Forms.CheckBox cbxFetchOpenIssues;
+		private System.Windows.Forms.CheckBox cbxGroupByLabel;
+		private System.Windows.Forms.TextBox tbxProjectName;
 		private System.Windows.Forms.Label label4;
 	}
 }
