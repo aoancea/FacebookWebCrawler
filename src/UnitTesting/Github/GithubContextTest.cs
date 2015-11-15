@@ -4,7 +4,7 @@ using Microsoft.VisualStudio.TestTools.UnitTesting;
 namespace Crawler.UnitTesting.Github
 {
 	[TestClass]
-	public class CrawlerContextTest
+	public class GithubContextTest
 	{
 		[TestMethod]
 		public void GithubContext_NewInstance_Success()
