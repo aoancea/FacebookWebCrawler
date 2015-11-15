@@ -1,7 +1,7 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 2013
-VisualStudioVersion = 12.0.31101.0
+VisualStudioVersion = 12.0.40629.0
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{900AB5D5-69DB-471B-B175-011C2947AB9E}"
 	ProjectSection(SolutionItems) = preProject
@@ -33,6 +33,8 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "UnitTesting", "UnitTesting"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Crawler.UnitTesting", "UnitTesting\Crawler.UnitTesting.csproj", "{2676616C-1E4B-4692-A59C-C9C573366EAC}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Crawler.Github.UI", "Github\UI\Crawler.Github.UI.csproj", "{FD98BA3B-E8D0-46D9-814A-85567FE3D671}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -59,6 +61,10 @@ Global
 		{2676616C-1E4B-4692-A59C-C9C573366EAC}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{2676616C-1E4B-4692-A59C-C9C573366EAC}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{2676616C-1E4B-4692-A59C-C9C573366EAC}.Release|Any CPU.Build.0 = Release|Any CPU
+		{FD98BA3B-E8D0-46D9-814A-85567FE3D671}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{FD98BA3B-E8D0-46D9-814A-85567FE3D671}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{FD98BA3B-E8D0-46D9-814A-85567FE3D671}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{FD98BA3B-E8D0-46D9-814A-85567FE3D671}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -69,5 +75,6 @@ Global
 		{AFFBA0F2-BBEA-49AA-B4AD-7D21B0B0C665} = {8B77D7B9-E30A-4FC7-89B5-DABF2CCB44CA}
 		{BBA2C094-2685-42BF-99E8-D895C11E0E5B} = {0A62BD84-2273-44DA-92A5-08E8B88D6163}
 		{2676616C-1E4B-4692-A59C-C9C573366EAC} = {91F0D5F4-E88F-499C-8BAB-6BC2E510749B}
+		{FD98BA3B-E8D0-46D9-814A-85567FE3D671} = {0A62BD84-2273-44DA-92A5-08E8B88D6163}
 	EndGlobalSection
 EndGlobal
