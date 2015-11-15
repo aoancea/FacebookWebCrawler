@@ -16,12 +16,12 @@ namespace Crawler.Github.Api
 			this.crawlerContext = crawlerContext;
 		}
 
-		public async Task<IEnumerable<Comment>> GetAsync(Issue issue)
+		public async Task<List<Comment>> GetAsync(Issue issue)
 		{
 			if (issue.Comments > 0)
-				return await crawlerContext.RequestAsync<IEnumerable<Comment>>(issue.Comments_Url);
+				return await crawlerContext.RequestAsync<List<Comment>>(issue.Comments_Url);
 
-			return await Task.FromResult<IEnumerable<Comment>>(Enumerable.Empty<Comment>());
+			return await Task.FromResult<List<Comment>>(new List<Comment>(0));
 		}
 	}
 }

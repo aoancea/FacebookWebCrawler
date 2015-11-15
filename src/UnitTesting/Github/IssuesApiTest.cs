@@ -21,7 +21,7 @@ namespace Crawler.UnitTesting.Github
 		}
 
 		[TestMethod]
-		public void TestMethod1()
+		public void IssuesApi_GetAsync_Success()
 		{
 			List<Issue> expectedIssues = new List<Issue>()
 			{
@@ -120,14 +120,14 @@ namespace Crawler.UnitTesting.Github
 				},
 			};
 
-			List<Issue> issues = issuesApi.GetAsync("aoancea", "github-api-tests").Result.ToList();
+			List<Issue> issues = issuesApi.GetAsync("aoancea", "github-api-tests").Result;
 
 			Assert.AreEqual(2, issues.Count);
 			AssertAreEqual(expectedIssues[0], issues[0]);
 			AssertAreEqual(expectedIssues[1], issues[1]);
 		}
 
-		public void AssertAreEqual(Issue expected, Issue actual)
+		private void AssertAreEqual(Issue expected, Issue actual)
 		{
 			Assert.AreEqual(expected.Url, actual.Url);
 			Assert.AreEqual(expected.Labels_Url, actual.Labels_Url);
@@ -150,7 +150,7 @@ namespace Crawler.UnitTesting.Github
 			Assert.AreEqual(expected.Body, actual.Body);
 		}
 
-		public void AssertAreEqual(User expected, User actual)
+		private void AssertAreEqual(User expected, User actual)
 		{
 			if (expected != null || actual != null)
 			{
@@ -173,7 +173,7 @@ namespace Crawler.UnitTesting.Github
 			}
 		}
 
-		public void AssertAreEqual(Milestone expected, Milestone actual)
+		private void AssertAreEqual(Milestone expected, Milestone actual)
 		{
 			if (expected != null || actual != null)
 			{
@@ -186,7 +186,7 @@ namespace Crawler.UnitTesting.Github
 			}
 		}
 
-		public void AssertAreEqual(List<Label> expected, List<Label> actual)
+		private void AssertAreEqual(List<Label> expected, List<Label> actual)
 		{
 			Assert.AreEqual(expected.Count, actual.Count);
 			for (int i = 0; i < expected.Count; ++i)
@@ -195,7 +195,7 @@ namespace Crawler.UnitTesting.Github
 			}
 		}
 
-		public void AssertAreEqual(Label expected, Label actual)
+		private void AssertAreEqual(Label expected, Label actual)
 		{
 			if (expected != null || actual != null)
 			{
