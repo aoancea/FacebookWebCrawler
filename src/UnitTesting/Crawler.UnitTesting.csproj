@@ -50,6 +50,7 @@
     </Otherwise>
   </Choose>
   <ItemGroup>
+    <Compile Include="Core\Common\Extensions\DictionaryExtensionsTest.cs" />
     <Compile Include="Github\GithubContextTest.cs" />
     <Compile Include="Github\IssuesApiTest.cs" />
     <Compile Include="Github\CommentsApiTest.cs" />

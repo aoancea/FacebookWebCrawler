@@ -50,6 +50,7 @@
   <ItemGroup>
     <Compile Include="Crawler.cs" />
     <Compile Include="CrawlerQueryResult.cs" />
+    <Compile Include="Extensions\DictionaryExtentions.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>

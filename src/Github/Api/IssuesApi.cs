@@ -1,26 +1,25 @@
-﻿using Crawler.Github.Api.Entities;
+﻿using Crawler.Core.Common.Extensions;
+using Crawler.Github.Api.Entities;
 using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
 using System.Threading.Tasks;
 
 namespace Crawler.Github.Api
 {
 	public class IssuesApi
 	{
-		private readonly GithubContext context;
+		private readonly GithubContext githubContext;
 
-		public IssuesApi(GithubContext context)
+		public IssuesApi(GithubContext githubContext)
 		{
-			this.context = context;
+			this.githubContext = githubContext;
 		}
 
-		public async Task<List<Issue>> GetAsync(string owner, string repo)
+		public async Task<List<Issue>> GetAsync(string owner, string repo, Dictionary<string, string> queryString = null)
 		{
-			Uri uri = new Uri(string.Format("https://api.github.com/repos/{0}/{1}/issues", owner, repo));
+			Uri uri = new Uri(string.Format("https://api.github.com/repos/{0}/{1}/issues{2}", owner, repo, queryString.ToQueryString()));
 
-			return await context.RequestAsync<List<Issue>>(uri);
+			return await githubContext.RequestAsync<List<Issue>>(uri);
 		}
 	}
 }
