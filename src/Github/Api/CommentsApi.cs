@@ -9,17 +9,17 @@ namespace Crawler.Github.Api
 {
 	public class CommentsApi
 	{
-		private readonly GithubContext crawlerContext;
+		private readonly GithubContext githubContext;
 
-		public CommentsApi(GithubContext crawlerContext)
+		public CommentsApi(GithubContext githubContext)
 		{
-			this.crawlerContext = crawlerContext;
+			this.githubContext = githubContext;
 		}
 
 		public async Task<List<Comment>> GetAsync(Issue issue)
 		{
 			if (issue.Comments > 0)
-				return await crawlerContext.RequestAsync<List<Comment>>(issue.Comments_Url);
+				return await githubContext.RequestAsync<List<Comment>>(issue.Comments_Url);
 
 			return await Task.FromResult<List<Comment>>(new List<Comment>(0));
 		}
