@@ -25,10 +25,10 @@ namespace Crawler.Github.Api.Entities
 		public User User { get; set; }
 
 		[DataMember(Name = "created_at")]
-		public DateTime CreatedAt { get; set; }
+		public DateTime Created_At { get; set; }
 
 		[DataMember(Name = "updated_at")]
-		public DateTime? UpdatedAt { get; set; }
+		public DateTime? Updated_At { get; set; }
 
 		[DataMember(Name = "body")]
 		public string Body { get; set; }
