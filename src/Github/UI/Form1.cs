@@ -5,6 +5,7 @@ using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
 using System.Drawing;
+using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -21,15 +22,37 @@ namespace Crawler.Github.UI
 
 		private async void btnStart_Click(object sender, EventArgs e)
 		{
-			GithubContext crawlerContext = new GithubContext();
+			string virtualFolderName = DateTime.Now.ToString("yyyy-MM-dd-HH-mm-ss");
 
-			GithubApi githubApi = new GithubApi(crawlerContext);
+			string commentsFolderPath = Path.Combine(tbxFolderPath.Text, virtualFolderName, "comments");
 
-			List<Issue> issues = await githubApi.IssuesApi.GetAsync(tbxRepoOwner.Text, tbxRepoName.Text);
+			if (!System.IO.Directory.Exists(commentsFolderPath))
+				System.IO.Directory.CreateDirectory(commentsFolderPath);
 
-			foreach (Issue issue in issues)
+			int fetchedPage = 0;
+
+			GithubContext githubContext = new GithubContext();
+
+			GithubApi githubApi = new GithubApi(githubContext);
+
+			List<Issue> issues = await githubApi.IssuesApi.GetAsync(tbxRepoOwner.Text, tbxRepoName.Text, new Dictionary<string, string>() { { "page", (++fetchedPage).ToString() } });
+
+			while (issues.Count > 0)
 			{
-				List<Comment> comments = await githubApi.CommentsApi.GetAsync(issue);
+				foreach (Issue issue in issues.Where(issue => issue.Comments > 0))
+				{
+					List<Comment> comments = await githubApi.CommentsApi.GetAsync(issue);
+
+					foreach (Comment comment in comments)
+					{
+						using (StreamWriter writer = new StreamWriter(Path.Combine(commentsFolderPath, comment.Id + ".txt")))
+						{
+							writer.WriteLine(comment.Body);
+						}
+					}
+				}
+
+				issues = await githubApi.IssuesApi.GetAsync(tbxRepoOwner.Text, tbxRepoName.Text, new Dictionary<string, string>() { { "page", (++fetchedPage).ToString() } });
 			}
 		}
 	}
