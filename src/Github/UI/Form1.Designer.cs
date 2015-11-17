@@ -42,13 +42,14 @@
 			this.tbxFolderPath = new System.Windows.Forms.TextBox();
 			this.btnBrowseFolder = new System.Windows.Forms.Button();
 			this.groupBox1 = new System.Windows.Forms.GroupBox();
+			this.tbxAccessToken = new System.Windows.Forms.TextBox();
+			this.label5 = new System.Windows.Forms.Label();
 			this.tbxRepoName = new System.Windows.Forms.TextBox();
 			this.label4 = new System.Windows.Forms.Label();
 			this.cbxFetchPullRequests = new System.Windows.Forms.CheckBox();
 			this.cbxFetchClosedIssues = new System.Windows.Forms.CheckBox();
 			this.cbxFetchOpenIssues = new System.Windows.Forms.CheckBox();
-			this.cbxGroupByLabel = new System.Windows.Forms.CheckBox();
-			this.cbxGroupCommentsByIssues = new System.Windows.Forms.CheckBox();
+			this.cbxConcatCommentsToIssueText = new System.Windows.Forms.CheckBox();
 			this.cbxFetchComments = new System.Windows.Forms.CheckBox();
 			this.groupBox2 = new System.Windows.Forms.GroupBox();
 			this.label3 = new System.Windows.Forms.Label();
@@ -63,8 +64,6 @@
 			this.progressBar = new System.Windows.Forms.ProgressBar();
 			this.btnStart = new System.Windows.Forms.Button();
 			this.btnCancel = new System.Windows.Forms.Button();
-			this.label5 = new System.Windows.Forms.Label();
-			this.tbxAccessToken = new System.Windows.Forms.TextBox();
 			this.groupBox1.SuspendLayout();
 			this.groupBox2.SuspendLayout();
 			this.SuspendLayout();
@@ -120,8 +119,7 @@
 			this.groupBox1.Controls.Add(this.cbxFetchPullRequests);
 			this.groupBox1.Controls.Add(this.cbxFetchClosedIssues);
 			this.groupBox1.Controls.Add(this.cbxFetchOpenIssues);
-			this.groupBox1.Controls.Add(this.cbxGroupByLabel);
-			this.groupBox1.Controls.Add(this.cbxGroupCommentsByIssues);
+			this.groupBox1.Controls.Add(this.cbxConcatCommentsToIssueText);
 			this.groupBox1.Controls.Add(this.cbxFetchComments);
 			this.groupBox1.Controls.Add(this.btnBrowseFolder);
 			this.groupBox1.Controls.Add(this.tbxRepoOwner);
@@ -130,10 +128,26 @@
 			this.groupBox1.Controls.Add(this.label2);
 			this.groupBox1.Location = new System.Drawing.Point(12, 12);
 			this.groupBox1.Name = "groupBox1";
-			this.groupBox1.Size = new System.Drawing.Size(583, 187);
+			this.groupBox1.Size = new System.Drawing.Size(583, 148);
 			this.groupBox1.TabIndex = 5;
 			this.groupBox1.TabStop = false;
 			this.groupBox1.Text = "Main options";
+			// 
+			// tbxAccessToken
+			// 
+			this.tbxAccessToken.Location = new System.Drawing.Point(82, 19);
+			this.tbxAccessToken.Name = "tbxAccessToken";
+			this.tbxAccessToken.Size = new System.Drawing.Size(495, 20);
+			this.tbxAccessToken.TabIndex = 17;
+			// 
+			// label5
+			// 
+			this.label5.AutoSize = true;
+			this.label5.Location = new System.Drawing.Point(8, 22);
+			this.label5.Name = "label5";
+			this.label5.Size = new System.Drawing.Size(75, 13);
+			this.label5.TabIndex = 16;
+			this.label5.Text = "Access token:";
 			// 
 			// tbxRepoName
 			// 
@@ -155,7 +169,7 @@
 			// cbxFetchPullRequests
 			// 
 			this.cbxFetchPullRequests.AutoSize = true;
-			this.cbxFetchPullRequests.Location = new System.Drawing.Point(254, 162);
+			this.cbxFetchPullRequests.Location = new System.Drawing.Point(254, 126);
 			this.cbxFetchPullRequests.Name = "cbxFetchPullRequests";
 			this.cbxFetchPullRequests.Size = new System.Drawing.Size(115, 17);
 			this.cbxFetchPullRequests.TabIndex = 12;
@@ -167,7 +181,7 @@
 			this.cbxFetchClosedIssues.AutoSize = true;
 			this.cbxFetchClosedIssues.Checked = true;
 			this.cbxFetchClosedIssues.CheckState = System.Windows.Forms.CheckState.Checked;
-			this.cbxFetchClosedIssues.Location = new System.Drawing.Point(129, 162);
+			this.cbxFetchClosedIssues.Location = new System.Drawing.Point(129, 126);
 			this.cbxFetchClosedIssues.Name = "cbxFetchClosedIssues";
 			this.cbxFetchClosedIssues.Size = new System.Drawing.Size(119, 17);
 			this.cbxFetchClosedIssues.TabIndex = 11;
@@ -179,33 +193,22 @@
 			this.cbxFetchOpenIssues.AutoSize = true;
 			this.cbxFetchOpenIssues.Checked = true;
 			this.cbxFetchOpenIssues.CheckState = System.Windows.Forms.CheckState.Checked;
-			this.cbxFetchOpenIssues.Location = new System.Drawing.Point(11, 162);
+			this.cbxFetchOpenIssues.Location = new System.Drawing.Point(11, 126);
 			this.cbxFetchOpenIssues.Name = "cbxFetchOpenIssues";
 			this.cbxFetchOpenIssues.Size = new System.Drawing.Size(112, 17);
 			this.cbxFetchOpenIssues.TabIndex = 10;
 			this.cbxFetchOpenIssues.Text = "Fetch open issues";
 			this.cbxFetchOpenIssues.UseVisualStyleBackColor = true;
 			// 
-			// cbxGroupByLabel
+			// cbxConcatCommentsToIssueText
 			// 
-			this.cbxGroupByLabel.AutoSize = true;
-			this.cbxGroupByLabel.Location = new System.Drawing.Point(129, 103);
-			this.cbxGroupByLabel.Name = "cbxGroupByLabel";
-			this.cbxGroupByLabel.Size = new System.Drawing.Size(94, 17);
-			this.cbxGroupByLabel.TabIndex = 9;
-			this.cbxGroupByLabel.Text = "Group by label";
-			this.cbxGroupByLabel.UseVisualStyleBackColor = true;
-			// 
-			// cbxGroupCommentsByIssues
-			// 
-			this.cbxGroupCommentsByIssues.AutoSize = true;
-			this.cbxGroupCommentsByIssues.Location = new System.Drawing.Point(11, 126);
-			this.cbxGroupCommentsByIssues.Name = "cbxGroupCommentsByIssues";
-			this.cbxGroupCommentsByIssues.Size = new System.Drawing.Size(432, 17);
-			this.cbxGroupCommentsByIssues.TabIndex = 7;
-			this.cbxGroupCommentsByIssues.Text = "Group comments by issue (otherwise, they will appear in the same file as the issu" +
-    "e text)";
-			this.cbxGroupCommentsByIssues.UseVisualStyleBackColor = true;
+			this.cbxConcatCommentsToIssueText.AutoSize = true;
+			this.cbxConcatCommentsToIssueText.Location = new System.Drawing.Point(121, 103);
+			this.cbxConcatCommentsToIssueText.Name = "cbxConcatCommentsToIssueText";
+			this.cbxConcatCommentsToIssueText.Size = new System.Drawing.Size(197, 17);
+			this.cbxConcatCommentsToIssueText.TabIndex = 7;
+			this.cbxConcatCommentsToIssueText.Text = "Concatenate comments to issue text";
+			this.cbxConcatCommentsToIssueText.UseVisualStyleBackColor = true;
 			// 
 			// cbxFetchComments
 			// 
@@ -227,7 +230,7 @@
 			this.groupBox2.Controls.Add(this.btnRemoveLabelOverride);
 			this.groupBox2.Controls.Add(this.btnAddLabelOverride);
 			this.groupBox2.Controls.Add(this.lstViewLabelOverride);
-			this.groupBox2.Location = new System.Drawing.Point(12, 208);
+			this.groupBox2.Location = new System.Drawing.Point(12, 168);
 			this.groupBox2.Name = "groupBox2";
 			this.groupBox2.Size = new System.Drawing.Size(583, 214);
 			this.groupBox2.TabIndex = 8;
@@ -320,7 +323,7 @@
 			// 
 			// progressBar
 			// 
-			this.progressBar.Location = new System.Drawing.Point(12, 428);
+			this.progressBar.Location = new System.Drawing.Point(12, 388);
 			this.progressBar.Name = "progressBar";
 			this.progressBar.Size = new System.Drawing.Size(583, 23);
 			this.progressBar.TabIndex = 9;
@@ -328,7 +331,7 @@
 			// btnStart
 			// 
 			this.btnStart.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-			this.btnStart.Location = new System.Drawing.Point(12, 457);
+			this.btnStart.Location = new System.Drawing.Point(12, 417);
 			this.btnStart.Name = "btnStart";
 			this.btnStart.Size = new System.Drawing.Size(83, 30);
 			this.btnStart.TabIndex = 14;
@@ -339,34 +342,18 @@
 			// btnCancel
 			// 
 			this.btnCancel.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-			this.btnCancel.Location = new System.Drawing.Point(101, 457);
+			this.btnCancel.Location = new System.Drawing.Point(101, 417);
 			this.btnCancel.Name = "btnCancel";
 			this.btnCancel.Size = new System.Drawing.Size(83, 30);
 			this.btnCancel.TabIndex = 15;
 			this.btnCancel.Text = "Cancel";
 			this.btnCancel.UseVisualStyleBackColor = true;
 			// 
-			// label5
-			// 
-			this.label5.AutoSize = true;
-			this.label5.Location = new System.Drawing.Point(8, 22);
-			this.label5.Name = "label5";
-			this.label5.Size = new System.Drawing.Size(75, 13);
-			this.label5.TabIndex = 16;
-			this.label5.Text = "Access token:";
-			// 
-			// tbxAccessToken
-			// 
-			this.tbxAccessToken.Location = new System.Drawing.Point(82, 19);
-			this.tbxAccessToken.Name = "tbxAccessToken";
-			this.tbxAccessToken.Size = new System.Drawing.Size(495, 20);
-			this.tbxAccessToken.TabIndex = 17;
-			// 
 			// Form1
 			// 
 			this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
 			this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-			this.ClientSize = new System.Drawing.Size(610, 491);
+			this.ClientSize = new System.Drawing.Size(610, 452);
 			this.Controls.Add(this.btnCancel);
 			this.Controls.Add(this.btnStart);
 			this.Controls.Add(this.progressBar);
@@ -393,7 +380,7 @@
 		private System.Windows.Forms.TextBox tbxFolderPath;
 		private System.Windows.Forms.Button btnBrowseFolder;
 		private System.Windows.Forms.GroupBox groupBox1;
-		private System.Windows.Forms.CheckBox cbxGroupCommentsByIssues;
+		private System.Windows.Forms.CheckBox cbxConcatCommentsToIssueText;
 		private System.Windows.Forms.CheckBox cbxFetchComments;
 		private System.Windows.Forms.GroupBox groupBox2;
 		private System.Windows.Forms.Label label3;
@@ -411,7 +398,6 @@
 		private System.Windows.Forms.CheckBox cbxFetchPullRequests;
 		private System.Windows.Forms.CheckBox cbxFetchClosedIssues;
 		private System.Windows.Forms.CheckBox cbxFetchOpenIssues;
-		private System.Windows.Forms.CheckBox cbxGroupByLabel;
 		private System.Windows.Forms.TextBox tbxRepoName;
 		private System.Windows.Forms.Label label4;
 		private System.Windows.Forms.TextBox tbxAccessToken;
