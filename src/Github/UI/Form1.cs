@@ -26,7 +26,7 @@ namespace Crawler.Github.UI
 
 			int fetchedPage = 0;
 
-			GithubContext githubContext = new GithubContext();
+			GithubContext githubContext = new GithubContext(tbxAccessToken.Text);
 
 			GithubApi githubApi = new GithubApi(githubContext);
 
@@ -56,7 +56,7 @@ namespace Crawler.Github.UI
 			string selectedCommentsPath;
 
 			if (string.IsNullOrEmpty(tbxFolderPath.Text))
-				selectedCommentsPath = System.AppDomain.CurrentDomain.BaseDirectory;
+				selectedCommentsPath = Path.Combine(System.AppDomain.CurrentDomain.BaseDirectory, "Data");
 			else
 				selectedCommentsPath = tbxFolderPath.Text;
 

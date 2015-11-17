@@ -63,13 +63,15 @@
 			this.progressBar = new System.Windows.Forms.ProgressBar();
 			this.btnStart = new System.Windows.Forms.Button();
 			this.btnCancel = new System.Windows.Forms.Button();
+			this.label5 = new System.Windows.Forms.Label();
+			this.tbxAccessToken = new System.Windows.Forms.TextBox();
 			this.groupBox1.SuspendLayout();
 			this.groupBox2.SuspendLayout();
 			this.SuspendLayout();
 			// 
 			// tbxRepoOwner
 			// 
-			this.tbxRepoOwner.Location = new System.Drawing.Point(82, 21);
+			this.tbxRepoOwner.Location = new System.Drawing.Point(82, 46);
 			this.tbxRepoOwner.Name = "tbxRepoOwner";
 			this.tbxRepoOwner.Size = new System.Drawing.Size(189, 20);
 			this.tbxRepoOwner.TabIndex = 0;
@@ -78,7 +80,7 @@
 			// label1
 			// 
 			this.label1.AutoSize = true;
-			this.label1.Location = new System.Drawing.Point(8, 24);
+			this.label1.Location = new System.Drawing.Point(6, 49);
 			this.label1.Name = "label1";
 			this.label1.Size = new System.Drawing.Size(68, 13);
 			this.label1.TabIndex = 1;
@@ -87,7 +89,7 @@
 			// label2
 			// 
 			this.label2.AutoSize = true;
-			this.label2.Location = new System.Drawing.Point(8, 55);
+			this.label2.Location = new System.Drawing.Point(8, 80);
 			this.label2.Name = "label2";
 			this.label2.Size = new System.Drawing.Size(75, 13);
 			this.label2.TabIndex = 2;
@@ -95,14 +97,14 @@
 			// 
 			// tbxFolderPath
 			// 
-			this.tbxFolderPath.Location = new System.Drawing.Point(82, 52);
+			this.tbxFolderPath.Location = new System.Drawing.Point(82, 77);
 			this.tbxFolderPath.Name = "tbxFolderPath";
 			this.tbxFolderPath.Size = new System.Drawing.Size(428, 20);
 			this.tbxFolderPath.TabIndex = 3;
 			// 
 			// btnBrowseFolder
 			// 
-			this.btnBrowseFolder.Location = new System.Drawing.Point(516, 50);
+			this.btnBrowseFolder.Location = new System.Drawing.Point(516, 75);
 			this.btnBrowseFolder.Name = "btnBrowseFolder";
 			this.btnBrowseFolder.Size = new System.Drawing.Size(61, 23);
 			this.btnBrowseFolder.TabIndex = 4;
@@ -111,6 +113,8 @@
 			// 
 			// groupBox1
 			// 
+			this.groupBox1.Controls.Add(this.tbxAccessToken);
+			this.groupBox1.Controls.Add(this.label5);
 			this.groupBox1.Controls.Add(this.tbxRepoName);
 			this.groupBox1.Controls.Add(this.label4);
 			this.groupBox1.Controls.Add(this.cbxFetchPullRequests);
@@ -126,14 +130,14 @@
 			this.groupBox1.Controls.Add(this.label2);
 			this.groupBox1.Location = new System.Drawing.Point(12, 12);
 			this.groupBox1.Name = "groupBox1";
-			this.groupBox1.Size = new System.Drawing.Size(583, 160);
+			this.groupBox1.Size = new System.Drawing.Size(583, 187);
 			this.groupBox1.TabIndex = 5;
 			this.groupBox1.TabStop = false;
 			this.groupBox1.Text = "Main options";
 			// 
 			// tbxRepoName
 			// 
-			this.tbxRepoName.Location = new System.Drawing.Point(388, 21);
+			this.tbxRepoName.Location = new System.Drawing.Point(388, 46);
 			this.tbxRepoName.Name = "tbxRepoName";
 			this.tbxRepoName.Size = new System.Drawing.Size(189, 20);
 			this.tbxRepoName.TabIndex = 15;
@@ -142,7 +146,7 @@
 			// label4
 			// 
 			this.label4.AutoSize = true;
-			this.label4.Location = new System.Drawing.Point(310, 24);
+			this.label4.Location = new System.Drawing.Point(310, 49);
 			this.label4.Name = "label4";
 			this.label4.Size = new System.Drawing.Size(65, 13);
 			this.label4.TabIndex = 14;
@@ -151,7 +155,7 @@
 			// cbxFetchPullRequests
 			// 
 			this.cbxFetchPullRequests.AutoSize = true;
-			this.cbxFetchPullRequests.Location = new System.Drawing.Point(254, 137);
+			this.cbxFetchPullRequests.Location = new System.Drawing.Point(254, 162);
 			this.cbxFetchPullRequests.Name = "cbxFetchPullRequests";
 			this.cbxFetchPullRequests.Size = new System.Drawing.Size(115, 17);
 			this.cbxFetchPullRequests.TabIndex = 12;
@@ -163,7 +167,7 @@
 			this.cbxFetchClosedIssues.AutoSize = true;
 			this.cbxFetchClosedIssues.Checked = true;
 			this.cbxFetchClosedIssues.CheckState = System.Windows.Forms.CheckState.Checked;
-			this.cbxFetchClosedIssues.Location = new System.Drawing.Point(129, 137);
+			this.cbxFetchClosedIssues.Location = new System.Drawing.Point(129, 162);
 			this.cbxFetchClosedIssues.Name = "cbxFetchClosedIssues";
 			this.cbxFetchClosedIssues.Size = new System.Drawing.Size(119, 17);
 			this.cbxFetchClosedIssues.TabIndex = 11;
@@ -175,7 +179,7 @@
 			this.cbxFetchOpenIssues.AutoSize = true;
 			this.cbxFetchOpenIssues.Checked = true;
 			this.cbxFetchOpenIssues.CheckState = System.Windows.Forms.CheckState.Checked;
-			this.cbxFetchOpenIssues.Location = new System.Drawing.Point(11, 137);
+			this.cbxFetchOpenIssues.Location = new System.Drawing.Point(11, 162);
 			this.cbxFetchOpenIssues.Name = "cbxFetchOpenIssues";
 			this.cbxFetchOpenIssues.Size = new System.Drawing.Size(112, 17);
 			this.cbxFetchOpenIssues.TabIndex = 10;
@@ -185,7 +189,7 @@
 			// cbxGroupByLabel
 			// 
 			this.cbxGroupByLabel.AutoSize = true;
-			this.cbxGroupByLabel.Location = new System.Drawing.Point(129, 78);
+			this.cbxGroupByLabel.Location = new System.Drawing.Point(129, 103);
 			this.cbxGroupByLabel.Name = "cbxGroupByLabel";
 			this.cbxGroupByLabel.Size = new System.Drawing.Size(94, 17);
 			this.cbxGroupByLabel.TabIndex = 9;
@@ -195,7 +199,7 @@
 			// cbxGroupCommentsByIssues
 			// 
 			this.cbxGroupCommentsByIssues.AutoSize = true;
-			this.cbxGroupCommentsByIssues.Location = new System.Drawing.Point(11, 101);
+			this.cbxGroupCommentsByIssues.Location = new System.Drawing.Point(11, 126);
 			this.cbxGroupCommentsByIssues.Name = "cbxGroupCommentsByIssues";
 			this.cbxGroupCommentsByIssues.Size = new System.Drawing.Size(432, 17);
 			this.cbxGroupCommentsByIssues.TabIndex = 7;
@@ -208,7 +212,7 @@
 			this.cbxFetchComments.AutoSize = true;
 			this.cbxFetchComments.Checked = true;
 			this.cbxFetchComments.CheckState = System.Windows.Forms.CheckState.Checked;
-			this.cbxFetchComments.Location = new System.Drawing.Point(11, 78);
+			this.cbxFetchComments.Location = new System.Drawing.Point(11, 103);
 			this.cbxFetchComments.Name = "cbxFetchComments";
 			this.cbxFetchComments.Size = new System.Drawing.Size(104, 17);
 			this.cbxFetchComments.TabIndex = 6;
@@ -223,7 +227,7 @@
 			this.groupBox2.Controls.Add(this.btnRemoveLabelOverride);
 			this.groupBox2.Controls.Add(this.btnAddLabelOverride);
 			this.groupBox2.Controls.Add(this.lstViewLabelOverride);
-			this.groupBox2.Location = new System.Drawing.Point(12, 193);
+			this.groupBox2.Location = new System.Drawing.Point(12, 208);
 			this.groupBox2.Name = "groupBox2";
 			this.groupBox2.Size = new System.Drawing.Size(583, 214);
 			this.groupBox2.TabIndex = 8;
@@ -316,7 +320,7 @@
 			// 
 			// progressBar
 			// 
-			this.progressBar.Location = new System.Drawing.Point(12, 413);
+			this.progressBar.Location = new System.Drawing.Point(12, 428);
 			this.progressBar.Name = "progressBar";
 			this.progressBar.Size = new System.Drawing.Size(583, 23);
 			this.progressBar.TabIndex = 9;
@@ -324,7 +328,7 @@
 			// btnStart
 			// 
 			this.btnStart.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-			this.btnStart.Location = new System.Drawing.Point(12, 442);
+			this.btnStart.Location = new System.Drawing.Point(12, 457);
 			this.btnStart.Name = "btnStart";
 			this.btnStart.Size = new System.Drawing.Size(83, 30);
 			this.btnStart.TabIndex = 14;
@@ -335,18 +339,34 @@
 			// btnCancel
 			// 
 			this.btnCancel.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-			this.btnCancel.Location = new System.Drawing.Point(101, 442);
+			this.btnCancel.Location = new System.Drawing.Point(101, 457);
 			this.btnCancel.Name = "btnCancel";
 			this.btnCancel.Size = new System.Drawing.Size(83, 30);
 			this.btnCancel.TabIndex = 15;
 			this.btnCancel.Text = "Cancel";
 			this.btnCancel.UseVisualStyleBackColor = true;
 			// 
+			// label5
+			// 
+			this.label5.AutoSize = true;
+			this.label5.Location = new System.Drawing.Point(8, 22);
+			this.label5.Name = "label5";
+			this.label5.Size = new System.Drawing.Size(75, 13);
+			this.label5.TabIndex = 16;
+			this.label5.Text = "Access token:";
+			// 
+			// tbxAccessToken
+			// 
+			this.tbxAccessToken.Location = new System.Drawing.Point(82, 19);
+			this.tbxAccessToken.Name = "tbxAccessToken";
+			this.tbxAccessToken.Size = new System.Drawing.Size(495, 20);
+			this.tbxAccessToken.TabIndex = 17;
+			// 
 			// Form1
 			// 
 			this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
 			this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-			this.ClientSize = new System.Drawing.Size(610, 480);
+			this.ClientSize = new System.Drawing.Size(610, 491);
 			this.Controls.Add(this.btnCancel);
 			this.Controls.Add(this.btnStart);
 			this.Controls.Add(this.progressBar);
@@ -394,6 +414,8 @@
 		private System.Windows.Forms.CheckBox cbxGroupByLabel;
 		private System.Windows.Forms.TextBox tbxRepoName;
 		private System.Windows.Forms.Label label4;
+		private System.Windows.Forms.TextBox tbxAccessToken;
+		private System.Windows.Forms.Label label5;
 	}
 }
 

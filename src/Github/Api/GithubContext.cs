@@ -10,6 +10,13 @@ namespace Crawler.Github.Api
 {
 	public class GithubContext
 	{
+		public string Access_Token { get; private set; }
+
+		public GithubContext(string access_token = null)
+		{
+			Access_Token = access_token;
+		}
+
 		public async Task<T> RequestAsync<T>(string path)
 		{
 			return await RequestAsync<T>(new Uri(path));
@@ -31,6 +38,9 @@ namespace Crawler.Github.Api
 			var request = WebRequest.CreateHttp(uri);
 			request.KeepAlive = false;
 			request.UserAgent = "Crawler.Github.Api 0.1";
+
+			if (!string.IsNullOrWhiteSpace(Access_Token))
+				request.Headers["Authorization"] = "token " + Access_Token;
 
 			return request;
 		}
