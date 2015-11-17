@@ -22,7 +22,7 @@ namespace Crawler.Github.UI
 
 		private async void btnStart_Click(object sender, EventArgs e)
 		{
-			string commentsFolderPath = CommentsFolderPath();
+			string issuesFolderPath = IssuesFolderPath();
 
 			int fetchedPage = 0;
 
@@ -40,7 +40,7 @@ namespace Crawler.Github.UI
 
 					foreach (Comment comment in comments)
 					{
-						using (StreamWriter writer = new StreamWriter(Path.Combine(commentsFolderPath, comment.Id + ".txt")))
+						using (StreamWriter writer = new StreamWriter(Path.Combine(issuesFolderPath, comment.Id + ".txt")))
 						{
 							writer.WriteLine(comment.Body);
 						}
@@ -51,23 +51,23 @@ namespace Crawler.Github.UI
 			}
 		}
 
-		private string CommentsFolderPath()
+		private string IssuesFolderPath()
 		{
-			string selectedCommentsPath;
+			string selectedIssuesPath;
 
 			if (string.IsNullOrEmpty(tbxFolderPath.Text))
-				selectedCommentsPath = Path.Combine(System.AppDomain.CurrentDomain.BaseDirectory, "Data");
+				selectedIssuesPath = Path.Combine(System.AppDomain.CurrentDomain.BaseDirectory, "Data");
 			else
-				selectedCommentsPath = tbxFolderPath.Text;
+				selectedIssuesPath = tbxFolderPath.Text;
 
 			string virtualFolderName = DateTime.Now.ToString("yyyy-MM-dd-HH-mm-ss");
 
-			string commentsFolderPath = Path.Combine(selectedCommentsPath, virtualFolderName, "comments");
+			string issuesFolderPath = Path.Combine(selectedIssuesPath, virtualFolderName, "comments");
 
-			if (!System.IO.Directory.Exists(commentsFolderPath))
-				System.IO.Directory.CreateDirectory(commentsFolderPath);
+			if (!System.IO.Directory.Exists(issuesFolderPath))
+				System.IO.Directory.CreateDirectory(issuesFolderPath);
 
-			return commentsFolderPath;
+			return issuesFolderPath;
 		}
 	}
 }
