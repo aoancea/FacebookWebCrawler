@@ -28,11 +28,11 @@
 		/// </summary>
 		private void InitializeComponent()
 		{
-			System.Windows.Forms.ListViewItem listViewItem5 = new System.Windows.Forms.ListViewItem(new string[] {
+			System.Windows.Forms.ListViewItem listViewItem1 = new System.Windows.Forms.ListViewItem(new string[] {
             "1",
             ".*defect.*",
             "bug"}, -1);
-			System.Windows.Forms.ListViewItem listViewItem6 = new System.Windows.Forms.ListViewItem(new string[] {
+			System.Windows.Forms.ListViewItem listViewItem2 = new System.Windows.Forms.ListViewItem(new string[] {
             "2",
             ".*problem.*",
             "bug"}, -1);
@@ -99,7 +99,6 @@
 			this.tbxFolderPath.Name = "tbxFolderPath";
 			this.tbxFolderPath.Size = new System.Drawing.Size(428, 20);
 			this.tbxFolderPath.TabIndex = 3;
-			this.tbxFolderPath.Text = "D:\\Data\\Github";
 			// 
 			// btnBrowseFolder
 			// 
@@ -289,10 +288,10 @@
 			this.lstViewLabelOverride.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
 			this.lstViewLabelOverride.FullRowSelect = true;
 			this.lstViewLabelOverride.GridLines = true;
-			listViewItem6.Tag = "";
+			listViewItem2.Tag = "";
 			this.lstViewLabelOverride.Items.AddRange(new System.Windows.Forms.ListViewItem[] {
-            listViewItem5,
-            listViewItem6});
+            listViewItem1,
+            listViewItem2});
 			this.lstViewLabelOverride.Location = new System.Drawing.Point(6, 53);
 			this.lstViewLabelOverride.Name = "lstViewLabelOverride";
 			this.lstViewLabelOverride.Size = new System.Drawing.Size(571, 123);

@@ -22,12 +22,7 @@ namespace Crawler.Github.UI
 
 		private async void btnStart_Click(object sender, EventArgs e)
 		{
-			string virtualFolderName = DateTime.Now.ToString("yyyy-MM-dd-HH-mm-ss");
-
-			string commentsFolderPath = Path.Combine(tbxFolderPath.Text, virtualFolderName, "comments");
-
-			if (!System.IO.Directory.Exists(commentsFolderPath))
-				System.IO.Directory.CreateDirectory(commentsFolderPath);
+			string commentsFolderPath = CommentsFolderPath();
 
 			int fetchedPage = 0;
 
@@ -54,6 +49,25 @@ namespace Crawler.Github.UI
 
 				issues = await githubApi.IssuesApi.GetAsync(tbxRepoOwner.Text, tbxRepoName.Text, new Dictionary<string, string>() { { "page", (++fetchedPage).ToString() } });
 			}
+		}
+
+		private string CommentsFolderPath()
+		{
+			string selectedCommentsPath;
+
+			if (string.IsNullOrEmpty(tbxFolderPath.Text))
+				selectedCommentsPath = System.AppDomain.CurrentDomain.BaseDirectory;
+			else
+				selectedCommentsPath = tbxFolderPath.Text;
+
+			string virtualFolderName = DateTime.Now.ToString("yyyy-MM-dd-HH-mm-ss");
+
+			string commentsFolderPath = Path.Combine(selectedCommentsPath, virtualFolderName, "comments");
+
+			if (!System.IO.Directory.Exists(commentsFolderPath))
+				System.IO.Directory.CreateDirectory(commentsFolderPath);
+
+			return commentsFolderPath;
 		}
 	}
 }
