@@ -38,16 +38,72 @@ namespace Crawler.Github.UI
 				{
 					List<Comment> comments = await githubApi.CommentsApi.GetAsync(issue);
 
-					foreach (Comment comment in comments)
-					{
-						using (StreamWriter writer = new StreamWriter(Path.Combine(issuesFolderPath, comment.Id + ".txt")))
-						{
-							writer.WriteLine(comment.Body);
-						}
-					}
+					SaveIssue(issue, comments, issuesFolderPath);
 				}
 
 				issues = await githubApi.IssuesApi.GetAsync(tbxRepoOwner.Text, tbxRepoName.Text, new Dictionary<string, string>() { { "page", (++fetchedPage).ToString() } });
+			}
+		}
+
+		private void SaveIssue(Issue issue, List<Comment> comments, string issuesFolderPath)
+		{
+			string issueFolderPath = IssueFolderPath(issue, issuesFolderPath);
+
+			if (cbxConcatCommentsToIssueText.Checked)
+			{
+				StringBuilder sb = new StringBuilder();
+				sb.AppendLine(issue.Body);
+
+				foreach (Comment comment in comments)
+				{
+					sb.AppendLine(comment.Body);
+				}
+
+				SaveIssueToFile(sb.ToString(), issueFolderPath);
+
+				SaveIssueLabels(issue, issueFolderPath);
+			}
+			else
+			{
+				SaveIssueToFile(issue.Body, issueFolderPath);
+
+				SaveIssueLabels(issue, issueFolderPath);
+
+				foreach (Comment comment in comments)
+				{
+					SaveCommentToFile(comment.Body, issueFolderPath, comment.Id.ToString());
+				}
+			}
+		}
+
+		private void SaveIssueLabels(Issue issue, string issueFolderPath)
+		{
+			StringBuilder sb = new StringBuilder();
+
+			foreach (Crawler.Github.Api.Entities.Label label in issue.Labels)
+			{
+				sb.AppendLine(label.Name);
+			}
+
+			using (StreamWriter writer = new StreamWriter(Path.Combine(issueFolderPath, "labels.txt")))
+			{
+				writer.WriteLine(sb.ToString());
+			}
+		}
+
+		private void SaveIssueToFile(string issueText, string issueFolderPath)
+		{
+			using (StreamWriter writer = new StreamWriter(Path.Combine(issueFolderPath, "issue.txt")))
+			{
+				writer.WriteLine(issueText);
+			}
+		}
+
+		private void SaveCommentToFile(string commentText, string issueFolderPath, string commentId)
+		{
+			using (StreamWriter writer = new StreamWriter(Path.Combine(issueFolderPath, string.Format("comment{0}.txt", commentId))))
+			{
+				writer.WriteLine(commentText);
 			}
 		}
 
@@ -62,12 +118,22 @@ namespace Crawler.Github.UI
 
 			string virtualFolderName = DateTime.Now.ToString("yyyy-MM-dd-HH-mm-ss");
 
-			string issuesFolderPath = Path.Combine(selectedIssuesPath, virtualFolderName, "comments");
+			string issuesFolderPath = Path.Combine(selectedIssuesPath, virtualFolderName, "issues");
 
 			if (!System.IO.Directory.Exists(issuesFolderPath))
 				System.IO.Directory.CreateDirectory(issuesFolderPath);
 
 			return issuesFolderPath;
+		}
+
+		private string IssueFolderPath(Issue issue, string issuesFolderPath)
+		{
+			string issueFolderPath = Path.Combine(issuesFolderPath, issue.Id.ToString());
+
+			if (!System.IO.Directory.Exists(issueFolderPath))
+				System.IO.Directory.CreateDirectory(issueFolderPath);
+
+			return issueFolderPath;
 		}
 	}
 }
