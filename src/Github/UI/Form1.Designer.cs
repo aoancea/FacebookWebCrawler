@@ -28,11 +28,11 @@
 		/// </summary>
 		private void InitializeComponent()
 		{
-			System.Windows.Forms.ListViewItem listViewItem1 = new System.Windows.Forms.ListViewItem(new string[] {
+			System.Windows.Forms.ListViewItem listViewItem3 = new System.Windows.Forms.ListViewItem(new string[] {
             "1",
             ".*defect.*",
             "bug"}, -1);
-			System.Windows.Forms.ListViewItem listViewItem2 = new System.Windows.Forms.ListViewItem(new string[] {
+			System.Windows.Forms.ListViewItem listViewItem4 = new System.Windows.Forms.ListViewItem(new string[] {
             "2",
             ".*problem.*",
             "bug"}, -1);
@@ -187,6 +187,7 @@
 			this.cbxFetchClosedIssues.TabIndex = 11;
 			this.cbxFetchClosedIssues.Text = "Fetch closed issues";
 			this.cbxFetchClosedIssues.UseVisualStyleBackColor = true;
+			this.cbxFetchClosedIssues.CheckedChanged += new System.EventHandler(this.cbxFetchClosedIssues_CheckedChanged);
 			// 
 			// cbxFetchOpenIssues
 			// 
@@ -199,6 +200,7 @@
 			this.cbxFetchOpenIssues.TabIndex = 10;
 			this.cbxFetchOpenIssues.Text = "Fetch open issues";
 			this.cbxFetchOpenIssues.UseVisualStyleBackColor = true;
+			this.cbxFetchOpenIssues.CheckedChanged += new System.EventHandler(this.cbxFetchOpenIssues_CheckedChanged);
 			// 
 			// cbxConcatCommentsToIssueText
 			// 
@@ -295,10 +297,10 @@
 			this.lstViewLabelOverride.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
 			this.lstViewLabelOverride.FullRowSelect = true;
 			this.lstViewLabelOverride.GridLines = true;
-			listViewItem2.Tag = "";
+			listViewItem4.Tag = "";
 			this.lstViewLabelOverride.Items.AddRange(new System.Windows.Forms.ListViewItem[] {
-            listViewItem1,
-            listViewItem2});
+            listViewItem3,
+            listViewItem4});
 			this.lstViewLabelOverride.Location = new System.Drawing.Point(6, 53);
 			this.lstViewLabelOverride.Name = "lstViewLabelOverride";
 			this.lstViewLabelOverride.Size = new System.Drawing.Size(571, 123);

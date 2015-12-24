@@ -30,6 +30,22 @@ namespace Crawler.Github.UI
 
 			GithubApi githubApi = new GithubApi(githubContext);
 
+			var queryStringDict = new Dictionary<string, string>();
+			queryStringDict.Add("page", (++fetchedPage).ToString());
+			string fetchTypeString;
+			if (cbxFetchClosedIssues.Checked && cbxFetchOpenIssues.Checked)
+			{
+				fetchTypeString = "all";
+			}
+			else if (cbxFetchOpenIssues.Checked)
+			{
+				fetchTypeString = "open";
+			}
+			else
+			{
+				fetchTypeString = "closed";
+			}
+			queryStringDict.Add("state", fetchTypeString);
 			List<Issue> issues = await githubApi.IssuesApi.GetAsync(tbxRepoOwner.Text, tbxRepoName.Text, new Dictionary<string, string>() { { "page", (++fetchedPage).ToString() } });
 
 			while (issues.Count > 0)
@@ -47,6 +63,11 @@ namespace Crawler.Github.UI
 
 		private void SaveIssue(Issue issue, List<Comment> comments, string issuesFolderPath)
 		{
+			if (issue.PullRequest != null && !cbxFetchPullRequests.Checked)
+			{
+				return;
+			}
+
 			string issueFolderPath = IssueFolderPath(issue, issuesFolderPath);
 
 			if (cbxConcatCommentsToIssueText.Checked)
@@ -134,6 +155,23 @@ namespace Crawler.Github.UI
 				System.IO.Directory.CreateDirectory(issueFolderPath);
 
 			return issueFolderPath;
+		}
+
+
+		private void cbxFetchOpenIssues_CheckedChanged(object sender, EventArgs e)
+		{
+			if (!cbxFetchClosedIssues.Checked && !cbxFetchOpenIssues.Checked)
+			{
+				cbxFetchOpenIssues.Checked = true;
+			}
+		}
+
+		private void cbxFetchClosedIssues_CheckedChanged(object sender, EventArgs e)
+		{
+			if (!cbxFetchClosedIssues.Checked && !cbxFetchOpenIssues.Checked)
+			{
+				cbxFetchClosedIssues.Checked = true;
+			}
 		}
 	}
 }
