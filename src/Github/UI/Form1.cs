@@ -15,20 +15,20 @@ namespace Crawler.Github.UI
 {
 	public partial class Form1 : Form
 	{
+		private int progressCount = 0;
+
 		public Form1()
 		{
 			InitializeComponent();
 		}
 
-		private async void btnStart_Click(object sender, EventArgs e)
+		private async Task GetIssuesWorker(int pageFrom, int pageTo, string issuesFolderPath)
 		{
-			string issuesFolderPath = IssuesFolderPath();
-
-			int fetchedPage = 0;
-
 			GithubContext githubContext = new GithubContext(tbxAccessToken.Text);
 
 			GithubApi githubApi = new GithubApi(githubContext);
+
+			int fetchedPage = pageFrom;
 
 			var queryStringDict = new Dictionary<string, string>();
 			queryStringDict.Add("page", (++fetchedPage).ToString());
@@ -46,19 +46,30 @@ namespace Crawler.Github.UI
 				fetchTypeString = "closed";
 			}
 			queryStringDict.Add("state", fetchTypeString);
-			List<Issue> issues = await githubApi.IssuesApi.GetAsync(tbxRepoOwner.Text, tbxRepoName.Text, new Dictionary<string, string>() { { "page", (++fetchedPage).ToString() } });
 
-			while (issues.Count > 0)
+			List<Issue> issues = await githubApi.IssuesApi.GetAsync(tbxRepoOwner.Text, tbxRepoName.Text, queryStringDict);
+
+			while (fetchedPage < pageTo && issues.Count > 0)
 			{
-				foreach (Issue issue in issues.Where(issue => issue.Comments > 0))
+				foreach (Issue issue in issues)
 				{
 					List<Comment> comments = await githubApi.CommentsApi.GetAsync(issue);
 
 					SaveIssue(issue, comments, issuesFolderPath);
 				}
 
-				issues = await githubApi.IssuesApi.GetAsync(tbxRepoOwner.Text, tbxRepoName.Text, new Dictionary<string, string>() { { "page", (++fetchedPage).ToString() } });
+				issues = await githubApi.IssuesApi.GetAsync(tbxRepoOwner.Text, tbxRepoName.Text, queryStringDict);
 			}
+		}
+		private async void btnStart_Click(object sender, EventArgs e)
+		{
+			txtProgressCount.Text = progressCount.ToString();
+			progressBar.MarqueeAnimationSpeed = 40;
+
+			string issuesFolderPath = IssuesFolderPath();
+
+			int[] intervals = { 0, 1, 2, 3 };
+			await Task.WhenAll(intervals.Select(i => GetIssuesWorker(i * 200, (i + 1) * 200, issuesFolderPath)));
 		}
 
 		private void SaveIssue(Issue issue, List<Comment> comments, string issuesFolderPath)
@@ -95,6 +106,8 @@ namespace Crawler.Github.UI
 					SaveCommentToFile(comment.Body, issueFolderPath, comment.Id.ToString());
 				}
 			}
+
+			txtProgressCount.Text = (++progressCount).ToString();
 		}
 
 		private void SaveIssueLabels(Issue issue, string issueFolderPath)
@@ -171,6 +184,14 @@ namespace Crawler.Github.UI
 			if (!cbxFetchClosedIssues.Checked && !cbxFetchOpenIssues.Checked)
 			{
 				cbxFetchClosedIssues.Checked = true;
+			}
+		}
+
+		private void btnBrowseFolder_Click(object sender, EventArgs e)
+		{
+			if (fldrBrowserDialog.ShowDialog() == DialogResult.OK)
+			{
+				tbxFolderPath.Text = fldrBrowserDialog.SelectedPath;
 			}
 		}
 	}
