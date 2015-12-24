@@ -15,23 +15,19 @@ namespace Crawler.Github.UI
 {
 	public partial class Form1 : Form
 	{
-		private int progressCount = 0;
-
 		public Form1()
 		{
 			InitializeComponent();
 		}
 
-		private async Task GetIssuesWorker(int pageFrom, int pageTo, string issuesFolderPath)
+		private void GetIssuesWorker(int pageFrom, int pageTo, string issuesFolderPath)
 		{
 			GithubContext githubContext = new GithubContext(tbxAccessToken.Text);
 
 			GithubApi githubApi = new GithubApi(githubContext);
 
-			int fetchedPage = pageFrom;
-
 			var queryStringDict = new Dictionary<string, string>();
-			queryStringDict.Add("page", (++fetchedPage).ToString());
+			queryStringDict.Add("page", pageFrom.ToString());
 			string fetchTypeString;
 			if (cbxFetchClosedIssues.Checked && cbxFetchOpenIssues.Checked)
 			{
@@ -47,29 +43,50 @@ namespace Crawler.Github.UI
 			}
 			queryStringDict.Add("state", fetchTypeString);
 
-			List<Issue> issues = await githubApi.IssuesApi.GetAsync(tbxRepoOwner.Text, tbxRepoName.Text, queryStringDict);
-
-			while (fetchedPage < pageTo && issues.Count > 0)
+			
+			Parallel.For(pageFrom, pageTo, async (page, loopState) => 
 			{
-				foreach (Issue issue in issues)
+				var localDict = new Dictionary<string, string>(queryStringDict);
+				localDict["page"] = page.ToString();
+				List<Issue> issues = await githubApi.IssuesApi.GetAsync(tbxRepoOwner.Text, tbxRepoName.Text, localDict);
+				
+				if (issues.Count == 0)
 				{
-					List<Comment> comments = await githubApi.CommentsApi.GetAsync(issue);
-
-					SaveIssue(issue, comments, issuesFolderPath);
+					loopState.Break();
 				}
 
-				issues = await githubApi.IssuesApi.GetAsync(tbxRepoOwner.Text, tbxRepoName.Text, queryStringDict);
-			}
+				Parallel.ForEach(issues, async issue =>
+				{
+					List<Comment> comments = null;
+					if (cbxFetchComments.Checked)
+					{
+						comments = await githubApi.CommentsApi.GetAsync(issue);
+					}
+
+					SaveIssue(issue, comments, issuesFolderPath);
+				});
+
+				progressBar.Invoke(new Action(() => progressBar.PerformStep()));
+				txtProgressCount.Invoke(new Action(() => txtProgressCount.Text = progressBar.Value + " / " + progressBar.Maximum + " pages"));
+			});
 		}
 		private async void btnStart_Click(object sender, EventArgs e)
 		{
-			txtProgressCount.Text = progressCount.ToString();
-			progressBar.MarqueeAnimationSpeed = 40;
+			txtProgressCount.Text = "0";
 
 			string issuesFolderPath = IssuesFolderPath();
 
+			Uri uri = new Uri(string.Format("https://api.github.com/repos/{0}/{1}/issues?page=1", tbxRepoOwner.Text, tbxRepoName.Text));
+			GithubContext githubContext = new GithubContext(tbxAccessToken.Text);
+
+			int numPages = await githubContext.GetNumPages(uri);
 			int[] intervals = { 0, 1, 2, 3 };
-			await Task.WhenAll(intervals.Select(i => GetIssuesWorker(i * 200, (i + 1) * 200, issuesFolderPath)));
+			int countPerWorker = numPages / intervals.Length;
+
+			progressBar.Maximum = numPages;
+
+			//await Task.WhenAll(intervals.Select(i => GetIssuesWorker(i * countPerWorker, (i + 1) * countPerWorker + (i + 1 == intervals.Length ? numPages % intervals.Length + 1 : 0), issuesFolderPath)));
+			await Task.Run(() => GetIssuesWorker(0, numPages, issuesFolderPath));
 		}
 
 		private void SaveIssue(Issue issue, List<Comment> comments, string issuesFolderPath)
@@ -80,34 +97,32 @@ namespace Crawler.Github.UI
 			}
 
 			string issueFolderPath = IssueFolderPath(issue, issuesFolderPath);
+			StringBuilder sb = new StringBuilder();
+			sb.AppendLine(issue.Body);
 
 			if (cbxConcatCommentsToIssueText.Checked)
 			{
-				StringBuilder sb = new StringBuilder();
-				sb.AppendLine(issue.Body);
-
-				foreach (Comment comment in comments)
+				if (cbxFetchComments.Checked)
 				{
-					sb.AppendLine(comment.Body);
+					foreach (Comment comment in comments)
+					{
+						sb.AppendLine(comment.Body);
+					}
 				}
-
-				SaveIssueToFile(sb.ToString(), issueFolderPath);
-
-				SaveIssueLabels(issue, issueFolderPath);
 			}
 			else
 			{
-				SaveIssueToFile(issue.Body, issueFolderPath);
-
-				SaveIssueLabels(issue, issueFolderPath);
-
-				foreach (Comment comment in comments)
+				if (cbxFetchComments.Checked)
 				{
-					SaveCommentToFile(comment.Body, issueFolderPath, comment.Id.ToString());
+					foreach (Comment comment in comments)
+					{
+						SaveCommentToFile(comment.Body, issueFolderPath, comment.Id.ToString());
+					}
 				}
 			}
 
-			txtProgressCount.Text = (++progressCount).ToString();
+			SaveIssueToFile(sb.ToString(), issueFolderPath);
+			SaveIssueLabels(issue, issueFolderPath);
 		}
 
 		private void SaveIssueLabels(Issue issue, string issueFolderPath)
