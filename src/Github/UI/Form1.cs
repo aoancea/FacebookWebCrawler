@@ -162,7 +162,12 @@ namespace Crawler.Github.UI
 
 		private string IssueFolderPath(Issue issue, string issuesFolderPath)
 		{
-			string issueFolderPath = Path.Combine(issuesFolderPath, issue.Id.ToString());
+			string issueFolderName = issue.Number.ToString();
+			if (issue.Closed_at != null)
+			{
+				issueFolderName += string.Format(" - {0}", (issue.Closed_at - issue.Created_at).Value.TotalHours);
+			}
+			string issueFolderPath = Path.Combine(issuesFolderPath, issueFolderName);
 
 			if (!System.IO.Directory.Exists(issueFolderPath))
 				System.IO.Directory.CreateDirectory(issueFolderPath);
