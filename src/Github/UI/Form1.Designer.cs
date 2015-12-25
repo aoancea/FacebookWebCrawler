@@ -28,11 +28,11 @@
 		/// </summary>
 		private void InitializeComponent()
 		{
-			System.Windows.Forms.ListViewItem listViewItem1 = new System.Windows.Forms.ListViewItem(new string[] {
+			System.Windows.Forms.ListViewItem listViewItem3 = new System.Windows.Forms.ListViewItem(new string[] {
             "1",
             ".*defect.*",
             "bug"}, -1);
-			System.Windows.Forms.ListViewItem listViewItem2 = new System.Windows.Forms.ListViewItem(new string[] {
+			System.Windows.Forms.ListViewItem listViewItem4 = new System.Windows.Forms.ListViewItem(new string[] {
             "2",
             ".*problem.*",
             "bug"}, -1);
@@ -66,6 +66,7 @@
 			this.btnCancel = new System.Windows.Forms.Button();
 			this.fldrBrowserDialog = new System.Windows.Forms.FolderBrowserDialog();
 			this.txtProgressCount = new System.Windows.Forms.Label();
+			this.tbxRequestsRemaining = new System.Windows.Forms.TextBox();
 			this.groupBox1.SuspendLayout();
 			this.groupBox2.SuspendLayout();
 			this.SuspendLayout();
@@ -300,10 +301,10 @@
 			this.lstViewLabelOverride.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
 			this.lstViewLabelOverride.FullRowSelect = true;
 			this.lstViewLabelOverride.GridLines = true;
-			listViewItem2.Tag = "";
+			listViewItem4.Tag = "";
 			this.lstViewLabelOverride.Items.AddRange(new System.Windows.Forms.ListViewItem[] {
-            listViewItem1,
-            listViewItem2});
+            listViewItem3,
+            listViewItem4});
 			this.lstViewLabelOverride.Location = new System.Drawing.Point(6, 53);
 			this.lstViewLabelOverride.Name = "lstViewLabelOverride";
 			this.lstViewLabelOverride.Size = new System.Drawing.Size(571, 123);
@@ -365,11 +366,21 @@
 			this.txtProgressCount.Size = new System.Drawing.Size(0, 13);
 			this.txtProgressCount.TabIndex = 18;
 			// 
+			// tbxRequestsRemaining
+			// 
+			this.tbxRequestsRemaining.Cursor = System.Windows.Forms.Cursors.IBeam;
+			this.tbxRequestsRemaining.Location = new System.Drawing.Point(190, 423);
+			this.tbxRequestsRemaining.Name = "tbxRequestsRemaining";
+			this.tbxRequestsRemaining.ReadOnly = true;
+			this.tbxRequestsRemaining.Size = new System.Drawing.Size(405, 20);
+			this.tbxRequestsRemaining.TabIndex = 19;
+			// 
 			// Form1
 			// 
 			this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
 			this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-			this.ClientSize = new System.Drawing.Size(610, 452);
+			this.ClientSize = new System.Drawing.Size(610, 454);
+			this.Controls.Add(this.tbxRequestsRemaining);
 			this.Controls.Add(this.txtProgressCount);
 			this.Controls.Add(this.btnCancel);
 			this.Controls.Add(this.btnStart);
@@ -422,6 +433,7 @@
 		private System.Windows.Forms.Label label5;
 		private System.Windows.Forms.FolderBrowserDialog fldrBrowserDialog;
 		private System.Windows.Forms.Label txtProgressCount;
+		private System.Windows.Forms.TextBox tbxRequestsRemaining;
 	}
 }
 

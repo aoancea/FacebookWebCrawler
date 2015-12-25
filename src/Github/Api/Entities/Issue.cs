@@ -67,7 +67,7 @@ namespace Crawler.Github.Api.Entities
 		public string Body { get; set; }
 
 		[DataMember(Name = "pull_request")]
-		public string PullRequest { get; set; }
+		public PullRequest Pull_request { get; set; }
 	}
 
 	public enum IssueState

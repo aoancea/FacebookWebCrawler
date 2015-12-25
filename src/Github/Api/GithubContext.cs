@@ -13,6 +13,8 @@ namespace Crawler.Github.Api
 	{
 		public string Access_Token { get; private set; }
 
+		public string RequestsRemaining { get; private set; }
+
 		public GithubContext(string access_token = null)
 		{
 			Access_Token = access_token;
@@ -29,7 +31,7 @@ namespace Crawler.Github.Api
 
 			HttpWebResponse response = (HttpWebResponse)await request.GetResponseAsync().ConfigureAwait(false);
 
-			Regex regex = new Regex(@"page=(\d+)>; rel=""last""");
+			Regex regex = new Regex(@"page=(\d+)&state=(all|open|closed)>; rel=""last""");
 			Match match = regex.Match(response.Headers.Get("Link"));
 
 			return int.Parse(match.Groups[1].Value);
@@ -41,7 +43,9 @@ namespace Crawler.Github.Api
 
 			HttpWebResponse response = (HttpWebResponse)await request.GetResponseAsync().ConfigureAwait(false);
 			T result = JsonSerializer.DeserializeResponse<T>(response);
-			
+
+			RequestsRemaining = response.Headers.Get("X-RateLimit-Remaining");
+
 			return await Task.FromResult<T>(result);
 		}
 

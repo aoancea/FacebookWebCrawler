@@ -20,6 +20,20 @@ namespace Crawler.Github.UI
 			InitializeComponent();
 		}
 
+		private string GetStateString()
+		{
+			if (cbxFetchClosedIssues.Checked && cbxFetchOpenIssues.Checked)
+			{
+				return "all";
+			}
+			else if (cbxFetchOpenIssues.Checked)
+			{
+				return "open";
+			}
+
+			return "closed";
+		}
+
 		private void GetIssuesWorker(int pageFrom, int pageTo, string issuesFolderPath)
 		{
 			GithubContext githubContext = new GithubContext(tbxAccessToken.Text);
@@ -28,19 +42,8 @@ namespace Crawler.Github.UI
 
 			var queryStringDict = new Dictionary<string, string>();
 			queryStringDict.Add("page", pageFrom.ToString());
-			string fetchTypeString;
-			if (cbxFetchClosedIssues.Checked && cbxFetchOpenIssues.Checked)
-			{
-				fetchTypeString = "all";
-			}
-			else if (cbxFetchOpenIssues.Checked)
-			{
-				fetchTypeString = "open";
-			}
-			else
-			{
-				fetchTypeString = "closed";
-			}
+			string fetchTypeString = GetStateString();
+			
 			queryStringDict.Add("state", fetchTypeString);
 
 			
@@ -68,6 +71,7 @@ namespace Crawler.Github.UI
 
 				progressBar.Invoke(new Action(() => progressBar.PerformStep()));
 				txtProgressCount.Invoke(new Action(() => txtProgressCount.Text = progressBar.Value + " / " + progressBar.Maximum + " pages"));
+				tbxRequestsRemaining.Invoke(new Action(() => tbxRequestsRemaining.Text = githubContext.RequestsRemaining + " requests remaining"));
 			});
 		}
 		private async void btnStart_Click(object sender, EventArgs e)
@@ -76,22 +80,23 @@ namespace Crawler.Github.UI
 
 			string issuesFolderPath = IssuesFolderPath();
 
-			Uri uri = new Uri(string.Format("https://api.github.com/repos/{0}/{1}/issues?page=1", tbxRepoOwner.Text, tbxRepoName.Text));
+			Uri uri = new Uri(string.Format("https://api.github.com/repos/{0}/{1}/issues?page=1&state={2}", tbxRepoOwner.Text, tbxRepoName.Text, GetStateString()));
 			GithubContext githubContext = new GithubContext(tbxAccessToken.Text);
 
 			int numPages = await githubContext.GetNumPages(uri);
-			int[] intervals = { 0, 1, 2, 3 };
-			int countPerWorker = numPages / intervals.Length;
+			//int[] intervals = { 0, 1, 2, 3 };
+			//int countPerWorker = numPages / intervals.Length;
 
 			progressBar.Maximum = numPages;
 
 			//await Task.WhenAll(intervals.Select(i => GetIssuesWorker(i * countPerWorker, (i + 1) * countPerWorker + (i + 1 == intervals.Length ? numPages % intervals.Length + 1 : 0), issuesFolderPath)));
-			await Task.Run(() => GetIssuesWorker(0, numPages, issuesFolderPath));
+			await Task.Run(() => GetIssuesWorker(0, numPages, issuesFolderPath)).ContinueWith(t => progressBar.Invoke(new Action(() => progressBar.Value = 0)));
+
 		}
 
 		private void SaveIssue(Issue issue, List<Comment> comments, string issuesFolderPath)
 		{
-			if (issue.PullRequest != null && !cbxFetchPullRequests.Checked)
+			if (issue.Pull_request != null && !cbxFetchPullRequests.Checked)
 			{
 				return;
 			}
