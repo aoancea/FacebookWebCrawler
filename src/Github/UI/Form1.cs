@@ -46,7 +46,6 @@ namespace Crawler.Github.UI
 			
 			queryStringDict.Add("state", fetchTypeString);
 
-			
 			Parallel.For(pageFrom, pageTo, async (page, loopState) => 
 			{
 				var localDict = new Dictionary<string, string>(queryStringDict);
@@ -69,14 +68,38 @@ namespace Crawler.Github.UI
 					SaveIssue(issue, comments, issuesFolderPath);
 				});
 
-				progressBar.Invoke(new Action(() => progressBar.PerformStep()));
-				txtProgressCount.Invoke(new Action(() => txtProgressCount.Text = progressBar.Value + " / " + progressBar.Maximum + " pages"));
-				tbxRequestsRemaining.Invoke(new Action(() => tbxRequestsRemaining.Text = githubContext.RequestsRemaining + " requests remaining"));
+				if (progressBar.InvokeRequired)
+				{
+					progressBar.Invoke(new Action(() => progressBar.PerformStep()));
+				}
+				else
+				{
+					progressBar.PerformStep();
+				}
+
+				if (txtProgressCount.InvokeRequired)
+				{
+					txtProgressCount.Invoke(new Action(() => txtProgressCount.Text = progressBar.Value + " / " + progressBar.Maximum + " pages"));
+				}
+				else
+				{
+					txtProgressCount.Text = progressBar.Value + " / " + progressBar.Maximum + " pages";
+                }
+
+				if (tbxRequestsRemaining.InvokeRequired)
+				{
+					tbxRequestsRemaining.Invoke(new Action(() => tbxRequestsRemaining.Text = githubContext.RequestsRemaining + " requests remaining"));
+				}
+				else
+				{
+					tbxRequestsRemaining.Text = githubContext.RequestsRemaining + " requests remaining";
+                }
 			});
 		}
 		private async void btnStart_Click(object sender, EventArgs e)
 		{
 			txtProgressCount.Text = "0";
+			progressBar.Value = progressBar.Minimum;
 
 			string issuesFolderPath = IssuesFolderPath();
 
@@ -90,8 +113,7 @@ namespace Crawler.Github.UI
 			progressBar.Maximum = numPages;
 
 			//await Task.WhenAll(intervals.Select(i => GetIssuesWorker(i * countPerWorker, (i + 1) * countPerWorker + (i + 1 == intervals.Length ? numPages % intervals.Length + 1 : 0), issuesFolderPath)));
-			await Task.Run(() => GetIssuesWorker(0, numPages, issuesFolderPath)).ContinueWith(t => progressBar.Invoke(new Action(() => progressBar.Value = 0)));
-
+			await Task.Run(() => GetIssuesWorker(0, numPages, issuesFolderPath));
 		}
 
 		private void SaveIssue(Issue issue, List<Comment> comments, string issuesFolderPath)
