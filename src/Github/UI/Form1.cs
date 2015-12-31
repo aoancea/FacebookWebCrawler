@@ -8,6 +8,7 @@ using System.Drawing;
 using System.IO;
 using System.Linq;
 using System.Text;
+using System.Threading;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 
@@ -15,6 +16,9 @@ namespace Crawler.Github.UI
 {
 	public partial class Form1 : Form
 	{
+		private Queue<string> accessTokens;
+		object resultsLocker = new object();
+
 		public Form1()
 		{
 			InitializeComponent();
@@ -34,17 +38,28 @@ namespace Crawler.Github.UI
 			return "closed";
 		}
 
-		private void GetIssuesWorker(int pageFrom, int pageTo, string issuesFolderPath)
+		private void GetAccessTokens()
 		{
-			GithubContext githubContext = new GithubContext(tbxAccessToken.Text);
+			accessTokens = new Queue<string>();
+			foreach (string accessToken in tbxAccessToken.Lines)
+			{
+				if (!string.IsNullOrEmpty(accessToken) && !string.IsNullOrWhiteSpace(accessToken))
+				{
+					accessTokens.Enqueue(accessToken);
+				}
+			}
+		}
 
+		private void GetIssuesWorker(int pageFrom, int pageTo, string issuesFolderPath, GithubContext githubContext)
+		{
 			GithubApi githubApi = new GithubApi(githubContext);
 
 			var queryStringDict = new Dictionary<string, string>();
 			queryStringDict.Add("page", pageFrom.ToString());
 			string fetchTypeString = GetStateString();
-			
+
 			queryStringDict.Add("state", fetchTypeString);
+
 
 			Parallel.For(pageFrom, pageTo, async (page, loopState) => 
 			{
@@ -56,7 +71,7 @@ namespace Crawler.Github.UI
 				{
 					loopState.Break();
 				}
-
+				
 				Parallel.ForEach(issues, async issue =>
 				{
 					List<Comment> comments = null;
@@ -68,32 +83,35 @@ namespace Crawler.Github.UI
 					SaveIssue(issue, comments, issuesFolderPath);
 				});
 
-				if (progressBar.InvokeRequired)
+				lock (resultsLocker)
 				{
-					progressBar.Invoke(new Action(() => progressBar.PerformStep()));
-				}
-				else
-				{
-					progressBar.PerformStep();
-				}
+					if (progressBar.InvokeRequired)
+					{
+						progressBar.Invoke(new Action(() => progressBar.PerformStep()));
+					}
+					else
+					{
+						progressBar.PerformStep();
+					}
 
-				if (txtProgressCount.InvokeRequired)
-				{
-					txtProgressCount.Invoke(new Action(() => txtProgressCount.Text = progressBar.Value + " / " + progressBar.Maximum + " pages"));
-				}
-				else
-				{
-					txtProgressCount.Text = progressBar.Value + " / " + progressBar.Maximum + " pages";
-                }
+					if (txtProgressCount.InvokeRequired)
+					{
+						txtProgressCount.Invoke(new Action(() => txtProgressCount.Text = progressBar.Value + " / " + progressBar.Maximum + " pages"));
+					}
+					else
+					{
+						txtProgressCount.Text = progressBar.Value + " / " + progressBar.Maximum + " pages";
+					}
 
-				if (tbxRequestsRemaining.InvokeRequired)
-				{
-					tbxRequestsRemaining.Invoke(new Action(() => tbxRequestsRemaining.Text = githubContext.RequestsRemaining + " requests remaining"));
+					if (tbxRequestsRemaining.InvokeRequired)
+					{
+						tbxRequestsRemaining.Invoke(new Action(() => tbxRequestsRemaining.Text = githubContext.RequestsRemaining + " requests remaining (" + accessTokens.Count + " other access token(s))"));
+					}
+					else
+					{
+						tbxRequestsRemaining.Text = githubContext.RequestsRemaining + " requests remaining (" + accessTokens.Count + " other access token(s))"; ;
+					}
 				}
-				else
-				{
-					tbxRequestsRemaining.Text = githubContext.RequestsRemaining + " requests remaining";
-                }
 			});
 		}
 		private async void btnStart_Click(object sender, EventArgs e)
@@ -101,10 +119,12 @@ namespace Crawler.Github.UI
 			txtProgressCount.Text = "0";
 			progressBar.Value = progressBar.Minimum;
 
+			GetAccessTokens();
+
 			string issuesFolderPath = IssuesFolderPath();
 
 			Uri uri = new Uri(string.Format("https://api.github.com/repos/{0}/{1}/issues?page=1&state={2}", tbxRepoOwner.Text, tbxRepoName.Text, GetStateString()));
-			GithubContext githubContext = new GithubContext(tbxAccessToken.Text);
+			GithubContext githubContext = new GithubContext(accessTokens);
 
 			int numPages = await githubContext.GetNumPages(uri);
 			//int[] intervals = { 0, 1, 2, 3 };
@@ -113,7 +133,7 @@ namespace Crawler.Github.UI
 			progressBar.Maximum = numPages;
 
 			//await Task.WhenAll(intervals.Select(i => GetIssuesWorker(i * countPerWorker, (i + 1) * countPerWorker + (i + 1 == intervals.Length ? numPages % intervals.Length + 1 : 0), issuesFolderPath)));
-			await Task.Run(() => GetIssuesWorker(0, numPages, issuesFolderPath));
+			await Task.Run(() => GetIssuesWorker(0, numPages, issuesFolderPath, githubContext));
 		}
 
 		private void SaveIssue(Issue issue, List<Comment> comments, string issuesFolderPath)

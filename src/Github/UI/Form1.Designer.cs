@@ -73,7 +73,7 @@
 			// 
 			// tbxRepoOwner
 			// 
-			this.tbxRepoOwner.Location = new System.Drawing.Point(82, 46);
+			this.tbxRepoOwner.Location = new System.Drawing.Point(82, 128);
 			this.tbxRepoOwner.Name = "tbxRepoOwner";
 			this.tbxRepoOwner.Size = new System.Drawing.Size(189, 20);
 			this.tbxRepoOwner.TabIndex = 0;
@@ -82,7 +82,7 @@
 			// label1
 			// 
 			this.label1.AutoSize = true;
-			this.label1.Location = new System.Drawing.Point(8, 49);
+			this.label1.Location = new System.Drawing.Point(8, 131);
 			this.label1.Name = "label1";
 			this.label1.Size = new System.Drawing.Size(68, 13);
 			this.label1.TabIndex = 1;
@@ -91,7 +91,7 @@
 			// label2
 			// 
 			this.label2.AutoSize = true;
-			this.label2.Location = new System.Drawing.Point(8, 80);
+			this.label2.Location = new System.Drawing.Point(8, 157);
 			this.label2.Name = "label2";
 			this.label2.Size = new System.Drawing.Size(75, 13);
 			this.label2.TabIndex = 2;
@@ -99,14 +99,14 @@
 			// 
 			// tbxFolderPath
 			// 
-			this.tbxFolderPath.Location = new System.Drawing.Point(82, 77);
+			this.tbxFolderPath.Location = new System.Drawing.Point(82, 154);
 			this.tbxFolderPath.Name = "tbxFolderPath";
 			this.tbxFolderPath.Size = new System.Drawing.Size(428, 20);
 			this.tbxFolderPath.TabIndex = 3;
 			// 
 			// btnBrowseFolder
 			// 
-			this.btnBrowseFolder.Location = new System.Drawing.Point(516, 75);
+			this.btnBrowseFolder.Location = new System.Drawing.Point(516, 152);
 			this.btnBrowseFolder.Name = "btnBrowseFolder";
 			this.btnBrowseFolder.Size = new System.Drawing.Size(61, 23);
 			this.btnBrowseFolder.TabIndex = 4;
@@ -132,16 +132,17 @@
 			this.groupBox1.Controls.Add(this.label2);
 			this.groupBox1.Location = new System.Drawing.Point(12, 12);
 			this.groupBox1.Name = "groupBox1";
-			this.groupBox1.Size = new System.Drawing.Size(583, 148);
+			this.groupBox1.Size = new System.Drawing.Size(583, 235);
 			this.groupBox1.TabIndex = 5;
 			this.groupBox1.TabStop = false;
 			this.groupBox1.Text = "Main options";
 			// 
 			// tbxAccessToken
 			// 
-			this.tbxAccessToken.Location = new System.Drawing.Point(82, 19);
+			this.tbxAccessToken.Location = new System.Drawing.Point(11, 38);
+			this.tbxAccessToken.Multiline = true;
 			this.tbxAccessToken.Name = "tbxAccessToken";
-			this.tbxAccessToken.Size = new System.Drawing.Size(495, 20);
+			this.tbxAccessToken.Size = new System.Drawing.Size(566, 84);
 			this.tbxAccessToken.TabIndex = 17;
 			// 
 			// label5
@@ -149,13 +150,13 @@
 			this.label5.AutoSize = true;
 			this.label5.Location = new System.Drawing.Point(8, 22);
 			this.label5.Name = "label5";
-			this.label5.Size = new System.Drawing.Size(75, 13);
+			this.label5.Size = new System.Drawing.Size(144, 13);
 			this.label5.TabIndex = 16;
-			this.label5.Text = "Access token:";
+			this.label5.Text = "Access tokens (one per line):";
 			// 
 			// tbxRepoName
 			// 
-			this.tbxRepoName.Location = new System.Drawing.Point(388, 46);
+			this.tbxRepoName.Location = new System.Drawing.Point(388, 128);
 			this.tbxRepoName.Name = "tbxRepoName";
 			this.tbxRepoName.Size = new System.Drawing.Size(189, 20);
 			this.tbxRepoName.TabIndex = 15;
@@ -164,7 +165,7 @@
 			// label4
 			// 
 			this.label4.AutoSize = true;
-			this.label4.Location = new System.Drawing.Point(310, 49);
+			this.label4.Location = new System.Drawing.Point(310, 131);
 			this.label4.Name = "label4";
 			this.label4.Size = new System.Drawing.Size(65, 13);
 			this.label4.TabIndex = 14;
@@ -173,7 +174,7 @@
 			// cbxFetchPullRequests
 			// 
 			this.cbxFetchPullRequests.AutoSize = true;
-			this.cbxFetchPullRequests.Location = new System.Drawing.Point(254, 126);
+			this.cbxFetchPullRequests.Location = new System.Drawing.Point(254, 208);
 			this.cbxFetchPullRequests.Name = "cbxFetchPullRequests";
 			this.cbxFetchPullRequests.Size = new System.Drawing.Size(115, 17);
 			this.cbxFetchPullRequests.TabIndex = 12;
@@ -185,7 +186,7 @@
 			this.cbxFetchClosedIssues.AutoSize = true;
 			this.cbxFetchClosedIssues.Checked = true;
 			this.cbxFetchClosedIssues.CheckState = System.Windows.Forms.CheckState.Checked;
-			this.cbxFetchClosedIssues.Location = new System.Drawing.Point(129, 126);
+			this.cbxFetchClosedIssues.Location = new System.Drawing.Point(129, 208);
 			this.cbxFetchClosedIssues.Name = "cbxFetchClosedIssues";
 			this.cbxFetchClosedIssues.Size = new System.Drawing.Size(119, 17);
 			this.cbxFetchClosedIssues.TabIndex = 11;
@@ -198,7 +199,7 @@
 			this.cbxFetchOpenIssues.AutoSize = true;
 			this.cbxFetchOpenIssues.Checked = true;
 			this.cbxFetchOpenIssues.CheckState = System.Windows.Forms.CheckState.Checked;
-			this.cbxFetchOpenIssues.Location = new System.Drawing.Point(11, 126);
+			this.cbxFetchOpenIssues.Location = new System.Drawing.Point(11, 208);
 			this.cbxFetchOpenIssues.Name = "cbxFetchOpenIssues";
 			this.cbxFetchOpenIssues.Size = new System.Drawing.Size(112, 17);
 			this.cbxFetchOpenIssues.TabIndex = 10;
@@ -209,7 +210,7 @@
 			// cbxConcatCommentsToIssueText
 			// 
 			this.cbxConcatCommentsToIssueText.AutoSize = true;
-			this.cbxConcatCommentsToIssueText.Location = new System.Drawing.Point(121, 103);
+			this.cbxConcatCommentsToIssueText.Location = new System.Drawing.Point(129, 185);
 			this.cbxConcatCommentsToIssueText.Name = "cbxConcatCommentsToIssueText";
 			this.cbxConcatCommentsToIssueText.Size = new System.Drawing.Size(197, 17);
 			this.cbxConcatCommentsToIssueText.TabIndex = 7;
@@ -221,7 +222,7 @@
 			this.cbxFetchComments.AutoSize = true;
 			this.cbxFetchComments.Checked = true;
 			this.cbxFetchComments.CheckState = System.Windows.Forms.CheckState.Checked;
-			this.cbxFetchComments.Location = new System.Drawing.Point(11, 103);
+			this.cbxFetchComments.Location = new System.Drawing.Point(11, 185);
 			this.cbxFetchComments.Name = "cbxFetchComments";
 			this.cbxFetchComments.Size = new System.Drawing.Size(104, 17);
 			this.cbxFetchComments.TabIndex = 6;
@@ -236,7 +237,7 @@
 			this.groupBox2.Controls.Add(this.btnRemoveLabelOverride);
 			this.groupBox2.Controls.Add(this.btnAddLabelOverride);
 			this.groupBox2.Controls.Add(this.lstViewLabelOverride);
-			this.groupBox2.Location = new System.Drawing.Point(12, 168);
+			this.groupBox2.Location = new System.Drawing.Point(12, 253);
 			this.groupBox2.Name = "groupBox2";
 			this.groupBox2.Size = new System.Drawing.Size(583, 214);
 			this.groupBox2.TabIndex = 8;
@@ -329,7 +330,7 @@
 			// 
 			// progressBar
 			// 
-			this.progressBar.Location = new System.Drawing.Point(12, 388);
+			this.progressBar.Location = new System.Drawing.Point(12, 473);
 			this.progressBar.MarqueeAnimationSpeed = 0;
 			this.progressBar.Name = "progressBar";
 			this.progressBar.Size = new System.Drawing.Size(583, 23);
@@ -339,7 +340,7 @@
 			// btnStart
 			// 
 			this.btnStart.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-			this.btnStart.Location = new System.Drawing.Point(12, 417);
+			this.btnStart.Location = new System.Drawing.Point(12, 502);
 			this.btnStart.Name = "btnStart";
 			this.btnStart.Size = new System.Drawing.Size(83, 30);
 			this.btnStart.TabIndex = 14;
@@ -350,7 +351,7 @@
 			// btnCancel
 			// 
 			this.btnCancel.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-			this.btnCancel.Location = new System.Drawing.Point(101, 417);
+			this.btnCancel.Location = new System.Drawing.Point(101, 502);
 			this.btnCancel.Name = "btnCancel";
 			this.btnCancel.Size = new System.Drawing.Size(83, 30);
 			this.btnCancel.TabIndex = 15;
@@ -361,7 +362,7 @@
 			// 
 			this.txtProgressCount.AutoSize = true;
 			this.txtProgressCount.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-			this.txtProgressCount.Location = new System.Drawing.Point(301, 392);
+			this.txtProgressCount.Location = new System.Drawing.Point(301, 477);
 			this.txtProgressCount.Name = "txtProgressCount";
 			this.txtProgressCount.Size = new System.Drawing.Size(0, 13);
 			this.txtProgressCount.TabIndex = 18;
@@ -369,7 +370,7 @@
 			// tbxRequestsRemaining
 			// 
 			this.tbxRequestsRemaining.Cursor = System.Windows.Forms.Cursors.IBeam;
-			this.tbxRequestsRemaining.Location = new System.Drawing.Point(190, 423);
+			this.tbxRequestsRemaining.Location = new System.Drawing.Point(190, 508);
 			this.tbxRequestsRemaining.Name = "tbxRequestsRemaining";
 			this.tbxRequestsRemaining.ReadOnly = true;
 			this.tbxRequestsRemaining.Size = new System.Drawing.Size(405, 20);
@@ -379,7 +380,7 @@
 			// 
 			this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
 			this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-			this.ClientSize = new System.Drawing.Size(610, 454);
+			this.ClientSize = new System.Drawing.Size(610, 542);
 			this.Controls.Add(this.tbxRequestsRemaining);
 			this.Controls.Add(this.txtProgressCount);
 			this.Controls.Add(this.btnCancel);

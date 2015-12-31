@@ -5,19 +5,26 @@ using System.Linq;
 using System.Net;
 using System.Text;
 using System.Text.RegularExpressions;
+using System.Threading;
 using System.Threading.Tasks;
 
 namespace Crawler.Github.Api
 {
 	public class GithubContext
 	{
+		private object lockerTokenChange = new object();
+		private object lockerRequestsUpdate = new object();
+
+		private Queue<string> accessTokens;
+
 		public string Access_Token { get; private set; }
 
 		public string RequestsRemaining { get; private set; }
 
-		public GithubContext(string access_token = null)
+		public GithubContext(Queue<string> accessTokens)
 		{
-			Access_Token = access_token;
+			this.accessTokens = accessTokens;
+			Access_Token = accessTokens.Dequeue();
 		}
 
 		public async Task<T> RequestAsync<T>(string path)
@@ -40,13 +47,45 @@ namespace Crawler.Github.Api
 		public async Task<T> RequestAsync<T>(Uri uri)
 		{
 			WebRequest request = CreateRequest(uri);
+			HttpWebResponse response = null;
+			T result = default(T);
 
-			HttpWebResponse response = (HttpWebResponse)await request.GetResponseAsync().ConfigureAwait(false);
-			T result = JsonSerializer.DeserializeResponse<T>(response);
+			try
+			{
+				response = (HttpWebResponse)await request.GetResponseAsync().ConfigureAwait(false);
+			}
+			catch (WebException)
+			{
+				// todo: breakpoint here
+				lock (lockerTokenChange)
+				{
+					if (RequestsRemaining == "0")
+					{
+						RequestsRemaining = "5000";
+						Access_Token = accessTokens.Dequeue();
+					}
+				}
 
-			RequestsRemaining = response.Headers.Get("X-RateLimit-Remaining");
+				request = CreateRequest(uri);
+				response = (HttpWebResponse)await request.GetResponseAsync().ConfigureAwait(false);
+			}
+			finally
+			{
+				result = JsonSerializer.DeserializeResponse<T>(response);
+
+				lock (lockerRequestsUpdate)
+				{
+					RequestsRemaining = response.Headers.Get("X-RateLimit-Remaining");
+				}
+
+			//	if (int.Parse(RequestsRemaining) <= 1)
+			//	{
+			//		Access_Token = accessTokens.Dequeue();
+			//	}
+			}
 
 			return await Task.FromResult<T>(result);
+
 		}
 
 		private WebRequest CreateRequest(Uri uri)
