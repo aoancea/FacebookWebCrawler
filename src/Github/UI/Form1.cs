@@ -50,7 +50,7 @@ namespace Crawler.Github.UI
 			}
 		}
 
-		private void GetIssuesWorker(int pageFrom, int pageTo, string issuesFolderPath, GithubContext githubContext)
+		private void GetIssuesWorker(int pageFrom, int pageTo, string issuesFolderPath, GithubContext githubContext, IProgress<ProgressBundle> progress)
 		{
 			GithubApi githubApi = new GithubApi(githubContext);
 
@@ -81,9 +81,13 @@ namespace Crawler.Github.UI
 					}
 
 					SaveIssue(issue, comments, issuesFolderPath);
+
+					progress.Report(new ProgressBundle { RequestsRemaining = githubContext.RequestsRemaining, UpdateProgressBar = false });
 				});
 
-				lock (resultsLocker)
+
+				progress.Report(new ProgressBundle { RequestsRemaining = githubContext.RequestsRemaining, UpdateProgressBar = true });
+				/*lock (resultsLocker)
 				{
 					if (progressBar.InvokeRequired)
 					{
@@ -111,7 +115,7 @@ namespace Crawler.Github.UI
 					{
 						tbxRequestsRemaining.Text = githubContext.RequestsRemaining + " requests remaining (" + accessTokens.Count + " other access token(s))"; ;
 					}
-				}
+				}*/
 			});
 		}
 		private async void btnStart_Click(object sender, EventArgs e)
@@ -133,7 +137,20 @@ namespace Crawler.Github.UI
 			progressBar.Maximum = numPages;
 
 			//await Task.WhenAll(intervals.Select(i => GetIssuesWorker(i * countPerWorker, (i + 1) * countPerWorker + (i + 1 == intervals.Length ? numPages % intervals.Length + 1 : 0), issuesFolderPath)));
-			await Task.Run(() => GetIssuesWorker(0, numPages, issuesFolderPath, githubContext));
+			var progress = new Progress<ProgressBundle>();
+			progress.ProgressChanged += Progress_ProgressChanged;
+
+			await Task.Run(() => GetIssuesWorker(0, numPages, issuesFolderPath, githubContext, progress));
+		}
+
+		private void Progress_ProgressChanged(object sender, ProgressBundle e)
+		{
+			if (e.UpdateProgressBar)
+			{
+				progressBar.PerformStep();
+				txtProgressCount.Text = progressBar.Value + " / " + progressBar.Maximum + " pages";
+			}
+			tbxRequestsRemaining.Text = e.RequestsRemaining + " requests remaining (" + accessTokens.Count + " other access token(s))"; 
 		}
 
 		private void SaveIssue(Issue issue, List<Comment> comments, string issuesFolderPath)
