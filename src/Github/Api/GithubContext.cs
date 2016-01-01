@@ -56,7 +56,6 @@ namespace Crawler.Github.Api
 			}
 			catch (WebException)
 			{
-				// todo: breakpoint here
 				lock (lockerTokenChange)
 				{
 					if (RequestsRemaining == "0")

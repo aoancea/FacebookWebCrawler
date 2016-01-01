@@ -28,6 +28,14 @@
 		/// </summary>
 		private void InitializeComponent()
 		{
+			System.Windows.Forms.ListViewItem listViewItem1 = new System.Windows.Forms.ListViewItem(new string[] {
+            "1",
+            ".*defect.*",
+            "bug"}, -1);
+			System.Windows.Forms.ListViewItem listViewItem2 = new System.Windows.Forms.ListViewItem(new string[] {
+            "2",
+            ".*problem.*",
+            "bug"}, -1);
 			System.Windows.Forms.ListViewItem listViewItem3 = new System.Windows.Forms.ListViewItem(new string[] {
             "1",
             ".*defect.*",
@@ -67,15 +75,28 @@
 			this.fldrBrowserDialog = new System.Windows.Forms.FolderBrowserDialog();
 			this.txtProgressCount = new System.Windows.Forms.Label();
 			this.tbxRequestsRemaining = new System.Windows.Forms.TextBox();
+			this.groupBox3 = new System.Windows.Forms.GroupBox();
+			this.cbxRemoveLinks = new System.Windows.Forms.CheckBox();
+			this.cbxRemoveCode = new System.Windows.Forms.CheckBox();
+			this.cbxRemoveTokens = new System.Windows.Forms.CheckBox();
+			this.tbxTokensToRemove = new System.Windows.Forms.TextBox();
+			this.cbxReplaceTokens = new System.Windows.Forms.CheckBox();
+			this.lstViewTextReplace = new System.Windows.Forms.ListView();
+			this.columnHeader4 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
+			this.columnHeader5 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
+			this.columnHeader6 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
+			this.btnAddReplaceToken = new System.Windows.Forms.Button();
+			this.btnRemoveReplaceToken = new System.Windows.Forms.Button();
 			this.groupBox1.SuspendLayout();
 			this.groupBox2.SuspendLayout();
+			this.groupBox3.SuspendLayout();
 			this.SuspendLayout();
 			// 
 			// tbxRepoOwner
 			// 
 			this.tbxRepoOwner.Location = new System.Drawing.Point(82, 128);
 			this.tbxRepoOwner.Name = "tbxRepoOwner";
-			this.tbxRepoOwner.Size = new System.Drawing.Size(189, 20);
+			this.tbxRepoOwner.Size = new System.Drawing.Size(115, 20);
 			this.tbxRepoOwner.TabIndex = 0;
 			this.tbxRepoOwner.Text = "angular";
 			// 
@@ -101,14 +122,14 @@
 			// 
 			this.tbxFolderPath.Location = new System.Drawing.Point(82, 154);
 			this.tbxFolderPath.Name = "tbxFolderPath";
-			this.tbxFolderPath.Size = new System.Drawing.Size(428, 20);
+			this.tbxFolderPath.Size = new System.Drawing.Size(244, 20);
 			this.tbxFolderPath.TabIndex = 3;
 			// 
 			// btnBrowseFolder
 			// 
-			this.btnBrowseFolder.Location = new System.Drawing.Point(516, 152);
+			this.btnBrowseFolder.Location = new System.Drawing.Point(332, 152);
 			this.btnBrowseFolder.Name = "btnBrowseFolder";
-			this.btnBrowseFolder.Size = new System.Drawing.Size(61, 23);
+			this.btnBrowseFolder.Size = new System.Drawing.Size(57, 23);
 			this.btnBrowseFolder.TabIndex = 4;
 			this.btnBrowseFolder.Text = "Browse";
 			this.btnBrowseFolder.UseVisualStyleBackColor = true;
@@ -132,7 +153,7 @@
 			this.groupBox1.Controls.Add(this.label2);
 			this.groupBox1.Location = new System.Drawing.Point(12, 12);
 			this.groupBox1.Name = "groupBox1";
-			this.groupBox1.Size = new System.Drawing.Size(583, 235);
+			this.groupBox1.Size = new System.Drawing.Size(399, 235);
 			this.groupBox1.TabIndex = 5;
 			this.groupBox1.TabStop = false;
 			this.groupBox1.Text = "Main options";
@@ -142,7 +163,7 @@
 			this.tbxAccessToken.Location = new System.Drawing.Point(11, 38);
 			this.tbxAccessToken.Multiline = true;
 			this.tbxAccessToken.Name = "tbxAccessToken";
-			this.tbxAccessToken.Size = new System.Drawing.Size(566, 84);
+			this.tbxAccessToken.Size = new System.Drawing.Size(378, 84);
 			this.tbxAccessToken.TabIndex = 17;
 			// 
 			// label5
@@ -156,16 +177,16 @@
 			// 
 			// tbxRepoName
 			// 
-			this.tbxRepoName.Location = new System.Drawing.Point(388, 128);
+			this.tbxRepoName.Location = new System.Drawing.Point(274, 128);
 			this.tbxRepoName.Name = "tbxRepoName";
-			this.tbxRepoName.Size = new System.Drawing.Size(189, 20);
+			this.tbxRepoName.Size = new System.Drawing.Size(115, 20);
 			this.tbxRepoName.TabIndex = 15;
 			this.tbxRepoName.Text = "angular.js";
 			// 
 			// label4
 			// 
 			this.label4.AutoSize = true;
-			this.label4.Location = new System.Drawing.Point(310, 131);
+			this.label4.Location = new System.Drawing.Point(203, 131);
 			this.label4.Name = "label4";
 			this.label4.Size = new System.Drawing.Size(65, 13);
 			this.label4.TabIndex = 14;
@@ -239,7 +260,7 @@
 			this.groupBox2.Controls.Add(this.lstViewLabelOverride);
 			this.groupBox2.Location = new System.Drawing.Point(12, 253);
 			this.groupBox2.Name = "groupBox2";
-			this.groupBox2.Size = new System.Drawing.Size(583, 214);
+			this.groupBox2.Size = new System.Drawing.Size(399, 240);
 			this.groupBox2.TabIndex = 8;
 			this.groupBox2.TabStop = false;
 			this.groupBox2.Text = "Label grouping options";
@@ -256,7 +277,7 @@
 			// rdoOnlyConsiderFirst
 			// 
 			this.rdoOnlyConsiderFirst.AutoSize = true;
-			this.rdoOnlyConsiderFirst.Location = new System.Drawing.Point(313, 191);
+			this.rdoOnlyConsiderFirst.Location = new System.Drawing.Point(6, 214);
 			this.rdoOnlyConsiderFirst.Name = "rdoOnlyConsiderFirst";
 			this.rdoOnlyConsiderFirst.Size = new System.Drawing.Size(266, 17);
 			this.rdoOnlyConsiderFirst.TabIndex = 13;
@@ -277,7 +298,7 @@
 			// 
 			// btnRemoveLabelOverride
 			// 
-			this.btnRemoveLabelOverride.Location = new System.Drawing.Point(516, 26);
+			this.btnRemoveLabelOverride.Location = new System.Drawing.Point(328, 24);
 			this.btnRemoveLabelOverride.Name = "btnRemoveLabelOverride";
 			this.btnRemoveLabelOverride.Size = new System.Drawing.Size(61, 23);
 			this.btnRemoveLabelOverride.TabIndex = 10;
@@ -286,7 +307,7 @@
 			// 
 			// btnAddLabelOverride
 			// 
-			this.btnAddLabelOverride.Location = new System.Drawing.Point(449, 26);
+			this.btnAddLabelOverride.Location = new System.Drawing.Point(261, 24);
 			this.btnAddLabelOverride.Name = "btnAddLabelOverride";
 			this.btnAddLabelOverride.Size = new System.Drawing.Size(61, 23);
 			this.btnAddLabelOverride.TabIndex = 8;
@@ -302,13 +323,13 @@
 			this.lstViewLabelOverride.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
 			this.lstViewLabelOverride.FullRowSelect = true;
 			this.lstViewLabelOverride.GridLines = true;
-			listViewItem4.Tag = "";
+			listViewItem2.Tag = "";
 			this.lstViewLabelOverride.Items.AddRange(new System.Windows.Forms.ListViewItem[] {
-            listViewItem3,
-            listViewItem4});
+            listViewItem1,
+            listViewItem2});
 			this.lstViewLabelOverride.Location = new System.Drawing.Point(6, 53);
 			this.lstViewLabelOverride.Name = "lstViewLabelOverride";
-			this.lstViewLabelOverride.Size = new System.Drawing.Size(571, 123);
+			this.lstViewLabelOverride.Size = new System.Drawing.Size(383, 123);
 			this.lstViewLabelOverride.TabIndex = 9;
 			this.lstViewLabelOverride.UseCompatibleStateImageBehavior = false;
 			this.lstViewLabelOverride.View = System.Windows.Forms.View.Details;
@@ -330,17 +351,17 @@
 			// 
 			// progressBar
 			// 
-			this.progressBar.Location = new System.Drawing.Point(12, 473);
+			this.progressBar.Location = new System.Drawing.Point(12, 499);
 			this.progressBar.MarqueeAnimationSpeed = 0;
 			this.progressBar.Name = "progressBar";
-			this.progressBar.Size = new System.Drawing.Size(583, 23);
+			this.progressBar.Size = new System.Drawing.Size(399, 23);
 			this.progressBar.Step = 1;
 			this.progressBar.TabIndex = 9;
 			// 
 			// btnStart
 			// 
 			this.btnStart.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-			this.btnStart.Location = new System.Drawing.Point(12, 502);
+			this.btnStart.Location = new System.Drawing.Point(12, 531);
 			this.btnStart.Name = "btnStart";
 			this.btnStart.Size = new System.Drawing.Size(83, 30);
 			this.btnStart.TabIndex = 14;
@@ -351,7 +372,7 @@
 			// btnCancel
 			// 
 			this.btnCancel.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-			this.btnCancel.Location = new System.Drawing.Point(101, 502);
+			this.btnCancel.Location = new System.Drawing.Point(101, 531);
 			this.btnCancel.Name = "btnCancel";
 			this.btnCancel.Size = new System.Drawing.Size(83, 30);
 			this.btnCancel.TabIndex = 15;
@@ -362,7 +383,7 @@
 			// 
 			this.txtProgressCount.AutoSize = true;
 			this.txtProgressCount.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-			this.txtProgressCount.Location = new System.Drawing.Point(301, 477);
+			this.txtProgressCount.Location = new System.Drawing.Point(218, 506);
 			this.txtProgressCount.Name = "txtProgressCount";
 			this.txtProgressCount.Size = new System.Drawing.Size(0, 13);
 			this.txtProgressCount.TabIndex = 18;
@@ -370,17 +391,137 @@
 			// tbxRequestsRemaining
 			// 
 			this.tbxRequestsRemaining.Cursor = System.Windows.Forms.Cursors.IBeam;
-			this.tbxRequestsRemaining.Location = new System.Drawing.Point(190, 508);
+			this.tbxRequestsRemaining.Location = new System.Drawing.Point(190, 537);
 			this.tbxRequestsRemaining.Name = "tbxRequestsRemaining";
 			this.tbxRequestsRemaining.ReadOnly = true;
-			this.tbxRequestsRemaining.Size = new System.Drawing.Size(405, 20);
+			this.tbxRequestsRemaining.Size = new System.Drawing.Size(221, 20);
 			this.tbxRequestsRemaining.TabIndex = 19;
+			// 
+			// groupBox3
+			// 
+			this.groupBox3.Controls.Add(this.btnRemoveReplaceToken);
+			this.groupBox3.Controls.Add(this.btnAddReplaceToken);
+			this.groupBox3.Controls.Add(this.lstViewTextReplace);
+			this.groupBox3.Controls.Add(this.cbxReplaceTokens);
+			this.groupBox3.Controls.Add(this.tbxTokensToRemove);
+			this.groupBox3.Controls.Add(this.cbxRemoveTokens);
+			this.groupBox3.Controls.Add(this.cbxRemoveCode);
+			this.groupBox3.Controls.Add(this.cbxRemoveLinks);
+			this.groupBox3.Location = new System.Drawing.Point(417, 12);
+			this.groupBox3.Name = "groupBox3";
+			this.groupBox3.Size = new System.Drawing.Size(272, 545);
+			this.groupBox3.TabIndex = 18;
+			this.groupBox3.TabStop = false;
+			this.groupBox3.Text = "Filtering options";
+			// 
+			// cbxRemoveLinks
+			// 
+			this.cbxRemoveLinks.AutoSize = true;
+			this.cbxRemoveLinks.Location = new System.Drawing.Point(6, 18);
+			this.cbxRemoveLinks.Name = "cbxRemoveLinks";
+			this.cbxRemoveLinks.Size = new System.Drawing.Size(133, 17);
+			this.cbxRemoveLinks.TabIndex = 18;
+			this.cbxRemoveLinks.Text = "Remove links from text";
+			this.cbxRemoveLinks.UseVisualStyleBackColor = true;
+			// 
+			// cbxRemoveCode
+			// 
+			this.cbxRemoveCode.AutoSize = true;
+			this.cbxRemoveCode.Location = new System.Drawing.Point(6, 41);
+			this.cbxRemoveCode.Name = "cbxRemoveCode";
+			this.cbxRemoveCode.Size = new System.Drawing.Size(136, 17);
+			this.cbxRemoveCode.TabIndex = 19;
+			this.cbxRemoveCode.Text = "Remove code from text";
+			this.cbxRemoveCode.UseVisualStyleBackColor = true;
+			// 
+			// cbxRemoveTokens
+			// 
+			this.cbxRemoveTokens.AutoSize = true;
+			this.cbxRemoveTokens.Location = new System.Drawing.Point(6, 64);
+			this.cbxRemoveTokens.Name = "cbxRemoveTokens";
+			this.cbxRemoveTokens.Size = new System.Drawing.Size(147, 17);
+			this.cbxRemoveTokens.TabIndex = 20;
+			this.cbxRemoveTokens.Text = "Remove tokens from text:";
+			this.cbxRemoveTokens.UseVisualStyleBackColor = true;
+			// 
+			// tbxTokensToRemove
+			// 
+			this.tbxTokensToRemove.Location = new System.Drawing.Point(6, 87);
+			this.tbxTokensToRemove.Multiline = true;
+			this.tbxTokensToRemove.Name = "tbxTokensToRemove";
+			this.tbxTokensToRemove.Size = new System.Drawing.Size(260, 84);
+			this.tbxTokensToRemove.TabIndex = 18;
+			this.tbxTokensToRemove.Text = "$\r\n<\r\n>\r\nfor";
+			// 
+			// cbxReplaceTokens
+			// 
+			this.cbxReplaceTokens.AutoSize = true;
+			this.cbxReplaceTokens.Location = new System.Drawing.Point(6, 185);
+			this.cbxReplaceTokens.Name = "cbxReplaceTokens";
+			this.cbxReplaceTokens.Size = new System.Drawing.Size(220, 17);
+			this.cbxReplaceTokens.TabIndex = 21;
+			this.cbxReplaceTokens.Text = "Replace tokens in text (regex supported):";
+			this.cbxReplaceTokens.UseVisualStyleBackColor = true;
+			// 
+			// lstViewTextReplace
+			// 
+			this.lstViewTextReplace.Columns.AddRange(new System.Windows.Forms.ColumnHeader[] {
+            this.columnHeader4,
+            this.columnHeader5,
+            this.columnHeader6});
+			this.lstViewTextReplace.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+			this.lstViewTextReplace.FullRowSelect = true;
+			this.lstViewTextReplace.GridLines = true;
+			listViewItem4.Tag = "";
+			this.lstViewTextReplace.Items.AddRange(new System.Windows.Forms.ListViewItem[] {
+            listViewItem3,
+            listViewItem4});
+			this.lstViewTextReplace.Location = new System.Drawing.Point(6, 208);
+			this.lstViewTextReplace.Name = "lstViewTextReplace";
+			this.lstViewTextReplace.Size = new System.Drawing.Size(260, 98);
+			this.lstViewTextReplace.TabIndex = 14;
+			this.lstViewTextReplace.UseCompatibleStateImageBehavior = false;
+			this.lstViewTextReplace.View = System.Windows.Forms.View.Details;
+			// 
+			// columnHeader4
+			// 
+			this.columnHeader4.Text = "#";
+			this.columnHeader4.Width = 40;
+			// 
+			// columnHeader5
+			// 
+			this.columnHeader5.Text = "Original Text";
+			this.columnHeader5.Width = 120;
+			// 
+			// columnHeader6
+			// 
+			this.columnHeader6.Text = "Replace Text";
+			this.columnHeader6.Width = 90;
+			// 
+			// btnAddReplaceToken
+			// 
+			this.btnAddReplaceToken.Location = new System.Drawing.Point(6, 312);
+			this.btnAddReplaceToken.Name = "btnAddReplaceToken";
+			this.btnAddReplaceToken.Size = new System.Drawing.Size(61, 23);
+			this.btnAddReplaceToken.TabIndex = 14;
+			this.btnAddReplaceToken.Text = "Add";
+			this.btnAddReplaceToken.UseVisualStyleBackColor = true;
+			// 
+			// btnRemoveReplaceToken
+			// 
+			this.btnRemoveReplaceToken.Location = new System.Drawing.Point(73, 312);
+			this.btnRemoveReplaceToken.Name = "btnRemoveReplaceToken";
+			this.btnRemoveReplaceToken.Size = new System.Drawing.Size(61, 23);
+			this.btnRemoveReplaceToken.TabIndex = 14;
+			this.btnRemoveReplaceToken.Text = "Remove";
+			this.btnRemoveReplaceToken.UseVisualStyleBackColor = true;
 			// 
 			// Form1
 			// 
 			this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
 			this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-			this.ClientSize = new System.Drawing.Size(610, 542);
+			this.ClientSize = new System.Drawing.Size(701, 570);
+			this.Controls.Add(this.groupBox3);
 			this.Controls.Add(this.tbxRequestsRemaining);
 			this.Controls.Add(this.txtProgressCount);
 			this.Controls.Add(this.btnCancel);
@@ -397,6 +538,8 @@
 			this.groupBox1.PerformLayout();
 			this.groupBox2.ResumeLayout(false);
 			this.groupBox2.PerformLayout();
+			this.groupBox3.ResumeLayout(false);
+			this.groupBox3.PerformLayout();
 			this.ResumeLayout(false);
 			this.PerformLayout();
 
@@ -435,6 +578,18 @@
 		private System.Windows.Forms.FolderBrowserDialog fldrBrowserDialog;
 		private System.Windows.Forms.Label txtProgressCount;
 		private System.Windows.Forms.TextBox tbxRequestsRemaining;
+		private System.Windows.Forms.GroupBox groupBox3;
+		private System.Windows.Forms.CheckBox cbxRemoveCode;
+		private System.Windows.Forms.CheckBox cbxRemoveLinks;
+		private System.Windows.Forms.ListView lstViewTextReplace;
+		private System.Windows.Forms.ColumnHeader columnHeader4;
+		private System.Windows.Forms.ColumnHeader columnHeader5;
+		private System.Windows.Forms.ColumnHeader columnHeader6;
+		private System.Windows.Forms.CheckBox cbxReplaceTokens;
+		private System.Windows.Forms.TextBox tbxTokensToRemove;
+		private System.Windows.Forms.CheckBox cbxRemoveTokens;
+		private System.Windows.Forms.Button btnRemoveReplaceToken;
+		private System.Windows.Forms.Button btnAddReplaceToken;
 	}
 }
 
