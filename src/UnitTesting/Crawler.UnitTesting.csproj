@@ -45,12 +45,15 @@
     </When>
     <Otherwise>
       <ItemGroup>
-        <Reference Include="Microsoft.VisualStudio.QualityTools.UnitTestFramework" />
+        <Reference Include="Microsoft.VisualStudio.QualityTools.UnitTestFramework">
+          <Private>False</Private>
+        </Reference>
       </ItemGroup>
     </Otherwise>
   </Choose>
   <ItemGroup>
     <Compile Include="Core\Common\Extensions\DictionaryExtensionsTest.cs" />
+    <Compile Include="Core\Common\Queue\ManagedQueueTest.cs" />
     <Compile Include="Github\GithubContextTest.cs" />
     <Compile Include="Github\IssuesApiTest.cs" />
     <Compile Include="Github\CommentsApiTest.cs" />
