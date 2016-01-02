@@ -17,11 +17,11 @@ namespace Crawler.UnitTesting.Core.Common.Queue
 
 			ManagedQueue<int> queue = new ManagedQueue<int>(queuedList);
 
-			Assert.AreEqual(queuedList.ElementAt(0), queue.DequeuedItem);
+			Assert.AreEqual(queuedList.ElementAt(0), queue.Front);
 		}
 
 		[TestMethod]
-		public void ManagedQueue_Dequeue_WithSameItem_ItemIsDequeued()
+		public void ManagedQueue_Dequeue_FrontEqualsExceptParameter_CollectionDequeued()
 		{
 			IEnumerable<int> queuedList = Enumerable.Range(0, 100);
 
@@ -29,11 +29,11 @@ namespace Crawler.UnitTesting.Core.Common.Queue
 
 			queue.Dequeue(queuedList.ElementAt(0));
 
-			Assert.AreEqual(queuedList.ElementAt(1), queue.DequeuedItem);
+			Assert.AreEqual(queuedList.ElementAt(1), queue.Front);
 		}
 
 		[TestMethod]
-		public void ManagedQueue_Dequeue_WithDifferentItem_ItemIsNotDequeued()
+		public void ManagedQueue_Dequeue_FrontDoesNotEqualExceptParameter_CollectionNotDequeued()
 		{
 			IEnumerable<int> queuedList = Enumerable.Range(0, 100);
 
@@ -41,7 +41,7 @@ namespace Crawler.UnitTesting.Core.Common.Queue
 
 			queue.Dequeue(queuedList.ElementAt(2));
 
-			Assert.AreEqual(queuedList.ElementAt(0), queue.DequeuedItem);
+			Assert.AreEqual(queuedList.ElementAt(0), queue.Front);
 		}
 
 		[TestMethod]

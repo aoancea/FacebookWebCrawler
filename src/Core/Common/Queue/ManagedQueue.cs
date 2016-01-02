@@ -10,23 +10,23 @@ namespace Crawler.Core.Common.Queue
 	{
 		private object locker = new object();
 
-		private readonly Queue<T> internalQueue;
+		private readonly Queue<T> queue;
 
-		public T DequeuedItem { get; private set; }
+		public T Front { get; private set; }
 
 		public ManagedQueue(IEnumerable<T> collection)
 		{
-			this.internalQueue = new Queue<T>(collection);
-			DequeuedItem = this.internalQueue.Dequeue();
+			queue = new Queue<T>(collection);
+			Front = queue.Dequeue();
 		}
 
-		public void Dequeue(T previouslyDequeued)
+		public void Dequeue(T except)
 		{
 			lock (locker)
 			{
-				if (DequeuedItem.CompareTo(previouslyDequeued) == 0)
+				if (Front.CompareTo(except) == 0)
 				{
-					DequeuedItem = this.internalQueue.Dequeue();
+					Front = queue.Dequeue();
 				}
 			}
 		}
