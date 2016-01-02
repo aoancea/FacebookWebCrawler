@@ -125,7 +125,7 @@ namespace Crawler.Github.UI
             Uri uri = new Uri(string.Format("https://api.github.com/repos/{0}/{1}/issues?page=1&state={2}", tbxRepoOwner.Text, tbxRepoName.Text, GetStateString()));
             GithubContext githubContext = new GithubContext(accessTokens);
 
-            int numPages = await githubContext.GetNumPages(uri);
+            int numPages = await githubContext.GetNumPagesAsync(uri);
             //int[] intervals = { 0, 1, 2, 3 };
             //int countPerWorker = numPages / intervals.Length;
 

@@ -29,7 +29,7 @@ namespace Crawler.Github.Api
 			return await RequestAsync<T>(new Uri(path));
 		}
 
-		public async Task<int> GetNumPages(Uri uri)
+		public async Task<int> GetNumPagesAsync(Uri uri)
 		{
 			WebRequest request = CreateRequest(uri);
 
