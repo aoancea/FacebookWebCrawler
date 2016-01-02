@@ -113,6 +113,7 @@ namespace Crawler.Github.UI
 				}*/
             });
         }
+
         private async void btnStart_Click(object sender, EventArgs e)
         {
             txtProgressCount.Text = "0";
@@ -126,12 +127,9 @@ namespace Crawler.Github.UI
             GithubContext githubContext = new GithubContext(accessTokens);
 
             int numPages = await githubContext.GetNumPagesAsync(uri);
-            //int[] intervals = { 0, 1, 2, 3 };
-            //int countPerWorker = numPages / intervals.Length;
 
             progressBar.Maximum = numPages;
 
-            //await Task.WhenAll(intervals.Select(i => GetIssuesWorker(i * countPerWorker, (i + 1) * countPerWorker + (i + 1 == intervals.Length ? numPages % intervals.Length + 1 : 0), issuesFolderPath)));
             var progress = new Progress<ProgressBundle>();
             progress.ProgressChanged += Progress_ProgressChanged;
 

@@ -28,19 +28,7 @@ namespace Crawler.Github.Api
 		{
 			return await RequestAsync<T>(new Uri(path));
 		}
-
-		public async Task<int> GetNumPagesAsync(Uri uri)
-		{
-			WebRequest request = CreateRequest(uri);
-
-			HttpWebResponse response = (HttpWebResponse)await request.GetResponseAsync().ConfigureAwait(false);
-
-			Regex regex = new Regex(@"page=(\d+)&state=(all|open|closed)>; rel=""last""");
-			Match match = regex.Match(response.Headers.Get("Link"));
-
-			return int.Parse(match.Groups[1].Value);
-		}
-
+        
 		public async Task<T> RequestAsync<T>(Uri uri)
 		{
 			WebRequest request = CreateRequest(uri);
@@ -73,14 +61,21 @@ namespace Crawler.Github.Api
 				{
 					RequestsRemaining = response.Headers.Get("X-RateLimit-Remaining");
 				}
-
-			//	if (int.Parse(RequestsRemaining) <= 1)
-			//	{
-			//		Access_Token = accessTokens.Dequeue();
-			//	}
 			}
 
 			return result;
+		}
+
+		public async Task<int> GetNumPagesAsync(Uri uri)
+		{
+			WebRequest request = CreateRequest(uri);
+
+			HttpWebResponse response = (HttpWebResponse)await request.GetResponseAsync().ConfigureAwait(false);
+
+			Regex regex = new Regex(@"page=(\d+)&state=(all|open|closed)>; rel=""last""");
+			Match match = regex.Match(response.Headers.Get("Link"));
+
+			return int.Parse(match.Groups[1].Value);
 		}
 
 		private WebRequest CreateRequest(Uri uri)
