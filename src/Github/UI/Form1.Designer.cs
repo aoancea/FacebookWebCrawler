@@ -87,6 +87,10 @@
 			this.columnHeader6 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
 			this.btnAddReplaceToken = new System.Windows.Forms.Button();
 			this.btnRemoveReplaceToken = new System.Windows.Forms.Button();
+			this.cbxLengthAtLeast = new System.Windows.Forms.CheckBox();
+			this.tbxLengthAtLeast = new System.Windows.Forms.TextBox();
+			this.cbxLabelOneOf = new System.Windows.Forms.CheckBox();
+			this.tbxLabelOneOf = new System.Windows.Forms.TextBox();
 			this.groupBox1.SuspendLayout();
 			this.groupBox2.SuspendLayout();
 			this.groupBox3.SuspendLayout();
@@ -399,6 +403,10 @@
 			// 
 			// groupBox3
 			// 
+			this.groupBox3.Controls.Add(this.tbxLabelOneOf);
+			this.groupBox3.Controls.Add(this.cbxLabelOneOf);
+			this.groupBox3.Controls.Add(this.tbxLengthAtLeast);
+			this.groupBox3.Controls.Add(this.cbxLengthAtLeast);
 			this.groupBox3.Controls.Add(this.btnRemoveReplaceToken);
 			this.groupBox3.Controls.Add(this.btnAddReplaceToken);
 			this.groupBox3.Controls.Add(this.lstViewTextReplace);
@@ -516,6 +524,42 @@
 			this.btnRemoveReplaceToken.Text = "Remove";
 			this.btnRemoveReplaceToken.UseVisualStyleBackColor = true;
 			// 
+			// cbxLengthAtLeast
+			// 
+			this.cbxLengthAtLeast.AutoSize = true;
+			this.cbxLengthAtLeast.Location = new System.Drawing.Point(6, 351);
+			this.cbxLengthAtLeast.Name = "cbxLengthAtLeast";
+			this.cbxLengthAtLeast.Size = new System.Drawing.Size(99, 17);
+			this.cbxLengthAtLeast.TabIndex = 22;
+			this.cbxLengthAtLeast.Text = "Length at least:";
+			this.cbxLengthAtLeast.UseVisualStyleBackColor = true;
+			// 
+			// tbxLengthAtLeast
+			// 
+			this.tbxLengthAtLeast.Location = new System.Drawing.Point(111, 349);
+			this.tbxLengthAtLeast.Name = "tbxLengthAtLeast";
+			this.tbxLengthAtLeast.Size = new System.Drawing.Size(155, 20);
+			this.tbxLengthAtLeast.TabIndex = 18;
+			// 
+			// cbxLabelOneOf
+			// 
+			this.cbxLabelOneOf.AutoSize = true;
+			this.cbxLabelOneOf.Location = new System.Drawing.Point(6, 384);
+			this.cbxLabelOneOf.Name = "cbxLabelOneOf";
+			this.cbxLabelOneOf.Size = new System.Drawing.Size(133, 17);
+			this.cbxLabelOneOf.TabIndex = 23;
+			this.cbxLabelOneOf.Text = "Labels must be one of:";
+			this.cbxLabelOneOf.UseVisualStyleBackColor = true;
+			// 
+			// tbxLabelOneOf
+			// 
+			this.tbxLabelOneOf.Location = new System.Drawing.Point(6, 407);
+			this.tbxLabelOneOf.Multiline = true;
+			this.tbxLabelOneOf.Name = "tbxLabelOneOf";
+			this.tbxLabelOneOf.Size = new System.Drawing.Size(260, 84);
+			this.tbxLabelOneOf.TabIndex = 24;
+			this.tbxLabelOneOf.Text = "bug\r\nproblem\r\ndefect";
+			// 
 			// Form1
 			// 
 			this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -590,6 +634,10 @@
 		private System.Windows.Forms.CheckBox cbxRemoveTokens;
 		private System.Windows.Forms.Button btnRemoveReplaceToken;
 		private System.Windows.Forms.Button btnAddReplaceToken;
+		private System.Windows.Forms.TextBox tbxLabelOneOf;
+		private System.Windows.Forms.CheckBox cbxLabelOneOf;
+		private System.Windows.Forms.TextBox tbxLengthAtLeast;
+		private System.Windows.Forms.CheckBox cbxLengthAtLeast;
 	}
 }
 
