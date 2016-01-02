@@ -1,9 +1,8 @@
 ﻿using System.Runtime.Serialization;
 
-
 namespace Crawler.Github.Api.Entities
 {
-	public class PullRequest
+    public class PullRequest
 	{
 		[DataMember(Name = "url")]
 		public string Url { get; set; }
@@ -16,6 +15,5 @@ namespace Crawler.Github.Api.Entities
 
 		[DataMember(Name = "patch_url")]
 		public string Patch_Url { get; set; }
-
 	}
 }

@@ -1,16 +1,13 @@
-﻿using ServiceStack.Text;
-using System;
+﻿using System;
 using System.Collections.Generic;
-using System.Linq;
 using System.Net;
-using System.Text;
 using System.Text.RegularExpressions;
-using System.Threading;
 using System.Threading.Tasks;
+using ServiceStack.Text;
 
 namespace Crawler.Github.Api
 {
-	public class GithubContext
+    public class GithubContext
 	{
 		private object lockerTokenChange = new object();
 		private object lockerRequestsUpdate = new object();
@@ -83,8 +80,7 @@ namespace Crawler.Github.Api
 			//	}
 			}
 
-			return await Task.FromResult<T>(result);
-
+			return result;
 		}
 
 		private WebRequest CreateRequest(Uri uri)

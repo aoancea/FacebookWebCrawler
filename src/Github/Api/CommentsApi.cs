@@ -1,13 +1,10 @@
-﻿using Crawler.Github.Api.Entities;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
+﻿using System.Collections.Generic;
 using System.Threading.Tasks;
+using Crawler.Github.Api.Entities;
 
 namespace Crawler.Github.Api
 {
-	public class CommentsApi
+    public class CommentsApi
 	{
 		private readonly GithubContext githubContext;
 
@@ -21,7 +18,7 @@ namespace Crawler.Github.Api
 			if (issue.Comments > 0)
 				return await githubContext.RequestAsync<List<Comment>>(issue.Comments_Url);
 
-			return await Task.FromResult<List<Comment>>(new List<Comment>(0));
-		}
+            return new List<Comment>();
+        }
 	}
 }

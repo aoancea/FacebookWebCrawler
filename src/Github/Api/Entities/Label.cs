@@ -1,13 +1,8 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Runtime.Serialization;
-using System.Text;
-using System.Threading.Tasks;
+﻿using System.Runtime.Serialization;
 
 namespace Crawler.Github.Api.Entities
 {
-	public class Label
+    public class Label
 	{
 		[DataMember(Name = "url")]
 		public string Url { get; set; }

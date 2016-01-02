@@ -1,12 +1,12 @@
-﻿using Crawler.Core.Common.Extensions;
-using Crawler.Github.Api.Entities;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Threading.Tasks;
+using Crawler.Core.Common.Extensions;
+using Crawler.Github.Api.Entities;
 
 namespace Crawler.Github.Api
 {
-	public class IssuesApi
+    public class IssuesApi
 	{
 		private readonly GithubContext githubContext;
 

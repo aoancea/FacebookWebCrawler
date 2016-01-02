@@ -1,12 +1,6 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace Crawler.Github.Api
+﻿namespace Crawler.Github.Api
 {
-	public class GithubApi
+    public class GithubApi
 	{
 		private readonly GithubContext githubContext;
 
@@ -14,7 +8,6 @@ namespace Crawler.Github.Api
 		{
 			this.githubContext = githubContext;
 		}
-
 
 		private IssuesApi issuesApi;
 		public IssuesApi IssuesApi
@@ -27,6 +20,5 @@ namespace Crawler.Github.Api
 		{
 			get { return commentsApi ?? (commentsApi = new CommentsApi(githubContext)); }
 		}
-
 	}
 }
