@@ -6,13 +6,14 @@ using System.Threading.Tasks;
 using System.Windows.Forms;
 using Crawler.Github.Api;
 using Crawler.Github.Api.Entities;
+using Crawler.Core.Common.Queue;
 
 namespace Crawler.Github.UI
 {
     public partial class Form1 : Form
     {
-        private Queue<string> accessTokens;
-        object resultsLocker = new object();
+		private object locker = new object();
+        private List<string> accessTokens;
 
         public Form1()
         {
@@ -35,17 +36,17 @@ namespace Crawler.Github.UI
 
         private void GetAccessTokens()
         {
-            accessTokens = new Queue<string>();
+			accessTokens = new List<string>();
             foreach (string accessToken in tbxAccessToken.Lines)
             {
                 if (!string.IsNullOrEmpty(accessToken) && !string.IsNullOrWhiteSpace(accessToken))
                 {
-                    accessTokens.Enqueue(accessToken);
+					accessTokens.Add(accessToken);
                 }
             }
-        }
+		}
 
-        private void GetIssuesWorker(int pageFrom, int pageTo, string issuesFolderPath, GithubContext githubContext, IProgress<ProgressBundle> progress)
+		private void GetIssuesWorker(int pageFrom, int pageTo, string issuesFolderPath, GithubContext githubContext, IProgress<ProgressBundle> progress)
         {
             GithubApi githubApi = new GithubApi(githubContext);
 
@@ -55,69 +56,44 @@ namespace Crawler.Github.UI
 
             queryStringDict.Add("state", fetchTypeString);
 
+			ParallelOptions optionsPages = new ParallelOptions();
+			ParallelOptions optionsIssues = new ParallelOptions();
 
-            Parallel.For(pageFrom, pageTo, async (page, loopState) =>
+			optionsPages.MaxDegreeOfParallelism = 2;
+			optionsIssues.MaxDegreeOfParallelism = 2;
+            Parallel.For(pageFrom, pageTo, optionsPages, (page, loopState) =>
             {
                 var localDict = new Dictionary<string, string>(queryStringDict);
                 localDict["page"] = page.ToString();
-                List<Issue> issues = await githubApi.IssuesApi.GetAsync(tbxRepoOwner.Text, tbxRepoName.Text, localDict);
+
+				List<Issue> issues = githubApi.IssuesApi.Get(tbxRepoOwner.Text, tbxRepoName.Text, localDict);
 
                 if (issues.Count == 0)
                 {
                     loopState.Break();
                 }
 
-                Parallel.ForEach(issues, async issue =>
+                Parallel.ForEach(issues, optionsIssues, issue =>
                 {
                     List<Comment> comments = null;
                     if (cbxFetchComments.Checked)
                     {
-                        comments = await githubApi.CommentsApi.GetAsync(issue);
+						comments = githubApi.CommentsApi.Get(issue);
                     }
 
-                    SaveIssue(issue, comments, issuesFolderPath);
+                    SaveIssue(issue, comments, issuesFolderPath, page);
 
-                    progress.Report(new ProgressBundle { RequestsRemaining = githubContext.RequestsRemaining, UpdateProgressBar = false });
-                });
+					progress.Report(new ProgressBundle { RequestsRemaining = githubContext.RequestsRemaining, UpdatePagesProgressBar = false, CountTokens = githubContext.CountTokens });
+				});
 
-
-                progress.Report(new ProgressBundle { RequestsRemaining = githubContext.RequestsRemaining, UpdateProgressBar = true });
-                /*lock (resultsLocker)
-				{
-					if (progressBar.InvokeRequired)
-					{
-						progressBar.Invoke(new Action(() => progressBar.PerformStep()));
-					}
-					else
-					{
-						progressBar.PerformStep();
-					}
-
-					if (txtProgressCount.InvokeRequired)
-					{
-						txtProgressCount.Invoke(new Action(() => txtProgressCount.Text = progressBar.Value + " / " + progressBar.Maximum + " pages"));
-					}
-					else
-					{
-						txtProgressCount.Text = progressBar.Value + " / " + progressBar.Maximum + " pages";
-					}
-
-					if (tbxRequestsRemaining.InvokeRequired)
-					{
-						tbxRequestsRemaining.Invoke(new Action(() => tbxRequestsRemaining.Text = githubContext.RequestsRemaining + " requests remaining (" + accessTokens.Count + " other access token(s))"));
-					}
-					else
-					{
-						tbxRequestsRemaining.Text = githubContext.RequestsRemaining + " requests remaining (" + accessTokens.Count + " other access token(s))"; ;
-					}
-				}*/
+                progress.Report(new ProgressBundle { RequestsRemaining = githubContext.RequestsRemaining, UpdatePagesProgressBar = true, CountTokens = githubContext.CountTokens });
             });
         }
 
         private async void btnStart_Click(object sender, EventArgs e)
         {
             txtProgressCount.Text = "0";
-            progressBar.Value = progressBar.Minimum;
+            progressBarPages.Value = progressBarPages.Minimum;
 
             GetAccessTokens();
 
@@ -128,32 +104,34 @@ namespace Crawler.Github.UI
 
             int numPages = await githubContext.GetNumPagesAsync(uri);
 
-            progressBar.Maximum = numPages;
+            progressBarPages.Maximum = numPages;
 
-            var progress = new Progress<ProgressBundle>();
-            progress.ProgressChanged += Progress_ProgressChanged;
+
+			var progress = new Progress<ProgressBundle>();
+			progress.ProgressChanged += Progress_ProgressChanged;
 
             await Task.Run(() => GetIssuesWorker(0, numPages, issuesFolderPath, githubContext, progress));
         }
 
-        private void Progress_ProgressChanged(object sender, ProgressBundle e)
+		private void Progress_ProgressChanged(object sender, ProgressBundle e)
         {
-            if (e.UpdateProgressBar)
+            if (e.UpdatePagesProgressBar)
             {
-                progressBar.PerformStep();
-                txtProgressCount.Text = progressBar.Value + " / " + progressBar.Maximum + " pages";
+				progressBarPages.Value += 1;
+				txtProgressCount.Text = progressBarPages.Value + " / " + progressBarPages.Maximum + " pages";
             }
-            tbxRequestsRemaining.Text = e.RequestsRemaining + " requests remaining (" + accessTokens.Count + " other access token(s))";
+
+            tbxRequestsRemaining.Text = e.RequestsRemaining + " requests remaining (" + e.CountTokens + " access token(s))";
         }
 
-        private void SaveIssue(Issue issue, List<Comment> comments, string issuesFolderPath)
+        private void SaveIssue(Issue issue, List<Comment> comments, string issuesFolderPath, int page)
         {
             if (issue.Pull_Request != null && !cbxFetchPullRequests.Checked)
             {
                 return;
             }
 
-            string issueFolderPath = IssueFolderPath(issue, issuesFolderPath);
+            string issueFolderPath = IssueFolderPath(issue, issuesFolderPath, page);
             StringBuilder sb = new StringBuilder();
             sb.AppendLine(issue.Body);
 
@@ -232,14 +210,14 @@ namespace Crawler.Github.UI
             return issuesFolderPath;
         }
 
-        private string IssueFolderPath(Issue issue, string issuesFolderPath)
+        private string IssueFolderPath(Issue issue, string issuesFolderPath, int page)
         {
             string issueFolderName = issue.Number.ToString();
             if (issue.Closed_at != null)
             {
                 issueFolderName += string.Format(" - {0}", (issue.Closed_at - issue.Created_at).Value.TotalHours);
             }
-            string issueFolderPath = Path.Combine(issuesFolderPath, issueFolderName);
+            string issueFolderPath = Path.Combine(issuesFolderPath, page.ToString(), issueFolderName);
 
             if (!System.IO.Directory.Exists(issueFolderPath))
                 System.IO.Directory.CreateDirectory(issueFolderPath);

@@ -28,19 +28,19 @@
 		/// </summary>
 		private void InitializeComponent()
 		{
-			System.Windows.Forms.ListViewItem listViewItem1 = new System.Windows.Forms.ListViewItem(new string[] {
+			System.Windows.Forms.ListViewItem listViewItem13 = new System.Windows.Forms.ListViewItem(new string[] {
             "1",
             ".*defect.*",
             "bug"}, -1);
-			System.Windows.Forms.ListViewItem listViewItem2 = new System.Windows.Forms.ListViewItem(new string[] {
+			System.Windows.Forms.ListViewItem listViewItem14 = new System.Windows.Forms.ListViewItem(new string[] {
             "2",
             ".*problem.*",
             "bug"}, -1);
-			System.Windows.Forms.ListViewItem listViewItem3 = new System.Windows.Forms.ListViewItem(new string[] {
+			System.Windows.Forms.ListViewItem listViewItem15 = new System.Windows.Forms.ListViewItem(new string[] {
             "1",
             ".*defect.*",
             "bug"}, -1);
-			System.Windows.Forms.ListViewItem listViewItem4 = new System.Windows.Forms.ListViewItem(new string[] {
+			System.Windows.Forms.ListViewItem listViewItem16 = new System.Windows.Forms.ListViewItem(new string[] {
             "2",
             ".*problem.*",
             "bug"}, -1);
@@ -69,28 +69,28 @@
 			this.columnHeader1 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
 			this.columnHeader2 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
 			this.columnHeader3 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
-			this.progressBar = new System.Windows.Forms.ProgressBar();
+			this.progressBarPages = new System.Windows.Forms.ProgressBar();
 			this.btnStart = new System.Windows.Forms.Button();
 			this.btnCancel = new System.Windows.Forms.Button();
 			this.fldrBrowserDialog = new System.Windows.Forms.FolderBrowserDialog();
 			this.txtProgressCount = new System.Windows.Forms.Label();
 			this.tbxRequestsRemaining = new System.Windows.Forms.TextBox();
 			this.groupBox3 = new System.Windows.Forms.GroupBox();
-			this.cbxRemoveLinks = new System.Windows.Forms.CheckBox();
-			this.cbxRemoveCode = new System.Windows.Forms.CheckBox();
-			this.cbxRemoveTokens = new System.Windows.Forms.CheckBox();
-			this.tbxTokensToRemove = new System.Windows.Forms.TextBox();
-			this.cbxReplaceTokens = new System.Windows.Forms.CheckBox();
+			this.tbxLabelOneOf = new System.Windows.Forms.TextBox();
+			this.cbxLabelOneOf = new System.Windows.Forms.CheckBox();
+			this.tbxLengthAtLeast = new System.Windows.Forms.TextBox();
+			this.cbxLengthAtLeast = new System.Windows.Forms.CheckBox();
+			this.btnRemoveReplaceToken = new System.Windows.Forms.Button();
+			this.btnAddReplaceToken = new System.Windows.Forms.Button();
 			this.lstViewTextReplace = new System.Windows.Forms.ListView();
 			this.columnHeader4 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
 			this.columnHeader5 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
 			this.columnHeader6 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
-			this.btnAddReplaceToken = new System.Windows.Forms.Button();
-			this.btnRemoveReplaceToken = new System.Windows.Forms.Button();
-			this.cbxLengthAtLeast = new System.Windows.Forms.CheckBox();
-			this.tbxLengthAtLeast = new System.Windows.Forms.TextBox();
-			this.cbxLabelOneOf = new System.Windows.Forms.CheckBox();
-			this.tbxLabelOneOf = new System.Windows.Forms.TextBox();
+			this.cbxReplaceTokens = new System.Windows.Forms.CheckBox();
+			this.tbxTokensToRemove = new System.Windows.Forms.TextBox();
+			this.cbxRemoveTokens = new System.Windows.Forms.CheckBox();
+			this.cbxRemoveCode = new System.Windows.Forms.CheckBox();
+			this.cbxRemoveLinks = new System.Windows.Forms.CheckBox();
 			this.groupBox1.SuspendLayout();
 			this.groupBox2.SuspendLayout();
 			this.groupBox3.SuspendLayout();
@@ -327,10 +327,10 @@
 			this.lstViewLabelOverride.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
 			this.lstViewLabelOverride.FullRowSelect = true;
 			this.lstViewLabelOverride.GridLines = true;
-			listViewItem2.Tag = "";
+			listViewItem14.Tag = "";
 			this.lstViewLabelOverride.Items.AddRange(new System.Windows.Forms.ListViewItem[] {
-            listViewItem1,
-            listViewItem2});
+            listViewItem13,
+            listViewItem14});
 			this.lstViewLabelOverride.Location = new System.Drawing.Point(6, 53);
 			this.lstViewLabelOverride.Name = "lstViewLabelOverride";
 			this.lstViewLabelOverride.Size = new System.Drawing.Size(383, 123);
@@ -353,19 +353,19 @@
 			this.columnHeader3.Text = "Rename to text";
 			this.columnHeader3.Width = 120;
 			// 
-			// progressBar
+			// progressBarPages
 			// 
-			this.progressBar.Location = new System.Drawing.Point(12, 499);
-			this.progressBar.MarqueeAnimationSpeed = 0;
-			this.progressBar.Name = "progressBar";
-			this.progressBar.Size = new System.Drawing.Size(399, 23);
-			this.progressBar.Step = 1;
-			this.progressBar.TabIndex = 9;
+			this.progressBarPages.Location = new System.Drawing.Point(12, 499);
+			this.progressBarPages.MarqueeAnimationSpeed = 0;
+			this.progressBarPages.Name = "progressBarPages";
+			this.progressBarPages.Size = new System.Drawing.Size(399, 23);
+			this.progressBarPages.Step = 1;
+			this.progressBarPages.TabIndex = 9;
 			// 
 			// btnStart
 			// 
 			this.btnStart.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-			this.btnStart.Location = new System.Drawing.Point(12, 531);
+			this.btnStart.Location = new System.Drawing.Point(12, 528);
 			this.btnStart.Name = "btnStart";
 			this.btnStart.Size = new System.Drawing.Size(83, 30);
 			this.btnStart.TabIndex = 14;
@@ -376,7 +376,7 @@
 			// btnCancel
 			// 
 			this.btnCancel.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-			this.btnCancel.Location = new System.Drawing.Point(101, 531);
+			this.btnCancel.Location = new System.Drawing.Point(101, 528);
 			this.btnCancel.Name = "btnCancel";
 			this.btnCancel.Size = new System.Drawing.Size(83, 30);
 			this.btnCancel.TabIndex = 15;
@@ -387,7 +387,7 @@
 			// 
 			this.txtProgressCount.AutoSize = true;
 			this.txtProgressCount.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-			this.txtProgressCount.Location = new System.Drawing.Point(218, 506);
+			this.txtProgressCount.Location = new System.Drawing.Point(204, 506);
 			this.txtProgressCount.Name = "txtProgressCount";
 			this.txtProgressCount.Size = new System.Drawing.Size(0, 13);
 			this.txtProgressCount.TabIndex = 18;
@@ -395,7 +395,7 @@
 			// tbxRequestsRemaining
 			// 
 			this.tbxRequestsRemaining.Cursor = System.Windows.Forms.Cursors.IBeam;
-			this.tbxRequestsRemaining.Location = new System.Drawing.Point(190, 537);
+			this.tbxRequestsRemaining.Location = new System.Drawing.Point(190, 534);
 			this.tbxRequestsRemaining.Name = "tbxRequestsRemaining";
 			this.tbxRequestsRemaining.ReadOnly = true;
 			this.tbxRequestsRemaining.Size = new System.Drawing.Size(221, 20);
@@ -417,59 +417,64 @@
 			this.groupBox3.Controls.Add(this.cbxRemoveLinks);
 			this.groupBox3.Location = new System.Drawing.Point(417, 12);
 			this.groupBox3.Name = "groupBox3";
-			this.groupBox3.Size = new System.Drawing.Size(272, 545);
+			this.groupBox3.Size = new System.Drawing.Size(272, 546);
 			this.groupBox3.TabIndex = 18;
 			this.groupBox3.TabStop = false;
 			this.groupBox3.Text = "Filtering options";
 			// 
-			// cbxRemoveLinks
+			// tbxLabelOneOf
 			// 
-			this.cbxRemoveLinks.AutoSize = true;
-			this.cbxRemoveLinks.Location = new System.Drawing.Point(6, 18);
-			this.cbxRemoveLinks.Name = "cbxRemoveLinks";
-			this.cbxRemoveLinks.Size = new System.Drawing.Size(133, 17);
-			this.cbxRemoveLinks.TabIndex = 18;
-			this.cbxRemoveLinks.Text = "Remove links from text";
-			this.cbxRemoveLinks.UseVisualStyleBackColor = true;
+			this.tbxLabelOneOf.Location = new System.Drawing.Point(6, 407);
+			this.tbxLabelOneOf.Multiline = true;
+			this.tbxLabelOneOf.Name = "tbxLabelOneOf";
+			this.tbxLabelOneOf.Size = new System.Drawing.Size(260, 84);
+			this.tbxLabelOneOf.TabIndex = 24;
+			this.tbxLabelOneOf.Text = "bug\r\nproblem\r\ndefect";
 			// 
-			// cbxRemoveCode
+			// cbxLabelOneOf
 			// 
-			this.cbxRemoveCode.AutoSize = true;
-			this.cbxRemoveCode.Location = new System.Drawing.Point(6, 41);
-			this.cbxRemoveCode.Name = "cbxRemoveCode";
-			this.cbxRemoveCode.Size = new System.Drawing.Size(136, 17);
-			this.cbxRemoveCode.TabIndex = 19;
-			this.cbxRemoveCode.Text = "Remove code from text";
-			this.cbxRemoveCode.UseVisualStyleBackColor = true;
+			this.cbxLabelOneOf.AutoSize = true;
+			this.cbxLabelOneOf.Location = new System.Drawing.Point(6, 384);
+			this.cbxLabelOneOf.Name = "cbxLabelOneOf";
+			this.cbxLabelOneOf.Size = new System.Drawing.Size(133, 17);
+			this.cbxLabelOneOf.TabIndex = 23;
+			this.cbxLabelOneOf.Text = "Labels must be one of:";
+			this.cbxLabelOneOf.UseVisualStyleBackColor = true;
 			// 
-			// cbxRemoveTokens
+			// tbxLengthAtLeast
 			// 
-			this.cbxRemoveTokens.AutoSize = true;
-			this.cbxRemoveTokens.Location = new System.Drawing.Point(6, 64);
-			this.cbxRemoveTokens.Name = "cbxRemoveTokens";
-			this.cbxRemoveTokens.Size = new System.Drawing.Size(147, 17);
-			this.cbxRemoveTokens.TabIndex = 20;
-			this.cbxRemoveTokens.Text = "Remove tokens from text:";
-			this.cbxRemoveTokens.UseVisualStyleBackColor = true;
+			this.tbxLengthAtLeast.Location = new System.Drawing.Point(111, 349);
+			this.tbxLengthAtLeast.Name = "tbxLengthAtLeast";
+			this.tbxLengthAtLeast.Size = new System.Drawing.Size(155, 20);
+			this.tbxLengthAtLeast.TabIndex = 18;
 			// 
-			// tbxTokensToRemove
+			// cbxLengthAtLeast
 			// 
-			this.tbxTokensToRemove.Location = new System.Drawing.Point(6, 87);
-			this.tbxTokensToRemove.Multiline = true;
-			this.tbxTokensToRemove.Name = "tbxTokensToRemove";
-			this.tbxTokensToRemove.Size = new System.Drawing.Size(260, 84);
-			this.tbxTokensToRemove.TabIndex = 18;
-			this.tbxTokensToRemove.Text = "$\r\n<\r\n>\r\nfor";
+			this.cbxLengthAtLeast.AutoSize = true;
+			this.cbxLengthAtLeast.Location = new System.Drawing.Point(6, 351);
+			this.cbxLengthAtLeast.Name = "cbxLengthAtLeast";
+			this.cbxLengthAtLeast.Size = new System.Drawing.Size(99, 17);
+			this.cbxLengthAtLeast.TabIndex = 22;
+			this.cbxLengthAtLeast.Text = "Length at least:";
+			this.cbxLengthAtLeast.UseVisualStyleBackColor = true;
 			// 
-			// cbxReplaceTokens
+			// btnRemoveReplaceToken
 			// 
-			this.cbxReplaceTokens.AutoSize = true;
-			this.cbxReplaceTokens.Location = new System.Drawing.Point(6, 185);
-			this.cbxReplaceTokens.Name = "cbxReplaceTokens";
-			this.cbxReplaceTokens.Size = new System.Drawing.Size(220, 17);
-			this.cbxReplaceTokens.TabIndex = 21;
-			this.cbxReplaceTokens.Text = "Replace tokens in text (regex supported):";
-			this.cbxReplaceTokens.UseVisualStyleBackColor = true;
+			this.btnRemoveReplaceToken.Location = new System.Drawing.Point(73, 312);
+			this.btnRemoveReplaceToken.Name = "btnRemoveReplaceToken";
+			this.btnRemoveReplaceToken.Size = new System.Drawing.Size(61, 23);
+			this.btnRemoveReplaceToken.TabIndex = 14;
+			this.btnRemoveReplaceToken.Text = "Remove";
+			this.btnRemoveReplaceToken.UseVisualStyleBackColor = true;
+			// 
+			// btnAddReplaceToken
+			// 
+			this.btnAddReplaceToken.Location = new System.Drawing.Point(6, 312);
+			this.btnAddReplaceToken.Name = "btnAddReplaceToken";
+			this.btnAddReplaceToken.Size = new System.Drawing.Size(61, 23);
+			this.btnAddReplaceToken.TabIndex = 14;
+			this.btnAddReplaceToken.Text = "Add";
+			this.btnAddReplaceToken.UseVisualStyleBackColor = true;
 			// 
 			// lstViewTextReplace
 			// 
@@ -480,10 +485,10 @@
 			this.lstViewTextReplace.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
 			this.lstViewTextReplace.FullRowSelect = true;
 			this.lstViewTextReplace.GridLines = true;
-			listViewItem4.Tag = "";
+			listViewItem16.Tag = "";
 			this.lstViewTextReplace.Items.AddRange(new System.Windows.Forms.ListViewItem[] {
-            listViewItem3,
-            listViewItem4});
+            listViewItem15,
+            listViewItem16});
 			this.lstViewTextReplace.Location = new System.Drawing.Point(6, 208);
 			this.lstViewTextReplace.Name = "lstViewTextReplace";
 			this.lstViewTextReplace.Size = new System.Drawing.Size(260, 98);
@@ -506,71 +511,66 @@
 			this.columnHeader6.Text = "Replace Text";
 			this.columnHeader6.Width = 90;
 			// 
-			// btnAddReplaceToken
+			// cbxReplaceTokens
 			// 
-			this.btnAddReplaceToken.Location = new System.Drawing.Point(6, 312);
-			this.btnAddReplaceToken.Name = "btnAddReplaceToken";
-			this.btnAddReplaceToken.Size = new System.Drawing.Size(61, 23);
-			this.btnAddReplaceToken.TabIndex = 14;
-			this.btnAddReplaceToken.Text = "Add";
-			this.btnAddReplaceToken.UseVisualStyleBackColor = true;
+			this.cbxReplaceTokens.AutoSize = true;
+			this.cbxReplaceTokens.Location = new System.Drawing.Point(6, 185);
+			this.cbxReplaceTokens.Name = "cbxReplaceTokens";
+			this.cbxReplaceTokens.Size = new System.Drawing.Size(220, 17);
+			this.cbxReplaceTokens.TabIndex = 21;
+			this.cbxReplaceTokens.Text = "Replace tokens in text (regex supported):";
+			this.cbxReplaceTokens.UseVisualStyleBackColor = true;
 			// 
-			// btnRemoveReplaceToken
+			// tbxTokensToRemove
 			// 
-			this.btnRemoveReplaceToken.Location = new System.Drawing.Point(73, 312);
-			this.btnRemoveReplaceToken.Name = "btnRemoveReplaceToken";
-			this.btnRemoveReplaceToken.Size = new System.Drawing.Size(61, 23);
-			this.btnRemoveReplaceToken.TabIndex = 14;
-			this.btnRemoveReplaceToken.Text = "Remove";
-			this.btnRemoveReplaceToken.UseVisualStyleBackColor = true;
+			this.tbxTokensToRemove.Location = new System.Drawing.Point(6, 87);
+			this.tbxTokensToRemove.Multiline = true;
+			this.tbxTokensToRemove.Name = "tbxTokensToRemove";
+			this.tbxTokensToRemove.Size = new System.Drawing.Size(260, 84);
+			this.tbxTokensToRemove.TabIndex = 18;
+			this.tbxTokensToRemove.Text = "$\r\n<\r\n>\r\nfor";
 			// 
-			// cbxLengthAtLeast
+			// cbxRemoveTokens
 			// 
-			this.cbxLengthAtLeast.AutoSize = true;
-			this.cbxLengthAtLeast.Location = new System.Drawing.Point(6, 351);
-			this.cbxLengthAtLeast.Name = "cbxLengthAtLeast";
-			this.cbxLengthAtLeast.Size = new System.Drawing.Size(99, 17);
-			this.cbxLengthAtLeast.TabIndex = 22;
-			this.cbxLengthAtLeast.Text = "Length at least:";
-			this.cbxLengthAtLeast.UseVisualStyleBackColor = true;
+			this.cbxRemoveTokens.AutoSize = true;
+			this.cbxRemoveTokens.Location = new System.Drawing.Point(6, 64);
+			this.cbxRemoveTokens.Name = "cbxRemoveTokens";
+			this.cbxRemoveTokens.Size = new System.Drawing.Size(147, 17);
+			this.cbxRemoveTokens.TabIndex = 20;
+			this.cbxRemoveTokens.Text = "Remove tokens from text:";
+			this.cbxRemoveTokens.UseVisualStyleBackColor = true;
 			// 
-			// tbxLengthAtLeast
+			// cbxRemoveCode
 			// 
-			this.tbxLengthAtLeast.Location = new System.Drawing.Point(111, 349);
-			this.tbxLengthAtLeast.Name = "tbxLengthAtLeast";
-			this.tbxLengthAtLeast.Size = new System.Drawing.Size(155, 20);
-			this.tbxLengthAtLeast.TabIndex = 18;
+			this.cbxRemoveCode.AutoSize = true;
+			this.cbxRemoveCode.Location = new System.Drawing.Point(6, 41);
+			this.cbxRemoveCode.Name = "cbxRemoveCode";
+			this.cbxRemoveCode.Size = new System.Drawing.Size(136, 17);
+			this.cbxRemoveCode.TabIndex = 19;
+			this.cbxRemoveCode.Text = "Remove code from text";
+			this.cbxRemoveCode.UseVisualStyleBackColor = true;
 			// 
-			// cbxLabelOneOf
+			// cbxRemoveLinks
 			// 
-			this.cbxLabelOneOf.AutoSize = true;
-			this.cbxLabelOneOf.Location = new System.Drawing.Point(6, 384);
-			this.cbxLabelOneOf.Name = "cbxLabelOneOf";
-			this.cbxLabelOneOf.Size = new System.Drawing.Size(133, 17);
-			this.cbxLabelOneOf.TabIndex = 23;
-			this.cbxLabelOneOf.Text = "Labels must be one of:";
-			this.cbxLabelOneOf.UseVisualStyleBackColor = true;
-			// 
-			// tbxLabelOneOf
-			// 
-			this.tbxLabelOneOf.Location = new System.Drawing.Point(6, 407);
-			this.tbxLabelOneOf.Multiline = true;
-			this.tbxLabelOneOf.Name = "tbxLabelOneOf";
-			this.tbxLabelOneOf.Size = new System.Drawing.Size(260, 84);
-			this.tbxLabelOneOf.TabIndex = 24;
-			this.tbxLabelOneOf.Text = "bug\r\nproblem\r\ndefect";
+			this.cbxRemoveLinks.AutoSize = true;
+			this.cbxRemoveLinks.Location = new System.Drawing.Point(6, 18);
+			this.cbxRemoveLinks.Name = "cbxRemoveLinks";
+			this.cbxRemoveLinks.Size = new System.Drawing.Size(133, 17);
+			this.cbxRemoveLinks.TabIndex = 18;
+			this.cbxRemoveLinks.Text = "Remove links from text";
+			this.cbxRemoveLinks.UseVisualStyleBackColor = true;
 			// 
 			// Form1
 			// 
 			this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
 			this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-			this.ClientSize = new System.Drawing.Size(701, 570);
+			this.ClientSize = new System.Drawing.Size(701, 566);
 			this.Controls.Add(this.groupBox3);
 			this.Controls.Add(this.tbxRequestsRemaining);
 			this.Controls.Add(this.txtProgressCount);
 			this.Controls.Add(this.btnCancel);
 			this.Controls.Add(this.btnStart);
-			this.Controls.Add(this.progressBar);
+			this.Controls.Add(this.progressBarPages);
 			this.Controls.Add(this.groupBox2);
 			this.Controls.Add(this.groupBox1);
 			this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedDialog;
@@ -609,7 +609,7 @@
 		private System.Windows.Forms.ColumnHeader columnHeader1;
 		private System.Windows.Forms.ColumnHeader columnHeader2;
 		private System.Windows.Forms.ColumnHeader columnHeader3;
-		private System.Windows.Forms.ProgressBar progressBar;
+		private System.Windows.Forms.ProgressBar progressBarPages;
 		private System.Windows.Forms.Button btnStart;
 		private System.Windows.Forms.Button btnCancel;
 		private System.Windows.Forms.CheckBox cbxFetchPullRequests;
