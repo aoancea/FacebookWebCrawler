@@ -13,6 +13,14 @@ namespace Crawler.Github.Api
 			this.githubContext = githubContext;
 		}
 
+		public List<Comment> Get(Issue issue)
+		{
+			if (issue.Comments > 0)
+				return githubContext.Request<List<Comment>>(issue.Comments_Url);
+
+			return new List<Comment>();
+		}
+
 		public async Task<List<Comment>> GetAsync(Issue issue)
 		{
 			if (issue.Comments > 0)

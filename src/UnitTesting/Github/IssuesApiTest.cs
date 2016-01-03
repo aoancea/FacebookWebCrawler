@@ -15,7 +15,9 @@ namespace Crawler.UnitTesting.Github
 		[TestInitialize]
 		public void TestInitialize()
 		{
-			GithubContext context = new GithubContext();
+			Queue<string> queue = new Queue<string>(new string[] { "first" });
+
+			GithubContext context = new GithubContext(queue);
 
 			issuesApi = new IssuesApi(context);
 		}

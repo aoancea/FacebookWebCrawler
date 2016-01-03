@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 
 namespace Crawler.UnitTesting.Github
@@ -9,7 +10,9 @@ namespace Crawler.UnitTesting.Github
 		[TestMethod]
 		public void GithubContext_NewInstance_Success()
 		{
-			Crawler.Github.Api.GithubContext crawler = new Crawler.Github.Api.GithubContext();
+			Queue<string> queue = new Queue<string>(new string[] { "first" });
+
+			Crawler.Github.Api.GithubContext crawler = new Crawler.Github.Api.GithubContext(queue);
 
 			Assert.IsNotNull(crawler);
 		}
