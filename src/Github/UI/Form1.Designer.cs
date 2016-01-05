@@ -28,19 +28,19 @@
 		/// </summary>
 		private void InitializeComponent()
 		{
-			System.Windows.Forms.ListViewItem listViewItem13 = new System.Windows.Forms.ListViewItem(new string[] {
+			System.Windows.Forms.ListViewItem listViewItem5 = new System.Windows.Forms.ListViewItem(new string[] {
             "1",
             ".*defect.*",
             "bug"}, -1);
-			System.Windows.Forms.ListViewItem listViewItem14 = new System.Windows.Forms.ListViewItem(new string[] {
+			System.Windows.Forms.ListViewItem listViewItem6 = new System.Windows.Forms.ListViewItem(new string[] {
             "2",
             ".*problem.*",
             "bug"}, -1);
-			System.Windows.Forms.ListViewItem listViewItem15 = new System.Windows.Forms.ListViewItem(new string[] {
+			System.Windows.Forms.ListViewItem listViewItem7 = new System.Windows.Forms.ListViewItem(new string[] {
             "1",
             ".*defect.*",
             "bug"}, -1);
-			System.Windows.Forms.ListViewItem listViewItem16 = new System.Windows.Forms.ListViewItem(new string[] {
+			System.Windows.Forms.ListViewItem listViewItem8 = new System.Windows.Forms.ListViewItem(new string[] {
             "2",
             ".*problem.*",
             "bug"}, -1);
@@ -91,6 +91,8 @@
 			this.cbxRemoveTokens = new System.Windows.Forms.CheckBox();
 			this.cbxRemoveCode = new System.Windows.Forms.CheckBox();
 			this.cbxRemoveLinks = new System.Windows.Forms.CheckBox();
+			this.checkBox1 = new System.Windows.Forms.CheckBox();
+			this.dateTimePicker1 = new System.Windows.Forms.DateTimePicker();
 			this.groupBox1.SuspendLayout();
 			this.groupBox2.SuspendLayout();
 			this.groupBox3.SuspendLayout();
@@ -327,10 +329,10 @@
 			this.lstViewLabelOverride.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
 			this.lstViewLabelOverride.FullRowSelect = true;
 			this.lstViewLabelOverride.GridLines = true;
-			listViewItem14.Tag = "";
+			listViewItem6.Tag = "";
 			this.lstViewLabelOverride.Items.AddRange(new System.Windows.Forms.ListViewItem[] {
-            listViewItem13,
-            listViewItem14});
+            listViewItem5,
+            listViewItem6});
 			this.lstViewLabelOverride.Location = new System.Drawing.Point(6, 53);
 			this.lstViewLabelOverride.Name = "lstViewLabelOverride";
 			this.lstViewLabelOverride.Size = new System.Drawing.Size(383, 123);
@@ -403,6 +405,8 @@
 			// 
 			// groupBox3
 			// 
+			this.groupBox3.Controls.Add(this.dateTimePicker1);
+			this.groupBox3.Controls.Add(this.checkBox1);
 			this.groupBox3.Controls.Add(this.tbxLabelOneOf);
 			this.groupBox3.Controls.Add(this.cbxLabelOneOf);
 			this.groupBox3.Controls.Add(this.tbxLengthAtLeast);
@@ -485,10 +489,10 @@
 			this.lstViewTextReplace.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
 			this.lstViewTextReplace.FullRowSelect = true;
 			this.lstViewTextReplace.GridLines = true;
-			listViewItem16.Tag = "";
+			listViewItem8.Tag = "";
 			this.lstViewTextReplace.Items.AddRange(new System.Windows.Forms.ListViewItem[] {
-            listViewItem15,
-            listViewItem16});
+            listViewItem7,
+            listViewItem8});
 			this.lstViewTextReplace.Location = new System.Drawing.Point(6, 208);
 			this.lstViewTextReplace.Name = "lstViewTextReplace";
 			this.lstViewTextReplace.Size = new System.Drawing.Size(260, 98);
@@ -559,6 +563,23 @@
 			this.cbxRemoveLinks.TabIndex = 18;
 			this.cbxRemoveLinks.Text = "Remove links from text";
 			this.cbxRemoveLinks.UseVisualStyleBackColor = true;
+			// 
+			// checkBox1
+			// 
+			this.checkBox1.AutoSize = true;
+			this.checkBox1.Location = new System.Drawing.Point(6, 497);
+			this.checkBox1.Name = "checkBox1";
+			this.checkBox1.Size = new System.Drawing.Size(116, 17);
+			this.checkBox1.TabIndex = 25;
+			this.checkBox1.Text = "Get only after date:";
+			this.checkBox1.UseVisualStyleBackColor = true;
+			// 
+			// dateTimePicker1
+			// 
+			this.dateTimePicker1.Location = new System.Drawing.Point(6, 519);
+			this.dateTimePicker1.Name = "dateTimePicker1";
+			this.dateTimePicker1.Size = new System.Drawing.Size(260, 20);
+			this.dateTimePicker1.TabIndex = 26;
 			// 
 			// Form1
 			// 
@@ -638,6 +659,8 @@
 		private System.Windows.Forms.CheckBox cbxLabelOneOf;
 		private System.Windows.Forms.TextBox tbxLengthAtLeast;
 		private System.Windows.Forms.CheckBox cbxLengthAtLeast;
+		private System.Windows.Forms.DateTimePicker dateTimePicker1;
+		private System.Windows.Forms.CheckBox checkBox1;
 	}
 }
 
