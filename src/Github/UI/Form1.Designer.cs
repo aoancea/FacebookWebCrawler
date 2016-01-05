@@ -28,19 +28,19 @@
 		/// </summary>
 		private void InitializeComponent()
 		{
-			System.Windows.Forms.ListViewItem listViewItem5 = new System.Windows.Forms.ListViewItem(new string[] {
+			System.Windows.Forms.ListViewItem listViewItem1 = new System.Windows.Forms.ListViewItem(new string[] {
             "1",
             ".*defect.*",
             "bug"}, -1);
-			System.Windows.Forms.ListViewItem listViewItem6 = new System.Windows.Forms.ListViewItem(new string[] {
+			System.Windows.Forms.ListViewItem listViewItem2 = new System.Windows.Forms.ListViewItem(new string[] {
             "2",
             ".*problem.*",
             "bug"}, -1);
-			System.Windows.Forms.ListViewItem listViewItem7 = new System.Windows.Forms.ListViewItem(new string[] {
+			System.Windows.Forms.ListViewItem listViewItem3 = new System.Windows.Forms.ListViewItem(new string[] {
             "1",
             ".*defect.*",
             "bug"}, -1);
-			System.Windows.Forms.ListViewItem listViewItem8 = new System.Windows.Forms.ListViewItem(new string[] {
+			System.Windows.Forms.ListViewItem listViewItem4 = new System.Windows.Forms.ListViewItem(new string[] {
             "2",
             ".*problem.*",
             "bug"}, -1);
@@ -91,8 +91,10 @@
 			this.cbxRemoveTokens = new System.Windows.Forms.CheckBox();
 			this.cbxRemoveCode = new System.Windows.Forms.CheckBox();
 			this.cbxRemoveLinks = new System.Windows.Forms.CheckBox();
-			this.checkBox1 = new System.Windows.Forms.CheckBox();
-			this.dateTimePicker1 = new System.Windows.Forms.DateTimePicker();
+			this.cbxOnlyAfterDate = new System.Windows.Forms.CheckBox();
+			this.dtmOnlyAfterDate = new System.Windows.Forms.DateTimePicker();
+			this.cbxTimeAtLeast = new System.Windows.Forms.CheckBox();
+			this.tbxTimeAtLeast = new System.Windows.Forms.TextBox();
 			this.groupBox1.SuspendLayout();
 			this.groupBox2.SuspendLayout();
 			this.groupBox3.SuspendLayout();
@@ -329,10 +331,10 @@
 			this.lstViewLabelOverride.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
 			this.lstViewLabelOverride.FullRowSelect = true;
 			this.lstViewLabelOverride.GridLines = true;
-			listViewItem6.Tag = "";
+			listViewItem2.Tag = "";
 			this.lstViewLabelOverride.Items.AddRange(new System.Windows.Forms.ListViewItem[] {
-            listViewItem5,
-            listViewItem6});
+            listViewItem1,
+            listViewItem2});
 			this.lstViewLabelOverride.Location = new System.Drawing.Point(6, 53);
 			this.lstViewLabelOverride.Name = "lstViewLabelOverride";
 			this.lstViewLabelOverride.Size = new System.Drawing.Size(383, 123);
@@ -405,8 +407,10 @@
 			// 
 			// groupBox3
 			// 
-			this.groupBox3.Controls.Add(this.dateTimePicker1);
-			this.groupBox3.Controls.Add(this.checkBox1);
+			this.groupBox3.Controls.Add(this.tbxTimeAtLeast);
+			this.groupBox3.Controls.Add(this.cbxTimeAtLeast);
+			this.groupBox3.Controls.Add(this.dtmOnlyAfterDate);
+			this.groupBox3.Controls.Add(this.cbxOnlyAfterDate);
 			this.groupBox3.Controls.Add(this.tbxLabelOneOf);
 			this.groupBox3.Controls.Add(this.cbxLabelOneOf);
 			this.groupBox3.Controls.Add(this.tbxLengthAtLeast);
@@ -489,10 +493,10 @@
 			this.lstViewTextReplace.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
 			this.lstViewTextReplace.FullRowSelect = true;
 			this.lstViewTextReplace.GridLines = true;
-			listViewItem8.Tag = "";
+			listViewItem4.Tag = "";
 			this.lstViewTextReplace.Items.AddRange(new System.Windows.Forms.ListViewItem[] {
-            listViewItem7,
-            listViewItem8});
+            listViewItem3,
+            listViewItem4});
 			this.lstViewTextReplace.Location = new System.Drawing.Point(6, 208);
 			this.lstViewTextReplace.Name = "lstViewTextReplace";
 			this.lstViewTextReplace.Size = new System.Drawing.Size(260, 98);
@@ -537,7 +541,7 @@
 			// cbxRemoveTokens
 			// 
 			this.cbxRemoveTokens.AutoSize = true;
-			this.cbxRemoveTokens.Location = new System.Drawing.Point(6, 64);
+			this.cbxRemoveTokens.Location = new System.Drawing.Point(6, 38);
 			this.cbxRemoveTokens.Name = "cbxRemoveTokens";
 			this.cbxRemoveTokens.Size = new System.Drawing.Size(147, 17);
 			this.cbxRemoveTokens.TabIndex = 20;
@@ -547,11 +551,11 @@
 			// cbxRemoveCode
 			// 
 			this.cbxRemoveCode.AutoSize = true;
-			this.cbxRemoveCode.Location = new System.Drawing.Point(6, 41);
+			this.cbxRemoveCode.Location = new System.Drawing.Point(102, 18);
 			this.cbxRemoveCode.Name = "cbxRemoveCode";
-			this.cbxRemoveCode.Size = new System.Drawing.Size(136, 17);
+			this.cbxRemoveCode.Size = new System.Drawing.Size(93, 17);
 			this.cbxRemoveCode.TabIndex = 19;
-			this.cbxRemoveCode.Text = "Remove code from text";
+			this.cbxRemoveCode.Text = "Remove code";
 			this.cbxRemoveCode.UseVisualStyleBackColor = true;
 			// 
 			// cbxRemoveLinks
@@ -559,27 +563,44 @@
 			this.cbxRemoveLinks.AutoSize = true;
 			this.cbxRemoveLinks.Location = new System.Drawing.Point(6, 18);
 			this.cbxRemoveLinks.Name = "cbxRemoveLinks";
-			this.cbxRemoveLinks.Size = new System.Drawing.Size(133, 17);
+			this.cbxRemoveLinks.Size = new System.Drawing.Size(90, 17);
 			this.cbxRemoveLinks.TabIndex = 18;
-			this.cbxRemoveLinks.Text = "Remove links from text";
+			this.cbxRemoveLinks.Text = "Remove links";
 			this.cbxRemoveLinks.UseVisualStyleBackColor = true;
 			// 
-			// checkBox1
+			// cbxOnlyAfterDate
 			// 
-			this.checkBox1.AutoSize = true;
-			this.checkBox1.Location = new System.Drawing.Point(6, 497);
-			this.checkBox1.Name = "checkBox1";
-			this.checkBox1.Size = new System.Drawing.Size(116, 17);
-			this.checkBox1.TabIndex = 25;
-			this.checkBox1.Text = "Get only after date:";
-			this.checkBox1.UseVisualStyleBackColor = true;
+			this.cbxOnlyAfterDate.AutoSize = true;
+			this.cbxOnlyAfterDate.Location = new System.Drawing.Point(6, 497);
+			this.cbxOnlyAfterDate.Name = "cbxOnlyAfterDate";
+			this.cbxOnlyAfterDate.Size = new System.Drawing.Size(116, 17);
+			this.cbxOnlyAfterDate.TabIndex = 25;
+			this.cbxOnlyAfterDate.Text = "Get only after date:";
+			this.cbxOnlyAfterDate.UseVisualStyleBackColor = true;
 			// 
-			// dateTimePicker1
+			// dtmOnlyAfterDate
 			// 
-			this.dateTimePicker1.Location = new System.Drawing.Point(6, 519);
-			this.dateTimePicker1.Name = "dateTimePicker1";
-			this.dateTimePicker1.Size = new System.Drawing.Size(260, 20);
-			this.dateTimePicker1.TabIndex = 26;
+			this.dtmOnlyAfterDate.Location = new System.Drawing.Point(6, 519);
+			this.dtmOnlyAfterDate.Name = "dtmOnlyAfterDate";
+			this.dtmOnlyAfterDate.Size = new System.Drawing.Size(260, 20);
+			this.dtmOnlyAfterDate.TabIndex = 26;
+			// 
+			// cbxTimeAtLeast
+			// 
+			this.cbxTimeAtLeast.AutoSize = true;
+			this.cbxTimeAtLeast.Location = new System.Drawing.Point(6, 61);
+			this.cbxTimeAtLeast.Name = "cbxTimeAtLeast";
+			this.cbxTimeAtLeast.Size = new System.Drawing.Size(89, 17);
+			this.cbxTimeAtLeast.TabIndex = 27;
+			this.cbxTimeAtLeast.Text = "Time at least:";
+			this.cbxTimeAtLeast.UseVisualStyleBackColor = true;
+			// 
+			// tbxTimeAtLeast
+			// 
+			this.tbxTimeAtLeast.Location = new System.Drawing.Point(101, 58);
+			this.tbxTimeAtLeast.Name = "tbxTimeAtLeast";
+			this.tbxTimeAtLeast.Size = new System.Drawing.Size(165, 20);
+			this.tbxTimeAtLeast.TabIndex = 28;
 			// 
 			// Form1
 			// 
@@ -659,8 +680,10 @@
 		private System.Windows.Forms.CheckBox cbxLabelOneOf;
 		private System.Windows.Forms.TextBox tbxLengthAtLeast;
 		private System.Windows.Forms.CheckBox cbxLengthAtLeast;
-		private System.Windows.Forms.DateTimePicker dateTimePicker1;
-		private System.Windows.Forms.CheckBox checkBox1;
+		private System.Windows.Forms.DateTimePicker dtmOnlyAfterDate;
+		private System.Windows.Forms.CheckBox cbxOnlyAfterDate;
+		private System.Windows.Forms.TextBox tbxTimeAtLeast;
+		private System.Windows.Forms.CheckBox cbxTimeAtLeast;
 	}
 }
 
