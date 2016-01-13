@@ -28,19 +28,19 @@
 		/// </summary>
 		private void InitializeComponent()
 		{
-			System.Windows.Forms.ListViewItem listViewItem1 = new System.Windows.Forms.ListViewItem(new string[] {
+			System.Windows.Forms.ListViewItem listViewItem5 = new System.Windows.Forms.ListViewItem(new string[] {
             "1",
             ".*defect.*",
             "bug"}, -1);
-			System.Windows.Forms.ListViewItem listViewItem2 = new System.Windows.Forms.ListViewItem(new string[] {
+			System.Windows.Forms.ListViewItem listViewItem6 = new System.Windows.Forms.ListViewItem(new string[] {
             "2",
             ".*problem.*",
             "bug"}, -1);
-			System.Windows.Forms.ListViewItem listViewItem3 = new System.Windows.Forms.ListViewItem(new string[] {
+			System.Windows.Forms.ListViewItem listViewItem7 = new System.Windows.Forms.ListViewItem(new string[] {
             "1",
             ".*defect.*",
             "bug"}, -1);
-			System.Windows.Forms.ListViewItem listViewItem4 = new System.Windows.Forms.ListViewItem(new string[] {
+			System.Windows.Forms.ListViewItem listViewItem8 = new System.Windows.Forms.ListViewItem(new string[] {
             "2",
             ".*problem.*",
             "bug"}, -1);
@@ -76,6 +76,10 @@
 			this.txtProgressCount = new System.Windows.Forms.Label();
 			this.tbxRequestsRemaining = new System.Windows.Forms.TextBox();
 			this.groupBox3 = new System.Windows.Forms.GroupBox();
+			this.tbxTimeAtLeast = new System.Windows.Forms.TextBox();
+			this.cbxTimeAtLeast = new System.Windows.Forms.CheckBox();
+			this.dtmOnlyAfterDate = new System.Windows.Forms.DateTimePicker();
+			this.cbxOnlyAfterDate = new System.Windows.Forms.CheckBox();
 			this.tbxLabelOneOf = new System.Windows.Forms.TextBox();
 			this.cbxLabelOneOf = new System.Windows.Forms.CheckBox();
 			this.tbxLengthAtLeast = new System.Windows.Forms.TextBox();
@@ -91,10 +95,9 @@
 			this.cbxRemoveTokens = new System.Windows.Forms.CheckBox();
 			this.cbxRemoveCode = new System.Windows.Forms.CheckBox();
 			this.cbxRemoveLinks = new System.Windows.Forms.CheckBox();
-			this.cbxOnlyAfterDate = new System.Windows.Forms.CheckBox();
-			this.dtmOnlyAfterDate = new System.Windows.Forms.DateTimePicker();
-			this.cbxTimeAtLeast = new System.Windows.Forms.CheckBox();
-			this.tbxTimeAtLeast = new System.Windows.Forms.TextBox();
+			this.cbxFetchCommits = new System.Windows.Forms.CheckBox();
+			this.lblRepeatTitle = new System.Windows.Forms.Label();
+			this.tbxRepeatTitle = new System.Windows.Forms.TextBox();
 			this.groupBox1.SuspendLayout();
 			this.groupBox2.SuspendLayout();
 			this.groupBox3.SuspendLayout();
@@ -145,6 +148,9 @@
 			// 
 			// groupBox1
 			// 
+			this.groupBox1.Controls.Add(this.tbxRepeatTitle);
+			this.groupBox1.Controls.Add(this.lblRepeatTitle);
+			this.groupBox1.Controls.Add(this.cbxFetchCommits);
 			this.groupBox1.Controls.Add(this.tbxAccessToken);
 			this.groupBox1.Controls.Add(this.label5);
 			this.groupBox1.Controls.Add(this.tbxRepoName);
@@ -161,7 +167,7 @@
 			this.groupBox1.Controls.Add(this.label2);
 			this.groupBox1.Location = new System.Drawing.Point(12, 12);
 			this.groupBox1.Name = "groupBox1";
-			this.groupBox1.Size = new System.Drawing.Size(399, 235);
+			this.groupBox1.Size = new System.Drawing.Size(399, 281);
 			this.groupBox1.TabIndex = 5;
 			this.groupBox1.TabStop = false;
 			this.groupBox1.Text = "Main options";
@@ -266,7 +272,7 @@
 			this.groupBox2.Controls.Add(this.btnRemoveLabelOverride);
 			this.groupBox2.Controls.Add(this.btnAddLabelOverride);
 			this.groupBox2.Controls.Add(this.lstViewLabelOverride);
-			this.groupBox2.Location = new System.Drawing.Point(12, 253);
+			this.groupBox2.Location = new System.Drawing.Point(12, 299);
 			this.groupBox2.Name = "groupBox2";
 			this.groupBox2.Size = new System.Drawing.Size(399, 240);
 			this.groupBox2.TabIndex = 8;
@@ -331,10 +337,10 @@
 			this.lstViewLabelOverride.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
 			this.lstViewLabelOverride.FullRowSelect = true;
 			this.lstViewLabelOverride.GridLines = true;
-			listViewItem2.Tag = "";
+			listViewItem6.Tag = "";
 			this.lstViewLabelOverride.Items.AddRange(new System.Windows.Forms.ListViewItem[] {
-            listViewItem1,
-            listViewItem2});
+            listViewItem5,
+            listViewItem6});
 			this.lstViewLabelOverride.Location = new System.Drawing.Point(6, 53);
 			this.lstViewLabelOverride.Name = "lstViewLabelOverride";
 			this.lstViewLabelOverride.Size = new System.Drawing.Size(383, 123);
@@ -359,7 +365,7 @@
 			// 
 			// progressBarPages
 			// 
-			this.progressBarPages.Location = new System.Drawing.Point(12, 499);
+			this.progressBarPages.Location = new System.Drawing.Point(12, 545);
 			this.progressBarPages.MarqueeAnimationSpeed = 0;
 			this.progressBarPages.Name = "progressBarPages";
 			this.progressBarPages.Size = new System.Drawing.Size(399, 23);
@@ -369,7 +375,7 @@
 			// btnStart
 			// 
 			this.btnStart.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-			this.btnStart.Location = new System.Drawing.Point(12, 528);
+			this.btnStart.Location = new System.Drawing.Point(12, 574);
 			this.btnStart.Name = "btnStart";
 			this.btnStart.Size = new System.Drawing.Size(83, 30);
 			this.btnStart.TabIndex = 14;
@@ -380,7 +386,7 @@
 			// btnCancel
 			// 
 			this.btnCancel.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-			this.btnCancel.Location = new System.Drawing.Point(101, 528);
+			this.btnCancel.Location = new System.Drawing.Point(101, 574);
 			this.btnCancel.Name = "btnCancel";
 			this.btnCancel.Size = new System.Drawing.Size(83, 30);
 			this.btnCancel.TabIndex = 15;
@@ -391,7 +397,7 @@
 			// 
 			this.txtProgressCount.AutoSize = true;
 			this.txtProgressCount.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-			this.txtProgressCount.Location = new System.Drawing.Point(204, 506);
+			this.txtProgressCount.Location = new System.Drawing.Point(194, 552);
 			this.txtProgressCount.Name = "txtProgressCount";
 			this.txtProgressCount.Size = new System.Drawing.Size(0, 13);
 			this.txtProgressCount.TabIndex = 18;
@@ -399,7 +405,7 @@
 			// tbxRequestsRemaining
 			// 
 			this.tbxRequestsRemaining.Cursor = System.Windows.Forms.Cursors.IBeam;
-			this.tbxRequestsRemaining.Location = new System.Drawing.Point(190, 534);
+			this.tbxRequestsRemaining.Location = new System.Drawing.Point(190, 580);
 			this.tbxRequestsRemaining.Name = "tbxRequestsRemaining";
 			this.tbxRequestsRemaining.ReadOnly = true;
 			this.tbxRequestsRemaining.Size = new System.Drawing.Size(221, 20);
@@ -425,10 +431,44 @@
 			this.groupBox3.Controls.Add(this.cbxRemoveLinks);
 			this.groupBox3.Location = new System.Drawing.Point(417, 12);
 			this.groupBox3.Name = "groupBox3";
-			this.groupBox3.Size = new System.Drawing.Size(272, 546);
+			this.groupBox3.Size = new System.Drawing.Size(272, 588);
 			this.groupBox3.TabIndex = 18;
 			this.groupBox3.TabStop = false;
 			this.groupBox3.Text = "Filtering options";
+			// 
+			// tbxTimeAtLeast
+			// 
+			this.tbxTimeAtLeast.Location = new System.Drawing.Point(101, 38);
+			this.tbxTimeAtLeast.Name = "tbxTimeAtLeast";
+			this.tbxTimeAtLeast.Size = new System.Drawing.Size(165, 20);
+			this.tbxTimeAtLeast.TabIndex = 28;
+			// 
+			// cbxTimeAtLeast
+			// 
+			this.cbxTimeAtLeast.AutoSize = true;
+			this.cbxTimeAtLeast.Location = new System.Drawing.Point(6, 41);
+			this.cbxTimeAtLeast.Name = "cbxTimeAtLeast";
+			this.cbxTimeAtLeast.Size = new System.Drawing.Size(89, 17);
+			this.cbxTimeAtLeast.TabIndex = 27;
+			this.cbxTimeAtLeast.Text = "Time at least:";
+			this.cbxTimeAtLeast.UseVisualStyleBackColor = true;
+			// 
+			// dtmOnlyAfterDate
+			// 
+			this.dtmOnlyAfterDate.Location = new System.Drawing.Point(6, 519);
+			this.dtmOnlyAfterDate.Name = "dtmOnlyAfterDate";
+			this.dtmOnlyAfterDate.Size = new System.Drawing.Size(260, 20);
+			this.dtmOnlyAfterDate.TabIndex = 26;
+			// 
+			// cbxOnlyAfterDate
+			// 
+			this.cbxOnlyAfterDate.AutoSize = true;
+			this.cbxOnlyAfterDate.Location = new System.Drawing.Point(6, 497);
+			this.cbxOnlyAfterDate.Name = "cbxOnlyAfterDate";
+			this.cbxOnlyAfterDate.Size = new System.Drawing.Size(116, 17);
+			this.cbxOnlyAfterDate.TabIndex = 25;
+			this.cbxOnlyAfterDate.Text = "Get only after date:";
+			this.cbxOnlyAfterDate.UseVisualStyleBackColor = true;
 			// 
 			// tbxLabelOneOf
 			// 
@@ -493,10 +533,10 @@
 			this.lstViewTextReplace.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
 			this.lstViewTextReplace.FullRowSelect = true;
 			this.lstViewTextReplace.GridLines = true;
-			listViewItem4.Tag = "";
+			listViewItem8.Tag = "";
 			this.lstViewTextReplace.Items.AddRange(new System.Windows.Forms.ListViewItem[] {
-            listViewItem3,
-            listViewItem4});
+            listViewItem7,
+            listViewItem8});
 			this.lstViewTextReplace.Location = new System.Drawing.Point(6, 208);
 			this.lstViewTextReplace.Name = "lstViewTextReplace";
 			this.lstViewTextReplace.Size = new System.Drawing.Size(260, 98);
@@ -541,7 +581,7 @@
 			// cbxRemoveTokens
 			// 
 			this.cbxRemoveTokens.AutoSize = true;
-			this.cbxRemoveTokens.Location = new System.Drawing.Point(6, 38);
+			this.cbxRemoveTokens.Location = new System.Drawing.Point(6, 64);
 			this.cbxRemoveTokens.Name = "cbxRemoveTokens";
 			this.cbxRemoveTokens.Size = new System.Drawing.Size(147, 17);
 			this.cbxRemoveTokens.TabIndex = 20;
@@ -568,45 +608,40 @@
 			this.cbxRemoveLinks.Text = "Remove links";
 			this.cbxRemoveLinks.UseVisualStyleBackColor = true;
 			// 
-			// cbxOnlyAfterDate
+			// cbxFetchCommits
 			// 
-			this.cbxOnlyAfterDate.AutoSize = true;
-			this.cbxOnlyAfterDate.Location = new System.Drawing.Point(6, 497);
-			this.cbxOnlyAfterDate.Name = "cbxOnlyAfterDate";
-			this.cbxOnlyAfterDate.Size = new System.Drawing.Size(116, 17);
-			this.cbxOnlyAfterDate.TabIndex = 25;
-			this.cbxOnlyAfterDate.Text = "Get only after date:";
-			this.cbxOnlyAfterDate.UseVisualStyleBackColor = true;
+			this.cbxFetchCommits.AutoSize = true;
+			this.cbxFetchCommits.Checked = true;
+			this.cbxFetchCommits.CheckState = System.Windows.Forms.CheckState.Checked;
+			this.cbxFetchCommits.Location = new System.Drawing.Point(11, 231);
+			this.cbxFetchCommits.Name = "cbxFetchCommits";
+			this.cbxFetchCommits.Size = new System.Drawing.Size(94, 17);
+			this.cbxFetchCommits.TabIndex = 18;
+			this.cbxFetchCommits.Text = "Fetch commits";
+			this.cbxFetchCommits.UseVisualStyleBackColor = true;
 			// 
-			// dtmOnlyAfterDate
+			// lblRepeatTitle
 			// 
-			this.dtmOnlyAfterDate.Location = new System.Drawing.Point(6, 519);
-			this.dtmOnlyAfterDate.Name = "dtmOnlyAfterDate";
-			this.dtmOnlyAfterDate.Size = new System.Drawing.Size(260, 20);
-			this.dtmOnlyAfterDate.TabIndex = 26;
+			this.lblRepeatTitle.AutoSize = true;
+			this.lblRepeatTitle.Location = new System.Drawing.Point(8, 255);
+			this.lblRepeatTitle.Name = "lblRepeatTitle";
+			this.lblRepeatTitle.Size = new System.Drawing.Size(64, 13);
+			this.lblRepeatTitle.TabIndex = 19;
+			this.lblRepeatTitle.Text = "Repeat title:";
 			// 
-			// cbxTimeAtLeast
+			// tbxRepeatTitle
 			// 
-			this.cbxTimeAtLeast.AutoSize = true;
-			this.cbxTimeAtLeast.Location = new System.Drawing.Point(6, 61);
-			this.cbxTimeAtLeast.Name = "cbxTimeAtLeast";
-			this.cbxTimeAtLeast.Size = new System.Drawing.Size(89, 17);
-			this.cbxTimeAtLeast.TabIndex = 27;
-			this.cbxTimeAtLeast.Text = "Time at least:";
-			this.cbxTimeAtLeast.UseVisualStyleBackColor = true;
-			// 
-			// tbxTimeAtLeast
-			// 
-			this.tbxTimeAtLeast.Location = new System.Drawing.Point(101, 58);
-			this.tbxTimeAtLeast.Name = "tbxTimeAtLeast";
-			this.tbxTimeAtLeast.Size = new System.Drawing.Size(165, 20);
-			this.tbxTimeAtLeast.TabIndex = 28;
+			this.tbxRepeatTitle.Location = new System.Drawing.Point(78, 252);
+			this.tbxRepeatTitle.Name = "tbxRepeatTitle";
+			this.tbxRepeatTitle.Size = new System.Drawing.Size(45, 20);
+			this.tbxRepeatTitle.TabIndex = 20;
+			this.tbxRepeatTitle.Text = "3";
 			// 
 			// Form1
 			// 
 			this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
 			this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-			this.ClientSize = new System.Drawing.Size(701, 566);
+			this.ClientSize = new System.Drawing.Size(701, 610);
 			this.Controls.Add(this.groupBox3);
 			this.Controls.Add(this.tbxRequestsRemaining);
 			this.Controls.Add(this.txtProgressCount);
@@ -684,6 +719,9 @@
 		private System.Windows.Forms.CheckBox cbxOnlyAfterDate;
 		private System.Windows.Forms.TextBox tbxTimeAtLeast;
 		private System.Windows.Forms.CheckBox cbxTimeAtLeast;
+		private System.Windows.Forms.TextBox tbxRepeatTitle;
+		private System.Windows.Forms.Label lblRepeatTitle;
+		private System.Windows.Forms.CheckBox cbxFetchCommits;
 	}
 }
 

@@ -99,19 +99,40 @@ namespace Crawler.Github.UI
 
             string issuesFolderPath = IssuesFolderPath();
 
-            Uri uri = new Uri(string.Format("https://api.github.com/repos/{0}/{1}/issues?page=1&state={2}", tbxRepoOwner.Text, tbxRepoName.Text, GetStateString()));
+			Uri uri = GetRequestUri();
             GithubContext githubContext = new GithubContext(accessTokens);
 
             int numPages = await githubContext.GetNumPagesAsync(uri);
-
             progressBarPages.Maximum = numPages;
-
+			txtProgressCount.Text = progressBarPages.Value + " / " + progressBarPages.Maximum + " pages";
 
 			var progress = new Progress<ProgressBundle>();
 			progress.ProgressChanged += Progress_ProgressChanged;
 
             await Task.Run(() => GetIssuesWorker(0, numPages, issuesFolderPath, githubContext, progress));
         }
+
+		private Uri GetRequestUri()
+		{
+			string str = string.Format(
+				"https://api.github.com/repos/{0}/{1}/issues?page=1&state={2}", 
+				tbxRepoOwner.Text, 
+				tbxRepoName.Text, 
+				GetStateString());
+
+			if (cbxLabelOneOf.Checked)
+			{
+				str += "&labels=";
+				foreach (string label in tbxLabelOneOf.Lines)
+				{
+					str += label + ",";
+				}
+
+				str.Remove(str.Length - 1);
+			}
+
+			return new Uri(str);
+		}
 
 		private void Progress_ProgressChanged(object sender, ProgressBundle e)
         {
@@ -131,9 +152,13 @@ namespace Crawler.Github.UI
                 return;
             }
 
-            string issueFolderPath = IssueFolderPath(issue, issuesFolderPath, page);
+            string issueFolderPath = IssueFolderPath(issue, issuesFolderPath);
             StringBuilder sb = new StringBuilder();
-            sb.AppendLine(issue.Body);
+			for (int i = 0; i < int.Parse(tbxRepeatTitle.Text); ++i)
+			{
+				sb.AppendLine(issue.Title);
+			}
+			sb.AppendLine(issue.Body);
 
             if (cbxConcatCommentsToIssueText.Checked)
             {
@@ -162,18 +187,20 @@ namespace Crawler.Github.UI
 
         private void SaveIssueLabels(Issue issue, string issueFolderPath)
         {
-            StringBuilder sb = new StringBuilder();
-
             foreach (Crawler.Github.Api.Entities.Label label in issue.Labels)
             {
-                sb.AppendLine(label.Name);
-            }
-
-            using (StreamWriter writer = new StreamWriter(Path.Combine(issueFolderPath, "labels.txt")))
-            {
-                writer.WriteLine(sb.ToString());
-            }
+				string friendlyLabelName = label.Name.Replace(':', '-');
+				using (StreamWriter writer = new StreamWriter(Path.Combine(issueFolderPath, "labels", friendlyLabelName + ".txt")))
+				{
+					writer.WriteLine(label.Name);
+				}
+			}
         }
+
+		private void SaveIssueCommits(Issue issue, string issueFolderPath)
+		{
+
+		}
 
         private void SaveIssueToFile(string issueText, string issueFolderPath)
         {
@@ -185,7 +212,10 @@ namespace Crawler.Github.UI
 
         private void SaveCommentToFile(string commentText, string issueFolderPath, string commentId)
         {
-            using (StreamWriter writer = new StreamWriter(Path.Combine(issueFolderPath, string.Format("comment{0}.txt", commentId))))
+            using (StreamWriter writer = new StreamWriter(Path.Combine(
+																issueFolderPath, 
+																"comments",
+																string.Format("comment {0}.txt", commentId))))
             {
                 writer.WriteLine(commentText);
             }
@@ -210,19 +240,24 @@ namespace Crawler.Github.UI
             return issuesFolderPath;
         }
 
-        private string IssueFolderPath(Issue issue, string issuesFolderPath, int page)
+        private string IssueFolderPath(Issue issue, string issuesFolderPath)
         {
-            string issueFolderName = issue.Number.ToString();
+            string issueFolderName = issue.User.Login + " - " + issue.Number.ToString();
             if (issue.Closed_at != null)
             {
                 issueFolderName += string.Format(" - {0}", (issue.Closed_at - issue.Created_at).Value.TotalHours);
             }
-            string issueFolderPath = Path.Combine(issuesFolderPath, page.ToString(), issueFolderName);
+            string issueFolderPath = Path.Combine(issuesFolderPath, issueFolderName);
 
-            if (!System.IO.Directory.Exists(issueFolderPath))
-                System.IO.Directory.CreateDirectory(issueFolderPath);
+			if (!System.IO.Directory.Exists(issueFolderPath))
+			{
+				System.IO.Directory.CreateDirectory(issueFolderPath);
+				System.IO.Directory.CreateDirectory(Path.Combine(issueFolderPath, "labels"));
+				System.IO.Directory.CreateDirectory(Path.Combine(issueFolderPath, "commits"));
+				System.IO.Directory.CreateDirectory(Path.Combine(issueFolderPath, "comments"));
+			}
 
-            return issueFolderPath;
+			return issueFolderPath;
         }
 
         private void cbxFetchOpenIssues_CheckedChanged(object sender, EventArgs e)

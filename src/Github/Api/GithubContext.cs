@@ -55,7 +55,7 @@ namespace Crawler.Github.Api
 		{
 			HttpWebResponse response = await WebRequestResponseAsync(uri);
 
-			Regex regex = new Regex(@"page=(\d+)&state=(all|open|closed)>; rel=""last""");
+			Regex regex = new Regex(@".*rel=""next"".*page=(\d+)&state=(all|open|closed).*>; rel=""last""", RegexOptions.RightToLeft);
 			Match match = regex.Match(response.Headers.Get("Link"));
 
 			return int.Parse(match.Groups[1].Value);
