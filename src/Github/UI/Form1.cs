@@ -76,12 +76,18 @@ namespace Crawler.Github.UI
                 Parallel.ForEach(issues, optionsIssues, issue =>
                 {
                     List<Comment> comments = null;
+					List<GitCommit> commits = null;
                     if (cbxFetchComments.Checked)
                     {
 						comments = githubApi.CommentsApi.Get(issue);
                     }
 
-                    SaveIssue(issue, comments, issuesFolderPath, page);
+					if (cbxFetchCommits.Checked)
+					{
+						commits = githubApi.CommitsApi.Get(issue);
+					}
+
+                    SaveIssue(issue, comments, commits, issuesFolderPath, page);
 
 					progress.Report(new ProgressBundle { RequestsRemaining = githubContext.RequestsRemaining, UpdatePagesProgressBar = false, CountTokens = githubContext.CountTokens });
 				});
@@ -145,7 +151,7 @@ namespace Crawler.Github.UI
             tbxRequestsRemaining.Text = e.RequestsRemaining + " requests remaining (" + e.CountTokens + " access token(s))";
         }
 
-        private void SaveIssue(Issue issue, List<Comment> comments, string issuesFolderPath, int page)
+        private void SaveIssue(Issue issue, List<Comment> comments, List<GitCommit> commits, string issuesFolderPath, int page)
         {
             if (issue.Pull_Request != null && !cbxFetchPullRequests.Checked)
             {
@@ -180,6 +186,11 @@ namespace Crawler.Github.UI
                     }
                 }
             }
+			
+			if (cbxFetchCommits.Checked)
+			{
+				SaveIssueCommits(commits, issueFolderPath);
+			}
 
             SaveIssueToFile(sb.ToString(), issueFolderPath);
             SaveIssueLabels(issue, issueFolderPath);
@@ -197,9 +208,17 @@ namespace Crawler.Github.UI
 			}
         }
 
-		private void SaveIssueCommits(Issue issue, string issueFolderPath)
+		private void SaveIssueCommits(List<GitCommit> commits, string issueFolderPath)
 		{
-
+			int num = 1;
+			foreach (GitCommit commit in commits)
+			{
+				string fileName = Path.Combine(issueFolderPath, "commits", commit?.Author.Login + " - " + commit?.Committer.Login + " - " + (num++) + ".txt");
+				using (StreamWriter writer = new StreamWriter(fileName))
+				{
+					writer.WriteLine(commit.Commit.Message);
+				}
+			}
 		}
 
         private void SaveIssueToFile(string issueText, string issueFolderPath)

@@ -28,19 +28,19 @@
 		/// </summary>
 		private void InitializeComponent()
 		{
-			System.Windows.Forms.ListViewItem listViewItem5 = new System.Windows.Forms.ListViewItem(new string[] {
+			System.Windows.Forms.ListViewItem listViewItem1 = new System.Windows.Forms.ListViewItem(new string[] {
             "1",
             ".*defect.*",
             "bug"}, -1);
-			System.Windows.Forms.ListViewItem listViewItem6 = new System.Windows.Forms.ListViewItem(new string[] {
+			System.Windows.Forms.ListViewItem listViewItem2 = new System.Windows.Forms.ListViewItem(new string[] {
             "2",
             ".*problem.*",
             "bug"}, -1);
-			System.Windows.Forms.ListViewItem listViewItem7 = new System.Windows.Forms.ListViewItem(new string[] {
+			System.Windows.Forms.ListViewItem listViewItem3 = new System.Windows.Forms.ListViewItem(new string[] {
             "1",
             ".*defect.*",
             "bug"}, -1);
-			System.Windows.Forms.ListViewItem listViewItem8 = new System.Windows.Forms.ListViewItem(new string[] {
+			System.Windows.Forms.ListViewItem listViewItem4 = new System.Windows.Forms.ListViewItem(new string[] {
             "2",
             ".*problem.*",
             "bug"}, -1);
@@ -50,6 +50,9 @@
 			this.tbxFolderPath = new System.Windows.Forms.TextBox();
 			this.btnBrowseFolder = new System.Windows.Forms.Button();
 			this.groupBox1 = new System.Windows.Forms.GroupBox();
+			this.tbxRepeatTitle = new System.Windows.Forms.TextBox();
+			this.lblRepeatTitle = new System.Windows.Forms.Label();
+			this.cbxFetchCommits = new System.Windows.Forms.CheckBox();
 			this.tbxAccessToken = new System.Windows.Forms.TextBox();
 			this.label5 = new System.Windows.Forms.Label();
 			this.tbxRepoName = new System.Windows.Forms.TextBox();
@@ -95,9 +98,6 @@
 			this.cbxRemoveTokens = new System.Windows.Forms.CheckBox();
 			this.cbxRemoveCode = new System.Windows.Forms.CheckBox();
 			this.cbxRemoveLinks = new System.Windows.Forms.CheckBox();
-			this.cbxFetchCommits = new System.Windows.Forms.CheckBox();
-			this.lblRepeatTitle = new System.Windows.Forms.Label();
-			this.tbxRepeatTitle = new System.Windows.Forms.TextBox();
 			this.groupBox1.SuspendLayout();
 			this.groupBox2.SuspendLayout();
 			this.groupBox3.SuspendLayout();
@@ -172,6 +172,35 @@
 			this.groupBox1.TabStop = false;
 			this.groupBox1.Text = "Main options";
 			// 
+			// tbxRepeatTitle
+			// 
+			this.tbxRepeatTitle.Location = new System.Drawing.Point(78, 252);
+			this.tbxRepeatTitle.Name = "tbxRepeatTitle";
+			this.tbxRepeatTitle.Size = new System.Drawing.Size(45, 20);
+			this.tbxRepeatTitle.TabIndex = 20;
+			this.tbxRepeatTitle.Text = "3";
+			// 
+			// lblRepeatTitle
+			// 
+			this.lblRepeatTitle.AutoSize = true;
+			this.lblRepeatTitle.Location = new System.Drawing.Point(8, 255);
+			this.lblRepeatTitle.Name = "lblRepeatTitle";
+			this.lblRepeatTitle.Size = new System.Drawing.Size(64, 13);
+			this.lblRepeatTitle.TabIndex = 19;
+			this.lblRepeatTitle.Text = "Repeat title:";
+			// 
+			// cbxFetchCommits
+			// 
+			this.cbxFetchCommits.AutoSize = true;
+			this.cbxFetchCommits.Checked = true;
+			this.cbxFetchCommits.CheckState = System.Windows.Forms.CheckState.Checked;
+			this.cbxFetchCommits.Location = new System.Drawing.Point(11, 231);
+			this.cbxFetchCommits.Name = "cbxFetchCommits";
+			this.cbxFetchCommits.Size = new System.Drawing.Size(94, 17);
+			this.cbxFetchCommits.TabIndex = 18;
+			this.cbxFetchCommits.Text = "Fetch commits";
+			this.cbxFetchCommits.UseVisualStyleBackColor = true;
+			// 
 			// tbxAccessToken
 			// 
 			this.tbxAccessToken.Location = new System.Drawing.Point(11, 38);
@@ -232,8 +261,6 @@
 			// cbxFetchOpenIssues
 			// 
 			this.cbxFetchOpenIssues.AutoSize = true;
-			this.cbxFetchOpenIssues.Checked = true;
-			this.cbxFetchOpenIssues.CheckState = System.Windows.Forms.CheckState.Checked;
 			this.cbxFetchOpenIssues.Location = new System.Drawing.Point(11, 208);
 			this.cbxFetchOpenIssues.Name = "cbxFetchOpenIssues";
 			this.cbxFetchOpenIssues.Size = new System.Drawing.Size(112, 17);
@@ -255,8 +282,6 @@
 			// cbxFetchComments
 			// 
 			this.cbxFetchComments.AutoSize = true;
-			this.cbxFetchComments.Checked = true;
-			this.cbxFetchComments.CheckState = System.Windows.Forms.CheckState.Checked;
 			this.cbxFetchComments.Location = new System.Drawing.Point(11, 185);
 			this.cbxFetchComments.Name = "cbxFetchComments";
 			this.cbxFetchComments.Size = new System.Drawing.Size(104, 17);
@@ -337,10 +362,10 @@
 			this.lstViewLabelOverride.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
 			this.lstViewLabelOverride.FullRowSelect = true;
 			this.lstViewLabelOverride.GridLines = true;
-			listViewItem6.Tag = "";
+			listViewItem2.Tag = "";
 			this.lstViewLabelOverride.Items.AddRange(new System.Windows.Forms.ListViewItem[] {
-            listViewItem5,
-            listViewItem6});
+            listViewItem1,
+            listViewItem2});
 			this.lstViewLabelOverride.Location = new System.Drawing.Point(6, 53);
 			this.lstViewLabelOverride.Name = "lstViewLabelOverride";
 			this.lstViewLabelOverride.Size = new System.Drawing.Size(383, 123);
@@ -477,11 +502,13 @@
 			this.tbxLabelOneOf.Name = "tbxLabelOneOf";
 			this.tbxLabelOneOf.Size = new System.Drawing.Size(260, 84);
 			this.tbxLabelOneOf.TabIndex = 24;
-			this.tbxLabelOneOf.Text = "bug\r\nproblem\r\ndefect";
+			this.tbxLabelOneOf.Text = "type: bug";
 			// 
 			// cbxLabelOneOf
 			// 
 			this.cbxLabelOneOf.AutoSize = true;
+			this.cbxLabelOneOf.Checked = true;
+			this.cbxLabelOneOf.CheckState = System.Windows.Forms.CheckState.Checked;
 			this.cbxLabelOneOf.Location = new System.Drawing.Point(6, 384);
 			this.cbxLabelOneOf.Name = "cbxLabelOneOf";
 			this.cbxLabelOneOf.Size = new System.Drawing.Size(133, 17);
@@ -533,10 +560,10 @@
 			this.lstViewTextReplace.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
 			this.lstViewTextReplace.FullRowSelect = true;
 			this.lstViewTextReplace.GridLines = true;
-			listViewItem8.Tag = "";
+			listViewItem4.Tag = "";
 			this.lstViewTextReplace.Items.AddRange(new System.Windows.Forms.ListViewItem[] {
-            listViewItem7,
-            listViewItem8});
+            listViewItem3,
+            listViewItem4});
 			this.lstViewTextReplace.Location = new System.Drawing.Point(6, 208);
 			this.lstViewTextReplace.Name = "lstViewTextReplace";
 			this.lstViewTextReplace.Size = new System.Drawing.Size(260, 98);
@@ -607,35 +634,6 @@
 			this.cbxRemoveLinks.TabIndex = 18;
 			this.cbxRemoveLinks.Text = "Remove links";
 			this.cbxRemoveLinks.UseVisualStyleBackColor = true;
-			// 
-			// cbxFetchCommits
-			// 
-			this.cbxFetchCommits.AutoSize = true;
-			this.cbxFetchCommits.Checked = true;
-			this.cbxFetchCommits.CheckState = System.Windows.Forms.CheckState.Checked;
-			this.cbxFetchCommits.Location = new System.Drawing.Point(11, 231);
-			this.cbxFetchCommits.Name = "cbxFetchCommits";
-			this.cbxFetchCommits.Size = new System.Drawing.Size(94, 17);
-			this.cbxFetchCommits.TabIndex = 18;
-			this.cbxFetchCommits.Text = "Fetch commits";
-			this.cbxFetchCommits.UseVisualStyleBackColor = true;
-			// 
-			// lblRepeatTitle
-			// 
-			this.lblRepeatTitle.AutoSize = true;
-			this.lblRepeatTitle.Location = new System.Drawing.Point(8, 255);
-			this.lblRepeatTitle.Name = "lblRepeatTitle";
-			this.lblRepeatTitle.Size = new System.Drawing.Size(64, 13);
-			this.lblRepeatTitle.TabIndex = 19;
-			this.lblRepeatTitle.Text = "Repeat title:";
-			// 
-			// tbxRepeatTitle
-			// 
-			this.tbxRepeatTitle.Location = new System.Drawing.Point(78, 252);
-			this.tbxRepeatTitle.Name = "tbxRepeatTitle";
-			this.tbxRepeatTitle.Size = new System.Drawing.Size(45, 20);
-			this.tbxRepeatTitle.TabIndex = 20;
-			this.tbxRepeatTitle.Text = "3";
 			// 
 			// Form1
 			// 

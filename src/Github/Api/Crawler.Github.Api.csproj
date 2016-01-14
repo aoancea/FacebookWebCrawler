@@ -46,8 +46,11 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="CommentsApi.cs" />
+    <Compile Include="CommitsApi.cs" />
+    <Compile Include="Entities\Commit.cs" />
     <Compile Include="Entities\GitEvent.cs" />
     <Compile Include="Entities\PullRequest.cs" />
+    <Compile Include="EventsApi.cs" />
     <Compile Include="GithubContext.cs" />
     <Compile Include="Entities\Comment.cs" />
     <Compile Include="Entities\Issue.cs" />

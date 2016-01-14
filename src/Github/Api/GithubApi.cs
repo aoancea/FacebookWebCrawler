@@ -20,5 +20,11 @@
 		{
 			get { return commentsApi ?? (commentsApi = new CommentsApi(githubContext)); }
 		}
+
+		private CommitsApi commitsApi;
+		public CommitsApi CommitsApi
+		{
+			get { return commitsApi ?? (commitsApi = new CommitsApi(githubContext)); }
+		}
 	}
 }
