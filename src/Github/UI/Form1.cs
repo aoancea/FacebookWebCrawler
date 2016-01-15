@@ -7,6 +7,7 @@ using System.Windows.Forms;
 using Crawler.Github.Api;
 using Crawler.Github.Api.Entities;
 using Crawler.Core.Common.Queue;
+using Crawler.Core.Common.Extensions;
 
 namespace Crawler.Github.UI
 {
@@ -50,53 +51,94 @@ namespace Crawler.Github.UI
         {
             GithubApi githubApi = new GithubApi(githubContext);
 
-            var queryStringDict = new Dictionary<string, string>();
-            queryStringDict.Add("page", pageFrom.ToString());
-            string fetchTypeString = GetStateString();
-
-            queryStringDict.Add("state", fetchTypeString);
-
+			var queryStringDict = GetRequestDict();
 			ParallelOptions optionsPages = new ParallelOptions();
 			ParallelOptions optionsIssues = new ParallelOptions();
 
 			optionsPages.MaxDegreeOfParallelism = 2;
 			optionsIssues.MaxDegreeOfParallelism = 2;
-            Parallel.For(pageFrom, pageTo, optionsPages, (page, loopState) =>
-            {
-                var localDict = new Dictionary<string, string>(queryStringDict);
-                localDict["page"] = page.ToString();
+
+			using (StreamWriter logger = new StreamWriter(Path.Combine(issuesFolderPath, "log.csv")))
+			{
+				logger.WriteLine("Number,Issue Opener,Duration,[Labels],[Commit authors],Number of comments,Number of commits");
+			}
+
+
+			Parallel.For(pageFrom, pageTo, optionsPages, (page, loopState) =>
+			{
+				var localDict = new Dictionary<string, string>(queryStringDict);
+				localDict["page"] = page.ToString();
 
 				List<Issue> issues = githubApi.IssuesApi.Get(tbxRepoOwner.Text, tbxRepoName.Text, localDict);
 
-                if (issues.Count == 0)
-                {
-                    loopState.Break();
-                }
+				if (issues.Count == 0)
+				{
+					loopState.Break();
+				}
 
-                Parallel.ForEach(issues, optionsIssues, issue =>
-                {
-                    List<Comment> comments = null;
+				Parallel.ForEach(issues, optionsIssues, issue =>
+				{
+					List<Comment> comments = null;
 					List<GitCommit> commits = null;
-                    if (cbxFetchComments.Checked)
-                    {
+					if (cbxFetchComments.Checked)
+					{
 						comments = githubApi.CommentsApi.Get(issue);
-                    }
+					}
 
 					if (cbxFetchCommits.Checked)
 					{
 						commits = githubApi.CommitsApi.Get(issue);
 					}
 
-                    SaveIssue(issue, comments, commits, issuesFolderPath, page);
+					SaveIssue(issue, comments, commits, issuesFolderPath, page);
+					LogIssue(issue, commits, issuesFolderPath);
 
 					progress.Report(new ProgressBundle { RequestsRemaining = githubContext.RequestsRemaining, UpdatePagesProgressBar = false, CountTokens = githubContext.CountTokens });
 				});
 
-                progress.Report(new ProgressBundle { RequestsRemaining = githubContext.RequestsRemaining, UpdatePagesProgressBar = true, CountTokens = githubContext.CountTokens });
-            });
+				progress.Report(new ProgressBundle { RequestsRemaining = githubContext.RequestsRemaining, UpdatePagesProgressBar = true, CountTokens = githubContext.CountTokens });
+			});
         }
 
-        private async void btnStart_Click(object sender, EventArgs e)
+		private void LogIssue(Issue issue, List<GitCommit> commits, string issuesFolderPath)
+		{
+			lock (this)
+			{
+				using (StreamWriter logger = new StreamWriter(Path.Combine(issuesFolderPath, "log.csv"), true))
+				{
+					StringBuilder labels = new StringBuilder();
+					foreach (Crawler.Github.Api.Entities.Label label in issue.Labels)
+					{
+						labels.Append(label.Name + "|");
+					}
+					if (labels.Length > 0)
+					{
+						labels.Remove(labels.Length - 1, 1);
+					}
+
+					StringBuilder commitAuthors = new StringBuilder();
+					foreach (GitCommit commit in commits)
+					{
+						commitAuthors.Append(commit.Author?.Login + "|");
+					}
+					if (commits.Count > 0)
+					{
+						commitAuthors.Remove(commitAuthors.Length - 1, 1);
+					}
+
+					logger.WriteLine(string.Format("{0},{1},{2},[{3}],[{4}],{5},{6}",
+						issue.Number,
+						issue.User.Login,
+						(issue.Closed_at - issue.Created_at).Value.TotalHours,
+						labels.ToString(),
+						commitAuthors.ToString(),
+						issue.Comments,
+						commits.Count));
+				}
+            }
+		}
+
+		private async void btnStart_Click(object sender, EventArgs e)
         {
             txtProgressCount.Text = "0";
             progressBarPages.Value = progressBarPages.Minimum;
@@ -104,8 +146,8 @@ namespace Crawler.Github.UI
             GetAccessTokens();
 
             string issuesFolderPath = IssuesFolderPath();
+			Uri uri = new Uri(string.Format("https://api.github.com/repos/{0}/{1}/issues{2}", tbxRepoOwner.Text, tbxRepoName.Text, GetRequestDict().ToQueryString()));
 
-			Uri uri = GetRequestUri();
             GithubContext githubContext = new GithubContext(accessTokens);
 
             int numPages = await githubContext.GetNumPagesAsync(uri);
@@ -118,26 +160,26 @@ namespace Crawler.Github.UI
             await Task.Run(() => GetIssuesWorker(0, numPages, issuesFolderPath, githubContext, progress));
         }
 
-		private Uri GetRequestUri()
+		private Dictionary<string, string> GetRequestDict()
 		{
-			string str = string.Format(
-				"https://api.github.com/repos/{0}/{1}/issues?page=1&state={2}", 
-				tbxRepoOwner.Text, 
-				tbxRepoName.Text, 
-				GetStateString());
+			Dictionary<string, string> requestDict = new Dictionary<string, string>();
+			requestDict["page"] = "1";
+			requestDict["state"] = GetStateString();
 
 			if (cbxLabelOneOf.Checked)
 			{
-				str += "&labels=";
+				StringBuilder labels = new StringBuilder();
 				foreach (string label in tbxLabelOneOf.Lines)
 				{
-					str += label + ",";
+					labels.Append(label + ",");
 				}
 
-				str.Remove(str.Length - 1);
-			}
+				labels.Remove(labels.Length - 1, 1);
 
-			return new Uri(str);
+				requestDict["labels"] = labels.ToString();
+			}
+			
+			return requestDict;
 		}
 
 		private void Progress_ProgressChanged(object sender, ProgressBundle e)
@@ -213,7 +255,7 @@ namespace Crawler.Github.UI
 			int num = 1;
 			foreach (GitCommit commit in commits)
 			{
-				string fileName = Path.Combine(issueFolderPath, "commits", commit?.Author.Login + " - " + commit?.Committer.Login + " - " + (num++) + ".txt");
+				string fileName = Path.Combine(issueFolderPath, "commits", commit.Author?.Login + " - " + commit.Committer?.Login + " - " + (num++) + ".txt");
 				using (StreamWriter writer = new StreamWriter(fileName))
 				{
 					writer.WriteLine(commit.Commit.Message);
