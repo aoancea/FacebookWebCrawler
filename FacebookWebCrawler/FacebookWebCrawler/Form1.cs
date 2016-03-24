@@ -5,6 +5,7 @@ using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using System.Windows.Forms;
+using System.Diagnostics;
 
 namespace FacebookWebCrawler
 {
@@ -156,6 +157,24 @@ namespace FacebookWebCrawler
 			}
 		}
 
+		private int commentsFetched;
+
+		public int CommentsFetched
+		{
+			get
+			{
+				//System.Diagnostics.Debug.WriteLine(string.Format("CommentsFetched - GET: {0}", commentsFetched));
+
+				return commentsFetched;
+			}
+			set
+			{
+				//System.Diagnostics.Debug.WriteLine(string.Format("CommentsFetched - SET: {0}", commentsFetched));
+
+				commentsFetched = value;
+			}
+		}
+
 		private async void btnProcess_Click(object sender, EventArgs e)
 		{
 			try
@@ -178,7 +197,7 @@ namespace FacebookWebCrawler
 					System.IO.Directory.CreateDirectory(commentsFolderPath);
 
 				int postsFetched = 0;
-				int commentsFetched = 0;
+				CommentsFetched = 0;
 
 				Crawler crawler = new Crawler("913819931996488|2e3ef18f88e42c9068d8a6dba3b14021");
 
@@ -186,7 +205,7 @@ namespace FacebookWebCrawler
 
 				List<JToken> posts = queryResult.GetFieldToken("data[*]").ToList();
 
-				while (posts.Count > 0 && FetchPosts(postsFetched, commentsFetched))
+				while (posts.Count > 0 && FetchPosts(postsFetched, CommentsFetched))
 				{
 					bool continueFetchingPosts = true;
 
@@ -203,7 +222,7 @@ namespace FacebookWebCrawler
 
 							progressBar.PerformStep();
 
-							if (!FetchPosts(++postsFetched, commentsFetched))
+							if (!FetchPosts(++postsFetched, CommentsFetched))
 							{
 								continueFetchingPosts = false;
 								break;
@@ -224,7 +243,7 @@ namespace FacebookWebCrawler
 
 							List<JToken> comments = commentsPageObject.GetFieldToken("data[*]").ToList();
 
-							while (comments.Count > 0 && FetchComments(commentsFetched, commentsPerPostFetched))
+							while (comments.Count > 0 && FetchComments(CommentsFetched, commentsPerPostFetched))
 							{
 								bool continueFetchingComments = true;
 
@@ -242,21 +261,31 @@ namespace FacebookWebCrawler
 
 									int authorIndex = authorsIndexes[authorFolderName];
 
-									if (authorIndex == 20 - 1)
+									if (cbxGroupByAuthor.Checked)
 									{
-										List<string> authorComments = authorsCommentsInMemory[authorFolderName];
-										for (int i = 0; i < authorComments.Count; ++i)
+										if (authorIndex == 20 - 1)
 										{
-											using (StreamWriter writer = new StreamWriter(BuildCommentPath(commentsFolderPath, commentsFetched, authorFolderName, i)))
+											List<string> authorComments = authorsCommentsInMemory[authorFolderName];
+											for (int i = 0; i < authorComments.Count; ++i)
 											{
-												writer.WriteLine(authorComments[i]);
+												using (StreamWriter writer = new StreamWriter(BuildCommentPath(commentsFolderPath, CommentsFetched, authorFolderName, i)))
+												{
+													writer.WriteLine(authorComments[i]);
+												}
+											}
+										}
+
+										if (authorIndex >= 20 - 1)
+										{
+											using (StreamWriter writer = new StreamWriter(BuildCommentPath(commentsFolderPath, CommentsFetched, authorFolderName, authorIndex)))
+											{
+												writer.WriteLine(commentBody);
 											}
 										}
 									}
-
-									if (authorIndex >= 20 - 1) 
+									else
 									{
-										using (StreamWriter writer = new StreamWriter(BuildCommentPath(commentsFolderPath, commentsFetched, authorFolderName, authorIndex)))
+										using (StreamWriter writer = new StreamWriter(BuildCommentPath(commentsFolderPath, CommentsFetched, authorFolderName, authorIndex)))
 										{
 											writer.WriteLine(commentBody);
 										}
@@ -264,7 +293,7 @@ namespace FacebookWebCrawler
 
 									progressBar.PerformStep();
 
-									if (!FetchComments(++commentsFetched, ++commentsPerPostFetched))
+									if (!FetchComments(++CommentsFetched, ++commentsPerPostFetched))
 									{
 										continueFetchingComments = false;
 										break;
